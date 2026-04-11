@@ -1,7 +1,7 @@
 {
-    "title": "Coming Soon",
-    "name": "startbootstrap-coming-soon",
-    "version": "6.0.7",
+    "title": "Grayscale",
+    "name": "startbootstrap-grayscale",
+    "version": "7.0.6",
     "scripts": {
         "build": "npm run clean && npm run build:pug && npm run build:scss && npm run build:scripts && npm run build:assets",
         "build:assets": "node scripts/build-assets.js",
@@ -12,7 +12,7 @@
         "start": "npm run build && node scripts/start.js",
         "start:debug": "npm run build && node scripts/start-debug.js"
     },
-    "description": "Coming Soon is a Bootstrap 4 coming soon page theme.",
+    "description": "A grayscale one page HTML theme for Bootstrap.",
     "keywords": [
         "css",
         "sass",
@@ -21,9 +21,9 @@
         "theme",
         "template"
     ],
-    "homepage": "https://startbootstrap.com/theme/coming-soon",
+    "homepage": "https://startbootstrap.com/theme/grayscale",
     "bugs": {
-        "url": "https://github.com/StartBootstrap/startbootstrap-coming-soon/issues",
+        "url": "https://github.com/StartBootstrap/startbootstrap-grayscale/issues",
         "email": "feedback@startbootstrap.com"
     },
     "license": "MIT",
@@ -33,7 +33,7 @@
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/StartBootstrap/startbootstrap-coming-soon.git"
+        "url": "https://github.com/StartBootstrap/startbootstrap-grayscale.git"
     },
     "dependencies": {
         "bootstrap": "5.2.3"
