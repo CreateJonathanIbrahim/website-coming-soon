@@ -11626,6 +11626,16 @@ body {
     z-index: 0;
 }
 
+/* Background image layer (Mobile Override) */
+@media (max-width: 768px) {
+    .contact-section::before {
+        transform: scale(1.4) translateX(50px); 
+        background-position: center center;
+        bottom:45%;
+        
+    }
+}
+
 /* Dark gradient overlay */
 .contact-section::after {
     content: '';
