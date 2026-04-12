@@ -11532,21 +11532,47 @@ body {
 }
 
 .contact-section {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
     position: relative;
     width: 100%;
-    height: auto;
     min-height: 35rem;
     padding: 15rem 0;
-    background:
-        linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%),
-        url('../assets/img/derek-livingston-P2TIXADqcFU-unsplash.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
-    background-size: cover;
+    overflow: hidden;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* pushes content down */
+    align-items: center;
+    text-align: center;
 }
+
+/* Background image layer */
+.contact-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('../assets/img/derek-livingston-P2TIXADqcFU-unsplash.jpg') center/cover
+        no-repeat;
+
+    filter: grayscale(100%);
+    z-index: 0;
+    background-position: top center;
+}
+
+/* Dark/gray overlay */
+.contact-section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8));
+    z-index: 1;
+}
+
+/* Content stays above */
+.contact-section > * {
+    position: relative;
+    z-index: 2;
+}
+
 .contact-section .card {
     border: 0;
     border-bottom: 0.25rem solid #64a19d;
