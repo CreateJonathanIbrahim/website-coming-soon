@@ -11530,56 +11530,68 @@ body {
     letter-spacing: 0.15rem;
     border: 0;
 }
+/* --- Contact Section --- */
+
 .contact-section {
     position: relative;
     width: 100%;
-    min-height: 35rem;
-    padding: 10rem 0 4rem 0; /* Adjusted padding to give the text breathing room at the bottom */
+    /* Increase height to 50rem as requested */
+    min-height: 50rem;
+    /* Balanced padding to create space for centered content */
+    padding: 10rem 0;
     overflow: hidden;
     color: white;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end; /* Pushes content down */
+    /* NEW: Vertically center the text on the section (and thus the moose's body) */
+    justify-content: center;
     align-items: center;
     text-align: center;
-    background-color: #000; /* Adds a solid black base for the seamless blend */
+    /* NEW: Add a solid black base for the final fade-out */
+    background-color: #000;
 }
 
-/* Background image layer */
+/* 1. Background image layer (Moose) */
 .contact-section::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    bottom: 25%; /* Moves the bottom boundary of the image up, lifting the moose */
-    background: url('../assets/img/derek-livingston-P2TIXADqcFU-unsplash.jpg') center bottom / cover
-        no-repeat;
+    bottom: 0;
+    /* Anchor to top center so horns are not cut off */
+    background: url('../assets/img/derek-livingston-P2TIXADqcFU-unsplash.jpg') no-repeat;
+    background-position: top center;
+    background-size: cover;
     filter: grayscale(100%);
     z-index: 0;
+
+    /* NEW: Zoom in by 1.5x and shift 50px to the right */
+    transform: scale(1.5) translateX(50px);
+    /* NEW: Set transform origin to top-center to keep horns in view during zoom */
+    transform-origin: top center;
 }
 
-/* Dark gradient overlay */
+/* 2. Dark/gray gradient overlay */
 .contact-section::after {
     content: '';
     position: absolute;
     inset: 0;
-    /* Fades from semi-transparent to solid black right where the image ends (75%) */
+    /* NEW: Smooth gradient fading from light (top) to solid black (bottom) */
     background: linear-gradient(
         to bottom,
-        rgba(0, 0, 0, 0.3) 0%,
-        rgba(0, 0, 0, 0.8) 60%,
-        #000000 75%
+        rgba(0, 0, 0, 0.2) 0%,
+        rgba(0, 0, 0, 0.5) 75%,
+        rgba(0, 0, 0, 1) 100%
     );
     z-index: 1;
 }
 
-/* Content stays above */
+/* 3. Content layer (Text & Button) stays above image and gradient */
 .contact-section > * {
     position: relative;
     z-index: 2;
 }
-
 .contact-section .card {
     border: 0;
     border-bottom: 0.25rem solid #64a19d;
