@@ -1,0 +1,935 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="Insights by Jonathan Ibrahim — writing and video on systems, AI, operations, ClickUp, SEO, and web development." />
+        <title>Insights | Jonathan Ibrahim</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23050505%22/><text x=%2250%22 y=%2274%22 text-anchor=%22middle%22 font-size=%2265%22 font-family=%22sans-serif%22 font-weight=%22900%22 fill=%22%2364a19d%22>JI</text></svg>" />
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900" rel="stylesheet" />
+        <link href="css/styles.css" rel="stylesheet" />
+
+        <style>
+            /* ── Masthead ── */
+            .insights-hero {
+                padding: 9rem 0 3.5rem;
+                background: #000;
+                position: relative;
+                overflow: hidden;
+            }
+            /* Subtle dot-grid texture */
+            .insights-hero::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background-image: radial-gradient(circle, #1a1a1a 1px, transparent 1px);
+                background-size: 28px 28px;
+                opacity: 0.5;
+            }
+            .masthead-rule {
+                border: none;
+                border-top: 3px solid #fff;
+                margin: 0.75rem 0;
+            }
+            .masthead-rule-thin {
+                border: none;
+                border-top: 1px solid #fff;
+                margin: 0.4rem 0 0;
+            }
+            .masthead-kicker {
+                font-family: 'Varela Round', sans-serif;
+                font-size: 0.72rem;
+                text-transform: uppercase;
+                letter-spacing: 0.2rem;
+                color: #555;
+            }
+            .masthead-title {
+                font-family: 'Varela Round', sans-serif;
+                font-size: clamp(4rem, 10vw, 8rem);
+                font-weight: 900;
+                color: #fff;
+                line-height: 0.9;
+                letter-spacing: -0.02em;
+            }
+            .masthead-tagline {
+                font-size: 0.85rem;
+                color: #555;
+                max-width: 420px;
+            }
+            .masthead-issue {
+                font-family: 'Varela Round', sans-serif;
+                font-size: 0.7rem;
+                text-transform: uppercase;
+                letter-spacing: 0.15rem;
+                color: #333;
+            }
+
+            /* ── Sticky category quick-nav ── */
+            .cat-nav {
+                position: sticky;
+                top: 68px;
+                z-index: 200;
+                background: #000;
+                border-bottom: 1px solid #1a1a1a;
+                padding: 0.65rem 0;
+            }
+            .cat-nav-inner {
+                display: flex;
+                gap: 0.4rem;
+                overflow-x: auto;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+                padding-bottom: 2px;
+            }
+            .cat-nav-inner::-webkit-scrollbar { display: none; }
+            .cat-nav-pill {
+                flex-shrink: 0;
+                border: 1px solid #2a2a2a;
+                background: transparent;
+                color: #555;
+                padding: 0.3rem 0.9rem;
+                border-radius: 50px;
+                font-size: 0.72rem;
+                text-transform: uppercase;
+                letter-spacing: 0.07rem;
+                cursor: pointer;
+                text-decoration: none;
+                font-family: 'Varela Round', sans-serif;
+                transition: all 0.2s ease;
+                white-space: nowrap;
+            }
+            .cat-nav-pill:hover {
+                border-color: #64a19d;
+                color: #64a19d;
+                text-decoration: none;
+            }
+            .cat-nav-pill.active {
+                background: #64a19d;
+                border-color: #64a19d;
+                color: #000;
+                font-weight: 700;
+            }
+
+            /* ── Section divider ── */
+            .section-divider {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-top: 1px solid #222;
+                padding-top: 0.6rem;
+                margin-bottom: 1.75rem;
+            }
+            .section-label {
+                font-family: 'Varela Round', sans-serif;
+                text-transform: uppercase;
+                letter-spacing: 0.18rem;
+                font-size: 0.75rem;
+                color: #64a19d;
+            }
+            .section-view-all {
+                font-size: 0.72rem;
+                color: #444;
+                text-decoration: none;
+                text-transform: uppercase;
+                letter-spacing: 0.08rem;
+                transition: color 0.2s;
+            }
+            .section-view-all:hover { color: #64a19d; text-decoration: none; }
+
+            /* ── Base card ── */
+            .insight-card {
+                background: #0d0d0d;
+                border-radius: 0.5rem;
+                overflow: hidden;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                text-decoration: none;
+                color: inherit;
+            }
+            .insight-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 14px 44px rgba(0,0,0,0.6);
+                text-decoration: none;
+                color: inherit;
+            }
+
+            /* Image wrapper */
+            .card-img-wrap {
+                position: relative;
+                overflow: hidden;
+                flex-shrink: 0;
+            }
+            .card-img-wrap img {
+                width: 100%;
+                display: block;
+                filter: grayscale(80%);
+                transition: filter 0.45s ease, transform 0.45s ease;
+            }
+            .insight-card:hover .card-img-wrap img {
+                filter: grayscale(30%);
+                transform: scale(1.04);
+            }
+
+            /* Category badge on image */
+            .cat-badge {
+                position: absolute;
+                top: 0.75rem;
+                left: 0.75rem;
+                background: rgba(0,0,0,0.75);
+                border: 1px solid #64a19d;
+                color: #64a19d;
+                padding: 0.2rem 0.6rem;
+                border-radius: 50px;
+                font-size: 0.65rem;
+                text-transform: uppercase;
+                letter-spacing: 0.08rem;
+                font-family: 'Varela Round', sans-serif;
+                backdrop-filter: blur(4px);
+            }
+
+            /* Card body */
+            .card-body-inner {
+                padding: 1.25rem;
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+            }
+            .card-title-link {
+                color: #fff;
+                font-weight: 700;
+                line-height: 1.35;
+                margin-bottom: 0.5rem;
+                display: block;
+                transition: color 0.2s;
+            }
+            .insight-card:hover .card-title-link { color: #64a19d; }
+            .card-blurb {
+                color: #666;
+                font-size: 0.84rem;
+                line-height: 1.6;
+                flex: 1;
+                margin-bottom: 0.75rem;
+            }
+            .card-meta {
+                font-size: 0.72rem;
+                color: #444;
+                text-transform: uppercase;
+                letter-spacing: 0.06rem;
+                font-family: 'Varela Round', sans-serif;
+                margin-top: auto;
+            }
+
+            /* Lead card sizing */
+            .card-lead .card-img-wrap { height: 260px; }
+            .card-lead .card-img-wrap img { height: 100%; object-fit: cover; }
+            .card-lead .card-title-link { font-size: 1.2rem; }
+
+            /* Supporting card sizing */
+            .card-supp .card-img-wrap { height: 160px; }
+            .card-supp .card-img-wrap img { height: 100%; object-fit: cover; }
+            .card-supp .card-title-link { font-size: 0.95rem; }
+            .card-supp .card-blurb { font-size: 0.8rem; }
+
+            /* ── Video card ── */
+            .insight-card.is-video {
+                border: 2px solid rgba(100,161,157,0.3);
+                background: #080808;
+            }
+            .insight-card.is-video:hover {
+                border-color: #64a19d;
+            }
+            .video-badge {
+                position: absolute;
+                top: 0.75rem;
+                right: 0.75rem;
+                background: #64a19d;
+                color: #000;
+                font-size: 0.6rem;
+                padding: 0.2rem 0.5rem;
+                border-radius: 3px;
+                font-weight: 900;
+                font-family: 'Varela Round', sans-serif;
+                letter-spacing: 0.06rem;
+                text-transform: uppercase;
+            }
+            .video-play-icon {
+                position: absolute;
+                bottom: 0.75rem;
+                right: 0.75rem;
+                color: #64a19d;
+                font-size: 1.5rem;
+                filter: drop-shadow(0 2px 4px rgba(0,0,0,0.7));
+                transition: transform 0.25s ease;
+            }
+            .insight-card.is-video:hover .video-play-icon {
+                transform: scale(1.15);
+            }
+
+            /* ── Fade-in ── */
+            .fade-in-section {
+                opacity: 0;
+                transform: translateY(18px);
+                transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            }
+            .fade-in-section.is-visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        </style>
+    </head>
+    <body id="page-top" class="bg-black text-white-50">
+
+        <!-- ── Navigation ── -->
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="index.html">Create | JonathanIbrahim</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html#expertise">Expertise</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html#achievements">Achievements</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html#experience">Experience</a></li>
+                        <li class="nav-item"><a class="nav-link" href="case-studies.html">Case Studies</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="insights.html">Insights</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html#connect">Connect</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- ══════════════════════════════════════════
+             EDITORIAL MASTHEAD
+        ══════════════════════════════════════════ -->
+        <header class="insights-hero fade-in-section">
+            <div class="container px-4 px-lg-5" style="position: relative; z-index: 1;">
+                <div class="row align-items-end">
+                    <div class="col-lg-8">
+                        <p class="masthead-kicker mb-2">Jonathan Ibrahim</p>
+                        <hr class="masthead-rule" />
+                        <h1 class="masthead-title">Insights</h1>
+                        <hr class="masthead-rule" />
+                        <hr class="masthead-rule-thin" />
+                    </div>
+                    <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+                        <p class="masthead-tagline mb-3">
+                            Writing and video on systems thinking, AI, operations, ClickUp architecture, SEO, and the craft of building things that scale.
+                        </p>
+                        <p class="masthead-issue mb-0">Est. 2025 &nbsp;·&nbsp; Austin, TX &nbsp;·&nbsp; Published irregularly</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- ══════════════════════════════════════════
+             STICKY CATEGORY NAV
+        ══════════════════════════════════════════ -->
+        <div class="cat-nav" id="catNav">
+            <div class="container px-4 px-lg-5">
+                <div class="cat-nav-inner">
+                    <a href="#systems-pm"     class="cat-nav-pill active" data-section="systems-pm">Systems &amp; PM</a>
+                    <a href="#ai-automation"  class="cat-nav-pill" data-section="ai-automation">AI &amp; Automation</a>
+                    <a href="#digital-mktg"   class="cat-nav-pill" data-section="digital-mktg">Digital Marketing</a>
+                    <a href="#seo-geo"         class="cat-nav-pill" data-section="seo-geo">SEO &amp; GEO</a>
+                    <a href="#web-design-dev"  class="cat-nav-pill" data-section="web-design-dev">Web Design &amp; Dev</a>
+                    <a href="#clickup-ops"     class="cat-nav-pill" data-section="clickup-ops">ClickUp &amp; Ops</a>
+                    <a href="#from-the-desk"   class="cat-nav-pill" data-section="from-the-desk">From the Desk</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════
+             CONTENT SECTIONS
+        ══════════════════════════════════════════ -->
+        <main style="background: #000; padding: 3.5rem 0 5rem;">
+            <div class="container px-4 px-lg-5">
+
+                <!-- ────────────────────────────────
+                     01 · SYSTEMS & PM (lead left)
+                ──────────────────────────────── -->
+                <section id="systems-pm" class="mb-6 fade-in-section" style="margin-bottom: 4.5rem;">
+                    <div class="section-divider">
+                        <span class="section-label">Systems &amp; Project Management</span>
+                        <a href="#" class="section-view-all">View All <i class="fas fa-arrow-right ms-1" style="font-size: 0.65rem;"></i></a>
+                    </div>
+                    <div class="row gx-3">
+                        <!-- Lead -->
+                        <div class="col-lg-6 mb-3">
+                            <a href="insights/post-template.html" class="insight-card card-lead">
+                                <div class="card-img-wrap">
+                                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1200&auto=format&fit=crop" alt="Systems thinking" />
+                                    <span class="cat-badge">Systems &amp; PM</span>
+                                </div>
+                                <div class="card-body-inner">
+                                    <span class="card-title-link">Why Your Project Management Tool Is Not Your Problem — Your Process Is</span>
+                                    <p class="card-blurb">Most teams switch tools every 18 months and wonder why nothing changes. The tool is rarely the bottleneck. Here's how to diagnose what's actually broken before you buy another subscription.</p>
+                                    <div class="card-meta">Apr 2026 &nbsp;·&nbsp; 6 min read</div>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Supporting 2-col -->
+                        <div class="col-lg-6">
+                            <div class="row gx-3 h-100">
+                                <div class="col-sm-6 mb-3">
+                                    <a href="#" class="insight-card card-supp">
+                                        <div class="card-img-wrap">
+                                            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=800&auto=format&fit=crop" alt="PM frameworks" />
+                                            <span class="cat-badge">Systems &amp; PM</span>
+                                        </div>
+                                        <div class="card-body-inner">
+                                            <span class="card-title-link">The Three Documents Every Project Needs Before It Starts</span>
+                                            <p class="card-blurb">Scope doc, RACI, and a kickoff brief. Not glamorous, but they prevent 80% of the fires.</p>
+                                            <div class="card-meta">Mar 2026 &nbsp;·&nbsp; 4 min read</div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-sm-6 mb-3">
+                                    <!-- VIDEO CARD -->
+                                    <a href="#" class="insight-card card-supp is-video">
+                                        <div class="card-img-wrap">
+                                            <img src="https://images.unsplash.com/photo-1507925922837-3265279c8e12?q=80&w=800&auto=format&fit=crop" alt="Video: EOS explained" />
+                                            <span class="cat-badge">Systems &amp; PM</span>
+                                            <span class="video-badge">Video</span>
+                                            <i class="fas fa-circle-play video-play-icon"></i>
+                                        </div>
+                                        <div class="card-body-inner">
+                                            <span class="card-title-link">EOS in Plain English: What It Is and Whether It's Right for Your Team</span>
+                                            <p class="card-blurb">A no-jargon breakdown of the Entrepreneurial Operating System and when it actually helps.</p>
+                                            <div class="card-meta">Feb 2026 &nbsp;·&nbsp; 9 min watch</div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- New cards row -->
+                    <div class="row gx-3 mt-1">
+                        <div class="col-sm-6 mb-3">
+                            <a href="insights/the-discovery-process.html" class="insight-card card-supp">
+                                <div class="card-img-wrap">
+                                    <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?q=80&w=800&auto=format&fit=crop" alt="Discovery process" />
+                                    <span class="cat-badge">Systems &amp; PM</span>
+                                </div>
+                                <div class="card-body-inner">
+                                    <span class="card-title-link">The Discovery Process: What I Ask Before I Touch Anything</span>
+                                    <p class="card-blurb">Most engagements fail before the first deliverable — not because of bad work, but because of assumptions never tested. Here's the intake process I use on every engagement.</p>
+                                    <div class="card-meta">Apr 2026 &nbsp;·&nbsp; 6 min read</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <a href="insights/onboarding-process-that-doesnt-leak.html" class="insight-card card-supp">
+                                <div class="card-img-wrap">
+                                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800&auto=format&fit=crop" alt="Team onboarding" />
+                                    <span class="cat-badge">Systems &amp; PM</span>
+                                </div>
+                                <div class="card-body-inner">
+                                    <span class="card-title-link">Building an Onboarding Process That Doesn't Leak</span>
+                                    <p class="card-blurb">Onboarding problems rarely look like onboarding problems at first. Here's the structured system I built at WISE — videos, quizzes, and a live Q&A that actually confirms someone is ready.</p>
+                                    <div class="card-meta">Apr 2026 &nbsp;·&nbsp; 6 min read</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ────────────────────────────────
+                     02 · AI & AUTOMATION (lead right)
+                ──────────────────────────────── -->
+                <section id="ai-automation" class="mb-6 fade-in-section" style="margin-bottom: 4.5rem;">
+                    <div class="section-divider">
+                        <span class="section-label">AI &amp; Automation</span>
+                        <a href="#" class="section-view-all">View All <i class="fas fa-arrow-right ms-1" style="font-size: 0.65rem;"></i></a>
+                    </div>
+                    <div class="row gx-3">
+                        <!-- Supporting left -->
+                        <div class="col-lg-6">
+                            <div class="row gx-3 h-100">
+                                <div class="col-sm-6 mb-3">
+                                    <a href="#" class="insight-card card-supp">
+                                        <div class="card-img-wrap">
+                                            <img src="https://images.unsplash.com/photo-1555255707-c07966088b7b?q=80&w=800&auto=format&fit=crop" alt="Make.com" />
+                                            <span class="cat-badge">AI &amp; Automation</span>
+                                        </div>
+                                        <div class="card-body-inner">
+                                            <span class="card-title-link">Make.com vs Zapier in 2026: A Practitioner's Honest Take</span>
+                                            <p class="card-blurb">After building 50+ automation scenarios in both, here's when each one actually wins.</p>
+                                            <div class="card-meta">Apr 2026 &nbsp;·&nbsp; 5 min read</div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-sm-6 mb-3">
+                                    <!-- VIDEO CARD -->
+                                    <a href="#" class="insight-card card-supp is-video">
+                                        <div class="card-img-wrap">
+                                            <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?q=80&w=800&auto=format&fit=crop" alt="Video: AI for ops" />
+                                            <span class="cat-badge">AI &amp; Automation</span>
+                                            <span class="video-badge">Video</span>
+                                            <i class="fas fa-circle-play video-play-icon"></i>
+                                        </div>
+                                        <div class="card-body-inner">
+                                            <span class="card-title-link">How I Use Claude to Draft SOPs in Under 10 Minutes</span>
+                                            <p class="card-blurb">A live walkthrough of my AI-assisted documentation workflow for operations teams.</p>
+                                            <div class="card-meta">Mar 2026 &nbsp;·&nbsp; 11 min watch</div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Lead right -->
+                        <div class="col-lg-6 mb-3">
+                            <a href="#" class="insight-card card-lead">
+                                <div class="card-img-wrap">
+                                    <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1200&auto=format&fit=crop" alt="AI and operations" />
+                                    <span class="cat-badge">AI &amp; Automation</span>
+                                </div>
+                                <div class="card-body-inner">
+                                    <span class="card-title-link">The Ops Leader's Guide to Integrating AI Without Breaking What Already Works</span>
+                                    <p class="card-blurb">AI doesn't replace operational judgment — it amplifies it. But only if you wire it into the right places. Here's the framework I use to evaluate where AI actually belongs in a workflow.</p>
+                                    <div class="card-meta">Apr 2026 &nbsp;·&nbsp; 8 min read</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ────────────────────────────────
+                     03 · DIGITAL MARKETING (lead left)
+                ──────────────────────────────── -->
+                <section id="digital-mktg" class="fade-in-section" style="margin-bottom: 4.5rem;">
+                    <div class="section-divider">
+                        <span class="section-label">Digital Marketing</span>
+                        <a href="#" class="section-view-all">View All <i class="fas fa-arrow-right ms-1" style="font-size: 0.65rem;"></i></a>
+                    </div>
+                    <div class="row gx-3">
+                        <!-- Lead -->
+                        <div class="col-lg-6 mb-3">
+                            <a href="#" class="insight-card card-lead">
+                                <div class="card-img-wrap">
+                                    <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?q=80&w=1200&auto=format&fit=crop" alt="Digital marketing" />
+                                    <span class="cat-badge">Digital Marketing</span>
+                                </div>
+                                <div class="card-body-inner">
+                                    <span class="card-title-link">What 14 Years of Client-Side Digital Marketing Actually Taught Me About Agency Promises</span>
+                                    <p class="card-blurb">From running campaigns to managing the teams that run them — the gap between what agencies say and what they deliver is usually an operations problem, not a strategy problem.</p>
+                                    <div class="card-meta">Mar 2026 &nbsp;·&nbsp; 7 min read</div>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Supporting -->
+                        <div class="col-lg-6">
+                            <div class="row gx-3 h-100">
+                                <div class="col-sm-6 mb-3">
+                                    <a href="#" class="insight-card card-supp">
+                                        <div class="card-img-wrap">
+                                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop" alt="Analytics" />
+                                            <span class="cat-badge">Digital Marketing</span>
+                                        </div>
+                                        <div class="card-body-inner">
+                                            <span class="card-title-link">The Metrics That Actually Tell You If Your Agency Is Delivering</span>
+                                            <p class="card-blurb">Vanity metrics are easy to report. Here are the numbers that actually correlate with business outcomes.</p>
+                                            <div class="card-meta">Feb 2026 &nbsp;·&nbsp; 5 min read</div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-sm-6 mb-3">
+                                    <a href="#" class="insight-card card-supp">
+                                        <div class="card-img-wrap">
+                                            <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?q=80&w=800&auto=format&fit=crop" alt="Content strategy" />
+                                            <span class="cat-badge">Digital Marketing</span>
+                                        </div>
+                                        <div class="card-body-inner">
+                                            <span class="card-title-link">Why Most Content Calendars Fail Within 60 Days</span>
+                                            <p class="card-blurb">The problem isn't the content — it's that the production system behind it was never built to sustain the volume.</p>
+                                            <div class="card-meta">Jan 2026 &nbsp;·&nbsp; 4 min read</div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ────────────────────────────────
+                     04 · SEO & GEO (lead right)
+                ──────────────────────────────── -->
+                <section id="seo-geo" class="fade-in-section" style="margin-bottom: 4.5rem;">
+                    <div class="section-divider">
+                        <span class="section-label">SEO &amp; GEO — AI Search Optimization</span>
+                        <a href="#" class="section-view-all">View All <i class="fas fa-arrow-right ms-1" style="font-size: 0.65rem;"></i></a>
+                    </div>
+                    <div class="row gx-3">
+                        <!-- Supporting left -->
+                        <div class="col-lg-6">
+                            <div class="row gx-3 h-100">
+                                <div class="col-sm-6 mb-3">
+                                    <a href="#" class="insight-card card-supp">
+                                        <div class="card-img-wrap">
+                                            <img src="https://images.unsplash.com/photo-1571721795195-a2ca2d3370a9?q=80&w=800&auto=format&fit=crop" alt="SEO" />
+                                            <span class="cat-badge">SEO &amp; GEO</span>
+                                        </div>
+                                        <div class="card-body-inner">
+                                            <span class="card-title-link">Local SEO in the Age of AI Overviews: What Still Works</span>
+                                            <p class="card-blurb">Google's AI answers are eating click-through rates. Here's how local businesses stay visible anyway.</p>
+                                            <div class="card-meta">Apr 2026 &nbsp;·&nbsp; 5 min read</div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-sm-6 mb-3">
+                                    <!-- VIDEO -->
+                                    <a href="#" class="insight-card card-supp is-video">
+                                        <div class="card-img-wrap">
+                                            <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=800&auto=format&fit=crop" alt="Video: GEO explained" />
+                                            <span class="cat-badge">SEO &amp; GEO</span>
+                                            <span class="video-badge">Video</span>
+                                            <i class="fas fa-circle-play video-play-icon"></i>
+                                        </div>
+                                        <div class="card-body-inner">
+                                            <span class="card-title-link">GEO Explained: How to Optimize for AI Search Answers, Not Just Rankings</span>
+                                            <p class="card-blurb">Generative Engine Optimization is not SEO. This video breaks down the difference and what to actually do about it.</p>
+                                            <div class="card-meta">Mar 2026 &nbsp;·&nbsp; 13 min watch</div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Lead right -->
+                        <div class="col-lg-6 mb-3">
+                            <a href="#" class="insight-card card-lead">
+                                <div class="card-img-wrap">
+                                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop" alt="AI search optimization" />
+                                    <span class="cat-badge">SEO &amp; GEO</span>
+                                </div>
+                                <div class="card-body-inner">
+                                    <span class="card-title-link">Generative Engine Optimization: The New Discipline Nobody Has Figured Out Yet</span>
+                                    <p class="card-blurb">When ChatGPT, Claude, and Perplexity answer questions instead of sending traffic, traditional SEO stops being enough. Here's how I'm thinking about content strategy in the age of AI-first search.</p>
+                                    <div class="card-meta">Apr 2026 &nbsp;·&nbsp; 9 min read</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- New cards row -->
+                    <div class="row gx-3 mt-1">
+                        <div class="col-sm-6 mb-3">
+                            <a href="insights/seo-2026-small-service-businesses.html" class="insight-card card-supp">
+                                <div class="card-img-wrap">
+                                    <img src="https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?q=80&w=800&auto=format&fit=crop" alt="SEO for service businesses" />
+                                    <span class="cat-badge">SEO &amp; GEO</span>
+                                </div>
+                                <div class="card-body-inner">
+                                    <span class="card-title-link">SEO in 2026 for Small Service Businesses: What to Ignore and What to Double Down On</span>
+                                    <p class="card-blurb">After running Electrician Metrics, I know what actually drives leads for trades businesses — and what just looks good in a report. Here's the honest version.</p>
+                                    <div class="card-meta">Apr 2026 &nbsp;·&nbsp; 6 min read</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ────────────────────────────────
+                     05 · WEB DESIGN & DEV (lead left)
+                ──────────────────────────────── -->
+                <section id="web-design-dev" class="fade-in-section" style="margin-bottom: 4.5rem;">
+                    <div class="section-divider">
+                        <span class="section-label">Web Design &amp; Development</span>
+                        <a href="#" class="section-view-all">View All <i class="fas fa-arrow-right ms-1" style="font-size: 0.65rem;"></i></a>
+                    </div>
+                    <div class="row gx-3">
+                        <!-- Lead -->
+                        <div class="col-lg-6 mb-3">
+                            <a href="#" class="insight-card card-lead">
+                                <div class="card-img-wrap">
+                                    <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=1200&auto=format&fit=crop" alt="Web development" />
+                                    <span class="cat-badge">Web Design &amp; Dev</span>
+                                </div>
+                                <div class="card-body-inner">
+                                    <span class="card-title-link">14 Years of WordPress: What I'd Tell a Client Who Wants to Build a Website in 2026</span>
+                                    <p class="card-blurb">The platform debate is less interesting than the strategy behind it. After 14 years building WordPress sites, here's how I evaluate whether a client actually needs what they're asking for.</p>
+                                    <div class="card-meta">Feb 2026 &nbsp;·&nbsp; 7 min read</div>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Supporting -->
+                        <div class="col-lg-6">
+                            <div class="row gx-3 h-100">
+                                <div class="col-sm-6 mb-3">
+                                    <!-- VIDEO -->
+                                    <a href="#" class="insight-card card-supp is-video">
+                                        <div class="card-img-wrap">
+                                            <img src="https://images.unsplash.com/photo-1593720219276-0b1eacd0aef4?q=80&w=800&auto=format&fit=crop" alt="Video: Lighthouse audit" />
+                                            <span class="cat-badge">Web Design &amp; Dev</span>
+                                            <span class="video-badge">Video</span>
+                                            <i class="fas fa-circle-play video-play-icon"></i>
+                                        </div>
+                                        <div class="card-body-inner">
+                                            <span class="card-title-link">Live Lighthouse Audit: Taking a Score from 40 to 90+ in One Session</span>
+                                            <p class="card-blurb">A real client site, real problems, live fixes. The exact moves that actually move the needle on Core Web Vitals.</p>
+                                            <div class="card-meta">Jan 2026 &nbsp;·&nbsp; 22 min watch</div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-sm-6 mb-3">
+                                    <a href="#" class="insight-card card-supp">
+                                        <div class="card-img-wrap">
+                                            <img src="https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?q=80&w=800&auto=format&fit=crop" alt="Design systems" />
+                                            <span class="cat-badge">Web Design &amp; Dev</span>
+                                        </div>
+                                        <div class="card-body-inner">
+                                            <span class="card-title-link">Why Home Services Websites Underperform and What Actually Fixes Them</span>
+                                            <p class="card-blurb">It's almost never the design. The conversion problems are almost always structural — wrong pages, wrong hierarchy, wrong intent match.</p>
+                                            <div class="card-meta">Dec 2025 &nbsp;·&nbsp; 5 min read</div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ────────────────────────────────
+                     06 · CLICKUP & OPS (lead right)
+                ──────────────────────────────── -->
+                <section id="clickup-ops" class="fade-in-section" style="margin-bottom: 4.5rem;">
+                    <div class="section-divider">
+                        <span class="section-label">ClickUp &amp; Operations</span>
+                        <a href="#" class="section-view-all">View All <i class="fas fa-arrow-right ms-1" style="font-size: 0.65rem;"></i></a>
+                    </div>
+                    <div class="row gx-3">
+                        <!-- Supporting left -->
+                        <div class="col-lg-6">
+                            <div class="row gx-3 h-100">
+                                <div class="col-sm-6 mb-3">
+                                    <a href="#" class="insight-card card-supp">
+                                        <div class="card-img-wrap">
+                                            <img src="https://images.unsplash.com/photo-1518186285589-2f7649de83e0?q=80&w=800&auto=format&fit=crop" alt="ClickUp automations" />
+                                            <span class="cat-badge">ClickUp &amp; Ops</span>
+                                        </div>
+                                        <div class="card-body-inner">
+                                            <span class="card-title-link">The 5 ClickUp Automations Every Agency Needs Running Before They Add a 6th</span>
+                                            <p class="card-blurb">Most teams automate the wrong things first. Start with these five — they handle 70% of the handoff failures I see.</p>
+                                            <div class="card-meta">Apr 2026 &nbsp;·&nbsp; 5 min read</div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-sm-6 mb-3">
+                                    <!-- VIDEO -->
+                                    <a href="#" class="insight-card card-supp is-video">
+                                        <div class="card-img-wrap">
+                                            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=800&auto=format&fit=crop" alt="Video: ClickUp workspace tour" />
+                                            <span class="cat-badge">ClickUp &amp; Ops</span>
+                                            <span class="video-badge">Video</span>
+                                            <i class="fas fa-circle-play video-play-icon"></i>
+                                        </div>
+                                        <div class="card-body-inner">
+                                            <span class="card-title-link">Inside a Real ClickUp Workspace Built for a 50-Person Agency</span>
+                                            <p class="card-blurb">A full walkthrough of the workspace taxonomy, custom fields, and dashboard setup I built at WISE Digital Partners.</p>
+                                            <div class="card-meta">Mar 2026 &nbsp;·&nbsp; 18 min watch</div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Lead right -->
+                        <div class="col-lg-6 mb-3">
+                            <a href="#" class="insight-card card-lead">
+                                <div class="card-img-wrap">
+                                    <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?q=80&w=1200&auto=format&fit=crop" alt="ClickUp architecture" />
+                                    <span class="cat-badge">ClickUp &amp; Ops</span>
+                                </div>
+                                <div class="card-body-inner">
+                                    <span class="card-title-link">Custom Fields at the Workspace Level: Why This One Decision Changes Everything</span>
+                                    <p class="card-blurb">The most common ClickUp architecture mistake I see: custom fields created at the list level instead of the workspace level. It's a small choice that breaks every dashboard you'll ever try to build across departments.</p>
+                                    <div class="card-meta">Apr 2026 &nbsp;·&nbsp; 6 min read</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- New cards row -->
+                    <div class="row gx-3 mt-1">
+                        <div class="col-sm-6 mb-3">
+                            <a href="insights/clickup-hierarchy-explained.html" class="insight-card card-supp">
+                                <div class="card-img-wrap">
+                                    <img src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?q=80&w=800&auto=format&fit=crop" alt="ClickUp hierarchy" />
+                                    <span class="cat-badge">ClickUp &amp; Ops</span>
+                                </div>
+                                <div class="card-body-inner">
+                                    <span class="card-title-link">The ClickUp Hierarchy Explained: When to Use Spaces, Folders, Lists, and Tasks</span>
+                                    <p class="card-blurb">Most ClickUp struggles aren't a features problem — they're a philosophy problem. Here's the mental model behind every hierarchy decision I make, including the workspace I built at WISE.</p>
+                                    <div class="card-meta">Apr 2026 &nbsp;·&nbsp; 8 min read</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ────────────────────────────────
+                     07 · FROM THE DESK (lead left)
+                ──────────────────────────────── -->
+                <section id="from-the-desk" class="fade-in-section" style="margin-bottom: 2rem;">
+                    <div class="section-divider">
+                        <span class="section-label">From the Desk</span>
+                        <a href="#" class="section-view-all">View All <i class="fas fa-arrow-right ms-1" style="font-size: 0.65rem;"></i></a>
+                    </div>
+                    <div class="row gx-3">
+                        <!-- Lead -->
+                        <div class="col-lg-6 mb-3">
+                            <a href="#" class="insight-card card-lead">
+                                <div class="card-img-wrap">
+                                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1200&auto=format&fit=crop" alt="From the desk" />
+                                    <span class="cat-badge">From the Desk</span>
+                                </div>
+                                <div class="card-body-inner">
+                                    <span class="card-title-link">On Building Things That Last Longer Than the Enthusiasm That Started Them</span>
+                                    <p class="card-blurb">Most good ideas die in the messy middle — not because the idea was bad, but because the system to sustain it was never built. Some thoughts on how I think about longevity in both work and projects.</p>
+                                    <div class="card-meta">Apr 2026 &nbsp;·&nbsp; 5 min read</div>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Supporting -->
+                        <div class="col-lg-6">
+                            <div class="row gx-3 h-100">
+                                <div class="col-sm-6 mb-3">
+                                    <!-- VIDEO -->
+                                    <a href="#" class="insight-card card-supp is-video">
+                                        <div class="card-img-wrap">
+                                            <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=800&auto=format&fit=crop" alt="Video: remote work" />
+                                            <span class="cat-badge">From the Desk</span>
+                                            <span class="video-badge">Video</span>
+                                            <i class="fas fa-circle-play video-play-icon"></i>
+                                        </div>
+                                        <div class="card-body-inner">
+                                            <span class="card-title-link">5 Years of Managing Fully Remote Teams: What I'd Tell Myself on Day One</span>
+                                            <p class="card-blurb">The things I learned the hard way about remote leadership, async communication, and distributed trust.</p>
+                                            <div class="card-meta">Feb 2026 &nbsp;·&nbsp; 12 min watch</div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-sm-6 mb-3">
+                                    <a href="#" class="insight-card card-supp">
+                                        <div class="card-img-wrap">
+                                            <img src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?q=80&w=800&auto=format&fit=crop" alt="Reflection" />
+                                            <span class="cat-badge">From the Desk</span>
+                                        </div>
+                                        <div class="card-body-inner">
+                                            <span class="card-title-link">The Quieter Part of Leadership: Knowing When to Stop Adding and Start Removing</span>
+                                            <p class="card-blurb">Every mature system I've seen starts getting better the moment someone decides to take something out.</p>
+                                            <div class="card-meta">Jan 2026 &nbsp;·&nbsp; 3 min read</div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- New cards row -->
+                    <div class="row gx-3 mt-1">
+                        <div class="col-sm-6 mb-3">
+                            <a href="insights/freelancer-to-agency-side.html" class="insight-card card-supp">
+                                <div class="card-img-wrap">
+                                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop" alt="Freelancer to agency transition" />
+                                    <span class="cat-badge">From the Desk</span>
+                                </div>
+                                <div class="card-body-inner">
+                                    <span class="card-title-link">From Freelancer to Agency-Side: What Nobody Tells You About the Switch</span>
+                                    <p class="card-blurb">Going from running your own thing to leading inside someone else's organization requires a completely different mental model. Here's what I learned the hard way making that transition.</p>
+                                    <div class="card-meta">Apr 2026 &nbsp;·&nbsp; 7 min read</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+
+        <!-- ══════════════════════════════════════════
+             CTA STRIP
+        ══════════════════════════════════════════ -->
+        <section class="fade-in-section" style="background: #0a0a0a; border-top: 1px solid #1a1a1a; padding: 4rem 0;">
+            <div class="container px-4 px-lg-5 text-center">
+                <h3 class="text-white mb-3">Want to talk through something you read?</h3>
+                <p class="text-white-50 mb-4" style="max-width: 480px; margin-left: auto; margin-right: auto;">
+                    I write and record because I think better when I'm trying to explain things. If something here sparked a thought, I'd genuinely enjoy the conversation.
+                </p>
+                <a href="mailto:create@jonathanibrahim.com" class="btn btn-primary btn-lg me-2 mb-2">
+                    <i class="fas fa-envelope me-2"></i>Get in Touch
+                </a>
+                <a href="case-studies.html" class="btn btn-outline-secondary btn-lg mb-2">
+                    <i class="fas fa-folder-open me-2"></i>View Case Studies
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer bg-black small text-center text-white-50">
+            <div class="container px-4 px-lg-5">
+                <p class="mb-2">Jonathan Ibrahim, Strategic Operations Leader</p>
+                <p class="mb-0">
+                    Austin, Texas &nbsp;|&nbsp; Remote-Friendly &nbsp;|&nbsp;
+                    <a href="mailto:create@jonathanibrahim.com" class="text-white-50">create@jonathanibrahim.com</a>
+                </p>
+                <p class="mt-3 mb-0">Copyright &copy; Jonathan Ibrahim 2026</p>
+            </div>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            // ── Navbar shrink ──
+            const mainNav = document.getElementById('mainNav');
+            window.addEventListener('scroll', () => {
+                mainNav.classList.toggle('navbar-shrink', window.scrollY > 50);
+            });
+
+            // ── Fade-in ──
+            const faders = document.querySelectorAll('.fade-in-section');
+            const fadeObs = new IntersectionObserver((entries, obs) => {
+                entries.forEach(e => {
+                    if (!e.isIntersecting) return;
+                    e.target.classList.add('is-visible');
+                    obs.unobserve(e.target);
+                });
+            }, { threshold: 0.07, rootMargin: '0px 0px -60px 0px' });
+            faders.forEach(f => fadeObs.observe(f));
+
+            // ── Cat-nav active state on scroll ──
+            const sections   = document.querySelectorAll('section[id]');
+            const navPills   = document.querySelectorAll('.cat-nav-pill');
+            const catNavEl   = document.getElementById('catNav');
+            const navOffset  = 68 + (catNavEl ? catNavEl.offsetHeight : 0) + 20;
+
+            const sectionObs = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navPills.forEach(pill => {
+                            pill.classList.toggle('active', pill.dataset.section === id);
+                        });
+                    }
+                });
+            }, {
+                rootMargin: `-${navOffset}px 0px -55% 0px`,
+                threshold: 0
+            });
+            sections.forEach(s => sectionObs.observe(s));
+
+            // Smooth scroll for cat-nav pills
+            navPills.forEach(pill => {
+                pill.addEventListener('click', e => {
+                    e.preventDefault();
+                    const target = document.getElementById(pill.dataset.section);
+                    if (target) {
+                        const top = target.getBoundingClientRect().top + window.scrollY - navOffset + 10;
+                        window.scrollTo({ top, behavior: 'smooth' });
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>

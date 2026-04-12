@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="[POST META DESCRIPTION — replace this]" />
+        <title>[Post Title] | Insights · Jonathan Ibrahim</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23050505%22/><text x=%2250%22 y=%2274%22 text-anchor=%22middle%22 font-size=%2265%22 font-family=%22sans-serif%22 font-weight=%22900%22 fill=%22%2364a19d%22>JI</text></svg>" />
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900" rel="stylesheet" />
+        <link href="../css/styles.css" rel="stylesheet" />
+
+        <style>
+            /* ── Post hero ── */
+            .post-hero {
+                padding: 10rem 0 4rem;
+                background:
+                    linear-gradient(to bottom, rgba(0,0,0,0.72), rgba(0,0,0,0.97)),
+                    url('https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop')
+                    center/cover no-repeat;
+                /* ↑ Replace URL with post-specific hero image */
+            }
+            .post-cat-badge {
+                display: inline-block;
+                border: 1px solid #64a19d;
+                color: #64a19d;
+                padding: 0.3rem 0.9rem;
+                border-radius: 50px;
+                font-size: 0.72rem;
+                text-transform: uppercase;
+                letter-spacing: 0.1rem;
+                margin-bottom: 1.25rem;
+                font-family: 'Varela Round', sans-serif;
+            }
+            .post-hero-title {
+                font-size: clamp(1.8rem, 4vw, 3rem);
+                font-weight: 800;
+                color: #fff;
+                line-height: 1.25;
+                max-width: 780px;
+                margin-bottom: 1.25rem;
+            }
+            .post-meta-row {
+                font-size: 0.78rem;
+                color: #555;
+                text-transform: uppercase;
+                letter-spacing: 0.08rem;
+                font-family: 'Varela Round', sans-serif;
+            }
+            .post-meta-row span + span::before {
+                content: '·';
+                margin: 0 0.5rem;
+            }
+
+            /* ── Layout: article + sidebar ── */
+            .post-layout {
+                display: grid;
+                grid-template-columns: 1fr 220px;
+                gap: 4rem;
+                align-items: start;
+            }
+            @media (max-width: 991px) {
+                .post-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+                .post-sidebar { display: none; }
+            }
+
+            /* ── Article body typography ── */
+            .post-body {
+                color: #aaa;
+                font-size: 1.05rem;
+                line-height: 1.88;
+            }
+            .post-body p { margin-bottom: 1.5rem; }
+            .post-body h2 {
+                color: #fff;
+                font-size: 1.45rem;
+                font-weight: 700;
+                margin-top: 3rem;
+                margin-bottom: 1rem;
+                padding-left: 1rem;
+                border-left: 3px solid #64a19d;
+            }
+            .post-body h3 {
+                color: #ddd;
+                font-size: 1.1rem;
+                font-weight: 700;
+                margin-top: 2rem;
+                margin-bottom: 0.75rem;
+            }
+            .post-body ul, .post-body ol {
+                padding-left: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+            .post-body li { margin-bottom: 0.5rem; }
+            .post-body a { color: #64a19d; text-decoration: underline; }
+            .post-body a:hover { color: #50817e; }
+            .post-body strong { color: #ddd; }
+            .post-body em { color: #888; }
+            .post-body hr {
+                border: none;
+                border-top: 1px solid #1a1a1a;
+                margin: 2.5rem 0;
+            }
+
+            /* Blockquote */
+            .post-body blockquote {
+                border-left: 3px solid #64a19d;
+                margin: 2rem 0;
+                padding: 0.5rem 1.5rem;
+                color: #888;
+                font-style: italic;
+                font-size: 1.1rem;
+            }
+
+            /* Callout box */
+            .callout-box {
+                background: rgba(100,161,157,0.08);
+                border: 1px solid rgba(100,161,157,0.25);
+                border-radius: 0.5rem;
+                padding: 1.5rem 1.75rem;
+                margin: 2rem 0;
+                color: #aaa;
+            }
+            .callout-box strong {
+                display: block;
+                color: #64a19d;
+                font-size: 0.75rem;
+                text-transform: uppercase;
+                letter-spacing: 0.12rem;
+                margin-bottom: 0.5rem;
+                font-family: 'Varela Round', sans-serif;
+            }
+
+            /* ── Sticky TOC sidebar ── */
+            .post-sidebar {
+                position: sticky;
+                top: 100px;
+            }
+            .toc-label {
+                font-family: 'Varela Round', sans-serif;
+                font-size: 0.7rem;
+                text-transform: uppercase;
+                letter-spacing: 0.15rem;
+                color: #444;
+                margin-bottom: 0.75rem;
+            }
+            .toc-list {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                border-left: 2px solid #1a1a1a;
+            }
+            .toc-list li a {
+                display: block;
+                padding: 0.35rem 0 0.35rem 1rem;
+                font-size: 0.8rem;
+                color: #444;
+                text-decoration: none;
+                transition: color 0.2s, border-color 0.2s;
+                line-height: 1.4;
+            }
+            .toc-list li a:hover { color: #64a19d; }
+            .toc-list li.active a {
+                color: #64a19d;
+                border-left: 2px solid #64a19d;
+                margin-left: -2px;
+            }
+
+            /* ── Post footer CTA ── */
+            .post-footer-cta {
+                border-top: 1px solid #1a1a1a;
+                margin-top: 4rem;
+                padding-top: 3rem;
+            }
+
+            /* ── Fade-in ── */
+            .fade-in-section {
+                opacity: 0;
+                transform: translateY(18px);
+                transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            }
+            .fade-in-section.is-visible { opacity: 1; transform: translateY(0); }
+        </style>
+    </head>
+    <body id="page-top" class="bg-black text-white-50">
+
+        <!-- ── Navigation ── -->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav"
+             style="background-color: rgba(0,0,0,0.92); backdrop-filter: blur(8px); padding: 1rem 0;">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand text-white" href="../insights.html">
+                    <i class="fas fa-arrow-left me-2 text-primary"></i> Back to Insights
+                </a>
+            </div>
+        </nav>
+
+        <!-- ══════════════════════════════════════════
+             POST HERO
+        ══════════════════════════════════════════ -->
+        <header class="post-hero">
+            <div class="container px-4 px-lg-5">
+                <!-- ↓ Change category label and color as needed -->
+                <div><span class="post-cat-badge">Systems &amp; Project Management</span></div>
+                <h1 class="post-hero-title">
+                    Why Your Project Management Tool Is Not Your Problem — Your Process Is
+                </h1>
+                <div class="post-meta-row">
+                    <span>Jonathan Ibrahim</span>
+                    <span>April 2026</span>
+                    <span>6 min read</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- ══════════════════════════════════════════
+             ARTICLE BODY + SIDEBAR
+        ══════════════════════════════════════════ -->
+        <section style="background: #000; padding: 4rem 0 5rem;" class="fade-in-section">
+            <div class="container px-4 px-lg-5">
+                <div class="post-layout">
+
+                    <!-- ── Article ── -->
+                    <article class="post-body" id="postBody">
+
+                        <p class="lead" style="color: #bbb; font-size: 1.15rem;">
+                            Every 18 months or so, a pattern repeats itself inside scaling companies. The team is frustrated. Projects are late. Communication is chaotic. And someone at the leadership table says: "We need a better tool."
+                        </p>
+
+                        <p>
+                            So they switch. From Asana to Monday. From Monday to ClickUp. From ClickUp to Notion. And six months later, the same problems are back — wearing a different interface. The tool gets blamed again. The cycle continues.
+                        </p>
+
+                        <p>
+                            After 14 years of building and inheriting project management systems for scaling companies, I've come to believe that the tool is almost never the real problem. The process is the problem. And until you fix the process, no tool will save you.
+                        </p>
+
+                        <h2 id="h-tool-fallacy">The Tool Fallacy</h2>
+
+                        <p>
+                            Here's what's actually happening when a team switches project management tools: they're importing their broken workflow into a new interface. The chaos doesn't go away — it just looks different for a few weeks while everyone is still figuring out the new software. That novelty gets mistaken for improvement.
+                        </p>
+
+                        <blockquote>
+                            "A fool with a tool is still a fool." The corollary is that a great tool in the hands of a team without a clear process will still produce chaos — just more organized-looking chaos.
+                        </blockquote>
+
+                        <p>
+                            The real test of whether your tool is the problem or your process is the problem is simple: could you run your operations effectively in a shared Google Sheet? If the honest answer is no — if your process is so unclear that no structure would hold it — then a new tool is going to make things worse, not better. You'll be configuring views and building templates while the actual work continues to fall apart underneath.
+                        </p>
+
+                        <h2 id="h-diagnosis">How to Diagnose What's Actually Broken</h2>
+
+                        <p>
+                            When I audit an organization's operational health, I'm not looking at their tool first. I'm looking at three things:
+                        </p>
+
+                        <h3>1. Can anyone describe the lifecycle of a piece of work?</h3>
+
+                        <p>
+                            Pick any deliverable — a client website, a marketing campaign, a product feature — and ask three people to describe the steps it goes through from kickoff to completion. If you get three different answers, you don't have a process problem, you have a documentation problem that's masquerading as a process problem. Write it down first.
+                        </p>
+
+                        <div class="callout-box">
+                            <strong>Key Diagnostic</strong>
+                            Ask your team: "What does done mean for [X deliverable]?" If the answers differ by department, you've found your first bottleneck. No tool can fix an undefined definition of done.
+                        </div>
+
+                        <h3>2. Where do handoffs break down?</h3>
+
+                        <p>
+                            Most project failures don't happen in the middle of a task — they happen between tasks. The design is complete, but development doesn't know it. The copy is written, but it's sitting in a Google Doc that nobody has a link to. The client approved the mockup, but the PM who knows that is on vacation.
+                        </p>
+
+                        <p>
+                            Handoff failures are process failures, not tool failures. A tool can automate a notification, but it can't create clarity about who is responsible for what, when, and under what conditions.
+                        </p>
+
+                        <h3>3. What does leadership actually want to see?</h3>
+
+                        <p>
+                            This is the question nobody asks early enough. If the CEO wants a weekly dashboard showing project health across all active clients, and you build a system that requires manual entry to produce that dashboard, you've built the wrong system. Understanding the reporting requirements before you design the workflow saves an enormous amount of rework.
+                        </p>
+
+                        <h2 id="h-when-tool-matters">When the Tool Actually Does Matter</h2>
+
+                        <p>
+                            I don't want to overcorrect here. The tool matters — but it matters second, not first. Once you have a documented process with clear owners, defined handoffs, and a shared definition of done, the right tool can do meaningful work:
+                        </p>
+
+                        <ul>
+                            <li><strong>Automation</strong> can enforce handoff triggers that humans forget</li>
+                            <li><strong>Views and dashboards</strong> can surface the reporting leadership needs without manual compilation</li>
+                            <li><strong>Notification systems</strong> can reduce the coordination overhead that kills async teams</li>
+                            <li><strong>Templates</strong> can encode your documented process so that it scales without you personally overseeing every project</li>
+                        </ul>
+
+                        <p>
+                            These are real gains. But they require a process to encode. They're multipliers, not replacements.
+                        </p>
+
+                        <h2 id="h-what-to-do">What to Actually Do</h2>
+
+                        <p>
+                            Before your next tool evaluation, run this exercise. It takes about two hours and will save you months of implementation pain:
+                        </p>
+
+                        <ol>
+                            <li>Map one complete project lifecycle on a whiteboard — every step, every handoff, every decision point</li>
+                            <li>Identify the three places where things most often fall through the cracks</li>
+                            <li>Write down who owns each stage and what "complete" means for each one</li>
+                            <li>Ask: what would need to be true for this process to work without you personally supervising it?</li>
+                        </ol>
+
+                        <p>
+                            Now you're in a position to evaluate tools. You know what you need to automate, what you need to track, and what leadership needs to see. The right tool will become obvious — or you'll realize your current tool is already capable of it, and the gap was always the process.
+                        </p>
+
+                        <hr />
+
+                        <p style="color: #555; font-size: 0.9rem; font-style: italic;">
+                            This is how I approach every operations engagement I take on. If you're working through a similar challenge and want to talk through it, I'm always up for a good conversation about what's actually broken and how to fix it.
+                        </p>
+
+                        <!-- Post footer CTA -->
+                        <div class="post-footer-cta">
+                            <div class="row gx-4 align-items-center">
+                                <div class="col-md-8">
+                                    <h4 class="text-white mb-2">Want more like this?</h4>
+                                    <p style="color: #555; font-size: 0.9rem; margin: 0;">
+                                        I write about systems, operations, ClickUp architecture, and the craft of building things that scale. New posts when something is worth saying.
+                                    </p>
+                                </div>
+                                <div class="col-md-4 mt-3 mt-md-0 text-md-end">
+                                    <a href="mailto:create@jonathanibrahim.com" class="btn btn-primary me-2 mb-2">
+                                        <i class="fas fa-envelope me-1"></i> Get in Touch
+                                    </a>
+                                    <a href="../insights.html" class="btn btn-outline-secondary mb-2">
+                                        <i class="fas fa-arrow-left me-1"></i> All Insights
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </article>
+
+                    <!-- ── Sticky TOC Sidebar ── -->
+                    <aside class="post-sidebar" id="tocSidebar">
+                        <p class="toc-label">In This Post</p>
+                        <ul class="toc-list" id="tocList">
+                            <!-- Populated by JS from h2 elements in #postBody -->
+                        </ul>
+                    </aside>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer bg-black small text-center text-white-50">
+            <div class="container px-4 px-lg-5">
+                <p class="mb-2">Jonathan Ibrahim, Strategic Operations Leader</p>
+                <p class="mb-0">
+                    Austin, Texas &nbsp;|&nbsp; Remote-Friendly &nbsp;|&nbsp;
+                    <a href="mailto:create@jonathanibrahim.com" class="text-white-50">create@jonathanibrahim.com</a>
+                </p>
+                <p class="mt-3 mb-0">Copyright &copy; Jonathan Ibrahim 2026</p>
+            </div>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            // ── Fade-in ──
+            document.querySelectorAll('.fade-in-section').forEach(el => {
+                new IntersectionObserver((entries, obs) => {
+                    entries.forEach(e => {
+                        if (!e.isIntersecting) return;
+                        e.target.classList.add('is-visible');
+                        obs.unobserve(e.target);
+                    });
+                }, { threshold: 0.05 }).observe(el);
+            });
+
+            // ── Build TOC from h2s ──
+            const postBody = document.getElementById('postBody');
+            const tocList  = document.getElementById('tocList');
+
+            if (postBody && tocList) {
+                const headings = postBody.querySelectorAll('h2');
+                headings.forEach(h => {
+                    // Ensure each h2 has an id
+                    if (!h.id) {
+                        h.id = h.textContent.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+                    }
+                    const li = document.createElement('li');
+                    const a  = document.createElement('a');
+                    a.href        = `#${h.id}`;
+                    a.textContent = h.textContent;
+                    li.appendChild(a);
+                    tocList.appendChild(li);
+
+                    // Smooth scroll
+                    a.addEventListener('click', e => {
+                        e.preventDefault();
+                        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    });
+                });
+
+                // ── Active TOC state on scroll ──
+                const tocItems = tocList.querySelectorAll('li');
+                const tocObs   = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const id = entry.target.getAttribute('id');
+                            tocItems.forEach(li => {
+                                li.classList.toggle('active', li.querySelector('a').getAttribute('href') === `#${id}`);
+                            });
+                        }
+                    });
+                }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+
+                headings.forEach(h => tocObs.observe(h));
+            }
+        </script>
+    </body>
+</html>
