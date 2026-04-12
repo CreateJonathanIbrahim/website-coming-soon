@@ -5068,6 +5068,33 @@ fieldset:disabled .btn {
     transform: translateY(0);
 }
 
+/* Initial hidden state for the navbar */
+.nav-pre-load {
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none;
+}
+
+/* 1. Base state: Hidden and ready to transition */
+#mainNav {
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none;
+    /* Forces smooth animation for all states (fade in AND the shrink effect) */
+    transition:
+        opacity 0.8s ease-out,
+        transform 0.8s ease-out,
+        background-color 0.3s ease-in-out,
+        padding 0.3s ease-in-out !important;
+}
+
+/* 2. Active state: Added via JavaScript */
+#mainNav.nav-is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
 .list-group {
     --bs-list-group-color: #212529;
     --bs-list-group-bg: #fff;
@@ -11456,7 +11483,8 @@ body {
 }
 
 .about-section {
-    padding-top: 10rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
     background: linear-gradient(
         to bottom,
         #000 0%,
@@ -11498,6 +11526,42 @@ body {
     transform: scale(1.05);
 }
 
+.track-record-section {
+    padding: 10rem 0;
+}
+
+.track-record-section .card {
+    border: 0;
+    border-bottom: 0.25rem solid #64a19d;
+}
+
+.track-record-section .card h4,
+.track-record-section .card .h4 {
+    font-size: 0.8rem;
+    font-family:
+        'Varela Round',
+        -apple-system,
+        BlinkMacSystemFont,
+        'Segoe UI',
+        Roboto,
+        'Helvetica Neue',
+        Arial,
+        sans-serif,
+        'Apple Color Emoji',
+        'Segoe UI Emoji',
+        'Segoe UI Symbol',
+        'Noto Color Emoji';
+    text-transform: uppercase;
+    letter-spacing: 0.15rem;
+}
+
+.track-record-section .card hr {
+    opacity: 1;
+    border-color: #64a19d;
+    border-width: 0.25rem;
+    width: 3rem;
+}
+
 .signup-section {
     padding: 10rem 0;
     background:
@@ -11535,63 +11599,54 @@ body {
 .contact-section {
     position: relative;
     width: 100%;
-    /* Increase height to 50rem as requested */
-    min-height: 50rem;
-    /* Balanced padding to create space for centered content */
-    padding: 10rem 0;
+    min-height: 100vh;
+    padding: 10rem 0 4rem 0;
     overflow: hidden;
     color: white;
     display: flex;
     flex-direction: column;
-    /* NEW: Vertically center the text on the section (and thus the moose's body) */
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     text-align: center;
-    /* NEW: Add a solid black base for the final fade-out */
     background-color: #000;
 }
 
-/* 1. Background image layer (Moose) */
+/* Background image layer */
 .contact-section::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
-    /* Anchor to top center so horns are not cut off */
-    background: url('../assets/img/derek-livingston-P2TIXADqcFU-unsplash.jpg') no-repeat;
-    background-position: top center;
-    background-size: cover;
+    bottom: 15%; /* Moves the bottom boundary of the image up, lifting the moose */
+    background: url('../assets/img/derek-livingston-P2TIXADqcFU-unsplash.jpg') center bottom / cover
+        no-repeat;
     filter: grayscale(100%);
+    transform: scale(1.3) translateX(150px);
     z-index: 0;
-
-    /* NEW: Zoom in by 1.5x and shift 50px to the right */
-    transform: scale(1.5) translateX(50px);
-    /* NEW: Set transform origin to top-center to keep horns in view during zoom */
-    transform-origin: top center;
 }
 
-/* 2. Dark/gray gradient overlay */
+/* Dark gradient overlay */
 .contact-section::after {
     content: '';
     position: absolute;
     inset: 0;
-    /* NEW: Smooth gradient fading from light (top) to solid black (bottom) */
+    /* Fades from semi-transparent to solid black right where the image ends (75%) */
     background: linear-gradient(
         to bottom,
-        rgba(0, 0, 0, 0.2) 0%,
-        rgba(0, 0, 0, 0.5) 75%,
-        rgba(0, 0, 0, 1) 100%
+        rgba(0, 0, 0, 0.3) 0%,
+        rgba(0, 0, 0, 0.8) 60%,
+        #000000 75%
     );
     z-index: 1;
 }
 
-/* 3. Content layer (Text & Button) stays above image and gradient */
+/* Content stays above */
 .contact-section > * {
     position: relative;
     z-index: 2;
 }
+
 .contact-section .card {
     border: 0;
     border-bottom: 0.25rem solid #64a19d;

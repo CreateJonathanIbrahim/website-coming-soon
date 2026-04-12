@@ -328,7 +328,7 @@
         </section>
 
         <!-- Track Record-->
-        <section class="contact-section fade-in-section bg-black" id="achievements">
+        <section class="track-record-section fade-in-section bg-black" id="achievements">
             <div class="container px-4 px-lg-5">
                 <h2 class="text-white text-center mb-5">Track Record of Impact</h2>
                 <div class="row gx-4 gx-lg-5">
@@ -662,6 +662,35 @@
 
             faders.forEach(fader => {
                 appearOnScroll.observe(fader);
+            });
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const mainNav = document.getElementById('mainNav');
+                let navTimeout;
+
+                if (mainNav) {
+                    // Function to reveal navbar
+                    const revealNav = () => {
+                        mainNav.classList.remove('nav-pre-load');
+                    };
+
+                    // If user refreshes the page and is already scrolled down, reveal immediately
+                    if (window.scrollY > 0) {
+                        revealNav();
+                    } else {
+                        // Otherwise, wait 2 seconds
+                        navTimeout = setTimeout(revealNav, 2000);
+                    }
+
+                    // If user scrolls before the 2 seconds are up, cancel the timer and reveal immediately
+                    window.addEventListener('scroll', () => {
+                        if (window.scrollY > 0 && mainNav.classList.contains('nav-pre-load')) {
+                            clearTimeout(navTimeout);
+                            revealNav();
+                        }
+                    });
+                }
             });
         </script>
     </body>
