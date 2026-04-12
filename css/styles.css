@@ -11532,39 +11532,38 @@ body {
 }
 
 .contact-section {
+    position: relative;
+    width: 100%;
+    min-height: 35rem;
+    padding: 15rem 0;
+    overflow: hidden;
+    color: white;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: flex-end; /* pushes content down */
     align-items: center;
+    text-align: center;
 }
 
 /* Background image layer */
 .contact-section::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 65%;
-
-    background: url('../assets/img/derek-livingston-P2TIXADqcFU-unsplash.jpg') top center / cover
+    inset: 0;
+    background: url('../assets/img/derek-livingston-P2TIXADqcFU-unsplash.jpg') center/cover
         no-repeat;
 
     filter: grayscale(100%);
     z-index: 0;
+    background-position: top center;
 }
 
 /* Dark/gray overlay */
 .contact-section::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 65%;
-
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7));
-
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8));
     z-index: 1;
 }
 
