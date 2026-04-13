@@ -124,6 +124,639 @@
         />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/custom.css" rel="stylesheet" />
+
+        <style>
+            /* ── Shared reel utility ── */
+            .reel-section {
+                padding: 5rem 0;
+            }
+            .stat-chip {
+                display: inline-block;
+                background: rgba(100, 161, 157, 0.12);
+                border: 1px solid rgba(100, 161, 157, 0.3);
+                color: #64a19d;
+                font-family: 'Varela Round', sans-serif;
+                font-size: 0.8rem;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                padding: 0.35rem 0.85rem;
+                border-radius: 2rem;
+                margin-bottom: 1rem;
+                display: inline-block;
+            }
+
+            /* ── Case study cards (reel) ── */
+            .cs-reel-card {
+                border-radius: 0.75rem;
+                overflow: hidden;
+                background: #111;
+                border: 1px solid #1a1a1a;
+                display: flex;
+                flex-direction: column;
+                text-decoration: none;
+                height: 100%;
+                transition:
+                    transform 0.25s ease,
+                    box-shadow 0.25s ease,
+                    border-color 0.25s ease;
+            }
+            .cs-reel-card:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+                border-color: rgba(100, 161, 157, 0.35);
+            }
+            /* Image area */
+            .cs-reel-card-img {
+                position: relative;
+                height: 200px;
+                overflow: hidden;
+                flex-shrink: 0;
+            }
+            .cs-reel-card-bg {
+                position: absolute;
+                inset: 0;
+                background-size: cover;
+                background-position: center;
+                filter: grayscale(30%);
+                transition:
+                    filter 0.4s ease,
+                    transform 0.4s ease;
+            }
+            .cs-reel-card:hover .cs-reel-card-bg {
+                filter: grayscale(0%);
+                transform: scale(1.04);
+            }
+            .cs-reel-card-overlay {
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(
+                    to bottom,
+                    rgba(0, 0, 0, 0.05) 0%,
+                    rgba(0, 0, 0, 0.3) 100%
+                );
+            }
+            /* Text area below image */
+            .cs-reel-card-content {
+                padding: 1.4rem 1.5rem 1.5rem;
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+            }
+            .cs-type-tag {
+                display: inline-block;
+                border: 1px solid rgba(100, 161, 157, 0.5);
+                color: #64a19d;
+                padding: 0.18rem 0.65rem;
+                border-radius: 50px;
+                font-size: 0.65rem;
+                text-transform: uppercase;
+                letter-spacing: 0.1rem;
+                margin-bottom: 0.75rem;
+                font-family: 'Varela Round', sans-serif;
+                align-self: flex-start;
+            }
+            .cs-reel-card-title {
+                color: #fff;
+                font-weight: 700;
+                font-size: 1.05rem;
+                line-height: 1.35;
+                margin-bottom: 0.6rem;
+                font-family: 'Varela Round', sans-serif;
+            }
+            .cs-reel-card-blurb {
+                color: rgba(255, 255, 255, 0.5);
+                font-size: 0.83rem;
+                line-height: 1.6;
+                margin-bottom: 1rem;
+                flex: 1;
+            }
+            .cs-reel-card-arrow {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.4rem;
+                color: #64a19d;
+                font-size: 0.75rem;
+                font-family: 'Varela Round', sans-serif;
+                text-transform: uppercase;
+                letter-spacing: 0.07rem;
+                transition: gap 0.2s ease;
+                margin-top: auto;
+            }
+            .cs-reel-card:hover .cs-reel-card-arrow {
+                gap: 0.65rem;
+            }
+
+            /* ── Case study carousel ── */
+            .cs-carousel-wrapper {
+                overflow: hidden;
+                position: relative;
+            }
+            .cs-carousel-track {
+                display: flex;
+                gap: 1.5rem;
+                scroll-snap-type: x mandatory;
+                overflow-x: auto;
+                scrollbar-width: none;
+                scroll-behavior: smooth;
+            }
+            .cs-carousel-track::-webkit-scrollbar {
+                display: none;
+            }
+            .cs-carousel-slide {
+                flex: 0 0 calc((100% - 3rem) / 3);
+                scroll-snap-align: start;
+            }
+            @media (max-width: 991px) {
+                .cs-carousel-slide {
+                    flex: 0 0 calc((100% - 1.5rem) / 2);
+                }
+            }
+            @media (max-width: 575px) {
+                .cs-carousel-slide {
+                    flex: 0 0 100%;
+                }
+            }
+            .cs-carousel-nav {
+                display: flex;
+                gap: 0.5rem;
+                justify-content: flex-end;
+            }
+            @media (max-width: 991px) {
+                .cs-carousel-nav {
+                    justify-content: center;
+                }
+            }
+            .cs-carousel-btn {
+                width: 2.5rem;
+                height: 2.5rem;
+                border-radius: 50%;
+                border: 1px solid rgba(100, 161, 157, 0.4);
+                background: transparent;
+                color: #64a19d;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition:
+                    background 0.2s ease,
+                    border-color 0.2s ease,
+                    color 0.2s ease;
+            }
+            .cs-carousel-btn:hover {
+                background: #64a19d;
+                border-color: #64a19d;
+                color: #050505;
+            }
+
+            /* ── Insight cards (reel) ── */
+            .insights-preview-grid {
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                grid-template-rows: auto auto;
+                gap: 0.75rem;
+            }
+            .irp-a {
+                grid-column: 1/3;
+                grid-row: 1;
+            }
+            .irp-b {
+                grid-column: 3/4;
+                grid-row: 1;
+            }
+            .irp-c {
+                grid-column: 1/2;
+                grid-row: 2;
+            }
+            .irp-d {
+                grid-column: 2/4;
+                grid-row: 2;
+            }
+            .irp-e {
+                grid-column: 4/6;
+                grid-row: 1/3;
+            }
+
+            /* Tablet: 3-col, E moves to row 3 full-width */
+            @media (max-width: 991px) and (min-width: 576px) {
+                .insights-preview-grid {
+                    grid-template-columns: repeat(3, 1fr);
+                    grid-template-rows: auto auto auto;
+                }
+                .irp-a {
+                    grid-column: 1/3;
+                    grid-row: 1;
+                }
+                .irp-b {
+                    grid-column: 3/4;
+                    grid-row: 1;
+                }
+                .irp-c {
+                    grid-column: 1/2;
+                    grid-row: 2;
+                }
+                .irp-d {
+                    grid-column: 2/4;
+                    grid-row: 2;
+                }
+                .irp-e {
+                    grid-column: 1/4;
+                    grid-row: 3;
+                }
+            }
+
+            /* Mobile: single column */
+            @media (max-width: 575px) {
+                .insights-preview-grid {
+                    grid-template-columns: 1fr;
+                    grid-template-rows: auto;
+                }
+                .irp-a,
+                .irp-b,
+                .irp-c,
+                .irp-d,
+                .irp-e {
+                    grid-column: auto;
+                    grid-row: auto;
+                }
+            }
+
+            .insight-reel-card {
+                display: flex;
+                flex-direction: column;
+                text-decoration: none;
+                background: #111;
+                border-radius: 0.75rem;
+                overflow: hidden;
+                border: 1px solid #1a1a1a;
+                transition:
+                    border-color 0.2s ease,
+                    transform 0.25s ease,
+                    box-shadow 0.25s ease;
+                height: 100%;
+            }
+            .insight-reel-card:hover {
+                border-color: #64a19d;
+                transform: translateY(-3px);
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            }
+            .insight-reel-img-wrap {
+                position: relative;
+                overflow: hidden;
+                flex-shrink: 0;
+            }
+            .insight-reel-img-wrap img {
+                width: 100%;
+                object-fit: cover;
+                display: block;
+                filter: grayscale(60%);
+                transition:
+                    filter 0.4s ease,
+                    transform 0.4s ease;
+            }
+            .insight-reel-card:hover .insight-reel-img-wrap img {
+                filter: grayscale(0%);
+                transform: scale(1.03);
+            }
+            .irp-a .insight-reel-img-wrap,
+            .irp-d .insight-reel-img-wrap {
+                height: 220px;
+            }
+            .irp-a .insight-reel-img-wrap img,
+            .irp-d .insight-reel-img-wrap img {
+                height: 100%;
+            }
+            .irp-b .insight-reel-img-wrap,
+            .irp-c .insight-reel-img-wrap {
+                height: 150px;
+            }
+            .irp-b .insight-reel-img-wrap img,
+            .irp-c .insight-reel-img-wrap img {
+                height: 100%;
+            }
+            .irp-e .insight-reel-img-wrap {
+                flex: 1;
+                min-height: 300px;
+            }
+            .irp-e .insight-reel-img-wrap img {
+                height: 100%;
+            }
+            .insight-cat-badge {
+                position: absolute;
+                top: 0.75rem;
+                left: 0.75rem;
+                background: rgba(0, 0, 0, 0.75);
+                border: 1px solid #64a19d;
+                color: #64a19d;
+                font-family: 'Varela Round', sans-serif;
+                font-size: 0.62rem;
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+                padding: 0.2rem 0.55rem;
+                border-radius: 50px;
+                backdrop-filter: blur(4px);
+            }
+            .insight-reel-body {
+                padding: 1.1rem 1.25rem 1.25rem;
+                display: flex;
+                flex-direction: column;
+            }
+            .insight-reel-title {
+                color: #fff;
+                font-weight: 700;
+                line-height: 1.35;
+                margin-bottom: 0.45rem;
+                display: block;
+                transition: color 0.2s;
+            }
+            .insight-reel-card:hover .insight-reel-title {
+                color: #64a19d;
+            }
+            .irp-a .insight-reel-title,
+            .irp-d .insight-reel-title,
+            .irp-e .insight-reel-title {
+                font-size: 1.1rem;
+            }
+            .irp-b .insight-reel-title,
+            .irp-c .insight-reel-title {
+                font-size: 0.9rem;
+            }
+            .insight-reel-blurb {
+                color: #666;
+                font-size: 0.83rem;
+                line-height: 1.6;
+                margin-bottom: 0.6rem;
+                flex: 1;
+            }
+            .irp-b .insight-reel-blurb,
+            .irp-c .insight-reel-blurb {
+                font-size: 0.78rem;
+            }
+            .insight-reel-meta {
+                font-size: 0.7rem;
+                color: #555;
+                text-transform: uppercase;
+                letter-spacing: 0.06rem;
+                font-family: 'Varela Round', sans-serif;
+                margin-top: auto;
+            }
+
+            /* ── Career Journey Timeline ── */
+            .career-timeline {
+                display: flex;
+                flex-direction: column;
+            }
+            .career-entry {
+                display: grid;
+                grid-template-columns: 4.5rem 1fr;
+                gap: 0 2rem;
+                padding: 2rem 0;
+            }
+            .career-year {
+                font-family: 'Varela Round', sans-serif;
+                font-size: 0.7rem;
+                color: #aaa;
+                text-transform: uppercase;
+                letter-spacing: 0.06em;
+                padding-top: 0.4rem;
+                line-height: 1.4;
+            }
+            .career-rule {
+                border: none;
+                border-top: 1px solid #dee2e6;
+                margin: 0;
+            }
+            .career-role {
+                font-family: 'Varela Round', sans-serif;
+                font-size: 1.1rem;
+                font-weight: 700;
+                color: #212529;
+                margin-bottom: 0.25rem;
+            }
+            .career-company {
+                font-size: 0.85rem;
+                color: #64a19d;
+                font-weight: 600;
+                margin-bottom: 0.4rem;
+            }
+            .career-meta {
+                font-size: 0.75rem;
+                color: #6c757d;
+                margin-bottom: 0.75rem;
+            }
+            .career-desc {
+                font-size: 0.9rem;
+                color: #555;
+                line-height: 1.7;
+                margin-bottom: 0;
+            }
+            @media (max-width: 575px) {
+                .career-entry {
+                    grid-template-columns: 1fr;
+                    gap: 0.2rem 0;
+                    padding: 1.5rem 0;
+                }
+                .career-year {
+                    padding-top: 0;
+                    font-size: 0.65rem;
+                    color: #bbb;
+                }
+            }
+        /* ── Track Record: Number Grid ── */
+        .tr-eyebrow {
+            font-family: 'Varela Round', sans-serif;
+            font-size: 0.72rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #64a19d;
+            margin: 0 0 3rem;
+            display: block;
+        }
+        .tr-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto;
+        }
+        .tr-cell {
+            padding: 3rem 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            border-top: 1px solid rgba(100, 161, 157, 0.2);
+        }
+        .tr-cell:nth-child(odd) {
+            border-right: 1px solid rgba(100, 161, 157, 0.2);
+        }
+        .tr-metric {
+            font-family: 'Varela Round', sans-serif;
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            line-height: 1;
+            color: #fff;
+            letter-spacing: -0.03em;
+        }
+        .tr-metric-unit {
+            font-size: 0.55em;
+            vertical-align: super;
+            color: rgba(255, 255, 255, 0.45);
+            letter-spacing: 0;
+        }
+        .tr-label {
+            font-family: 'Varela Round', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #64a19d;
+            margin: 0;
+        }
+        .tr-desc {
+            font-size: 0.88rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.4);
+            margin: 0;
+            max-width: 36ch;
+        }
+        @media (max-width: 767px) {
+            .tr-grid { grid-template-columns: 1fr; }
+            .tr-cell { padding: 2rem 0; border-right: none !important; }
+            .tr-metric { font-size: 4rem; }
+            .tr-desc { max-width: 100%; }
+        }
+        /* ── Hero entrance stagger ── */
+        @media (prefers-reduced-motion: no-preference) {
+            .hero-reveal {
+                opacity: 0;
+                transform: translateY(14px);
+                transition:
+                    opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+            .masthead.hero-loaded .hero-reveal { opacity: 1; transform: translateY(0); }
+            .masthead.hero-loaded .hero-d1 { transition-delay: 0.2s; }
+            .masthead.hero-loaded .hero-d2 { transition-delay: 0.55s; }
+            .masthead.hero-loaded .hero-d3 { transition-delay: 0.75s; }
+            .masthead.hero-loaded .hero-d4 { transition-delay: 0.95s; }
+            .masthead.hero-loaded .hero-d5 { transition-delay: 1.1s; }
+            .masthead.hero-loaded .hero-d6 { transition-delay: 1.25s; }
+
+            /* Separator line: scaleX reveal */
+            .hero-sep {
+                display: block;
+                width: 60px;
+                height: 1px;
+                background: rgba(100, 161, 157, 0.5);
+                margin: 1.25rem auto 1.5rem;
+                transform-origin: center;
+                opacity: 0;
+                transform: scaleX(0);
+                transition:
+                    opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+            .masthead.hero-loaded .hero-sep {
+                opacity: 1;
+                transform: scaleX(1);
+                transition-delay: 0.55s;
+            }
+        }
+
+        /* Grain overlay */
+        .masthead::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+            background-size: 200px 200px;
+            opacity: 0.035;
+            mix-blend-mode: overlay;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .masthead > * { position: relative; z-index: 2; }
+
+        /* Scroll chevron */
+        .masthead-scroll-cue {
+            display: none;
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(100, 161, 157, 0.6);
+            font-size: 1.1rem;
+            z-index: 10;
+            text-decoration: none;
+            opacity: 0;
+            transition: color 0.2s ease, opacity 0.6s ease;
+        }
+        .masthead-scroll-cue:hover { color: #64a19d; }
+        @media (min-width: 992px) {
+            .masthead-scroll-cue { display: block; }
+        }
+        @media (prefers-reduced-motion: no-preference) {
+            .masthead.hero-loaded .masthead-scroll-cue {
+                opacity: 1;
+                transition-delay: 1.6s;
+            }
+            @keyframes hero-chevron-bounce {
+                0%, 100% { transform: translateX(-50%) translateY(0); }
+                50% { transform: translateX(-50%) translateY(8px); }
+            }
+            .masthead.hero-loaded .masthead-scroll-cue {
+                animation: hero-chevron-bounce 1.8s ease-in-out 2.2s infinite;
+            }
+        }
+
+        /* Button press delight */
+        .masthead .btn-primary {
+            transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s ease, background-color 0.2s ease;
+        }
+        .masthead .btn-primary:active {
+            transform: translateY(2px) scale(0.975);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+            transition-duration: 0.08s;
+        }
+
+        /* ── Core Expertise: directional row entrances ── */
+        .expertise-row {
+            transition:
+                opacity 0.7s cubic-bezier(0.25, 1, 0.5, 1),
+                transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .expertise-row--from-left  { transform: translateX(-40px); }
+        .expertise-row--from-right { transform: translateX(40px); }
+        .expertise-row.is-visible  { transform: translateX(0); }
+
+        /* ── Core Expertise: hover — image grayscale lift ── */
+        .expertise-img-wrap img {
+            transition: filter 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .expertise-row:hover .expertise-img-wrap img {
+            filter: grayscale(50%) !important;
+        }
+
+        /* ── Core Expertise: hover — heading teal shift + panel tint ── */
+        .expertise-row .project {
+            transition: background-color 0.3s ease-out;
+        }
+        .expertise-row:hover .project {
+            background-color: #050d0c !important;
+        }
+        .expertise-row .project-text h4 {
+            transition: color 0.2s ease-out;
+        }
+        .expertise-row:hover .project-text h4 {
+            color: #64a19d;
+        }
+
+        /* ── Core Expertise: reduced motion ── */
+        @media (prefers-reduced-motion: reduce) {
+            .expertise-row,
+            .expertise-img-wrap img,
+            .expertise-row .project,
+            .expertise-row .project-text h4 {
+                transition: none !important;
+            }
+        }
+        </style>
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -154,8 +787,12 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#experience">Experience</a>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="case-studies.html">Case Studies</a></li>
-                        <li class="nav-item"><a class="nav-link" href="insights.html">Insights</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="case-studies.html">Case Studies</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="insights.html">Insights</a>
+                        </li>
                         <li class="nav-item"><a class="nav-link" href="#connect">Connect</a></li>
                     </ul>
                 </div>
@@ -166,15 +803,16 @@
             <div
                 class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center"
             >
-                <div class="d-flex justify-content-center fade-in-section">
+                <div class="d-flex justify-content-center">
                     <div class="text-center">
-                        <h1 class="mx-auto my-0 text-uppercase">Jonathan Ibrahim</h1>
-                        <h2 class="text-white-50 mx-auto mt-2 mb-3">
+                        <h1 class="mx-auto my-0 text-uppercase hero-reveal hero-d1">Jonathan Ibrahim</h1>
+                        <span class="hero-sep hero-reveal hero-d2" aria-hidden="true"></span>
+                        <h2 class="text-white-50 mx-auto mb-3 hero-reveal hero-d3">
                             Strategic Operations Leader<br />Head of Project Management | ClickUp
                             Architect
                         </h2>
-                        <p class="text-white-50 mx-auto mb-5"><em>Full Website Coming Soon</em></p>
-                        <div class="mt-4">
+                        <p class="text-white-50 mx-auto mb-5 hero-reveal hero-d4"><em>Full Website Coming Soon</em></p>
+                        <div class="mt-4 hero-reveal hero-d5">
                             <a
                                 class="btn btn-primary btn-lg mx-2 mb-2"
                                 href="assets/Jonathan_Ibrahim_Resume.pdf"
@@ -190,7 +828,7 @@
                                 <i class="fab fa-linkedin"></i> LinkedIn
                             </a>
                         </div>
-                        <div class="mt-3">
+                        <div class="mt-3 hero-reveal hero-d6">
                             <a
                                 class="btn btn-primary mx-2"
                                 href="mailto:create@jonathanibrahim.com"
@@ -201,6 +839,9 @@
                     </div>
                 </div>
             </div>
+            <a href="#about" class="masthead-scroll-cue" aria-label="Scroll to About">
+                <i class="fas fa-chevron-down"></i>
+            </a>
         </header>
 
         <!-- About-->
@@ -242,19 +883,19 @@
         </section>
 
         <!-- Core Expertise-->
-        <section class="projects-section fade-in-section bg-light" id="expertise">
+        <section class="projects-section bg-light" id="expertise">
             <div class="container px-4 px-lg-5">
                 <h1 class="text-center mb-5 display-4">Core Expertise</h1>
 
                 <!-- Program & Portfolio Management -->
-                <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
+                <div class="row gx-0 mb-5 mb-lg-0 justify-content-center fade-in-section expertise-row expertise-row--from-left">
                     <div class="col-lg-6">
-                        <img
+                        <div class="expertise-img-wrap"><img
                             class="img-fluid"
                             src="assets/img/vasudev-gurjar-Ox2zmPgSQ2k-unsplash.jpg"
                             alt="Project Management"
                             style="filter: grayscale(100%)"
-                        />
+                        /></div>
                     </div>
                     <div class="col-lg-6">
                         <div class="bg-black text-center h-100 project">
@@ -274,14 +915,14 @@
                 </div>
 
                 <!-- Operations Architecture -->
-                <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
+                <div class="row gx-0 mb-5 mb-lg-0 justify-content-center fade-in-section expertise-row expertise-row--from-right">
                     <div class="col-lg-6">
-                        <img
+                        <div class="expertise-img-wrap"><img
                             class="img-fluid"
                             src="assets/img/campaign-creators-gMsnXqILjp4-unsplash.jpg"
                             alt="Operations Architecture"
                             style="filter: grayscale(100%)"
-                        />
+                        /></div>
                     </div>
                     <div class="col-lg-6 order-lg-first">
                         <div class="bg-black text-center h-100 project">
@@ -301,14 +942,14 @@
                 </div>
 
                 <!-- Web Strategy -->
-                <div class="row gx-0 justify-content-center">
+                <div class="row gx-0 justify-content-center fade-in-section expertise-row expertise-row--from-left">
                     <div class="col-lg-6">
-                        <img
+                        <div class="expertise-img-wrap"><img
                             class="img-fluid"
                             src="assets/img/saied-hosni-L7-LeHy4yGc-unsplash.jpg"
                             alt="Web Strategy"
                             style="filter: grayscale(100%)"
-                        />
+                        /></div>
                     </div>
                     <div class="col-lg-6">
                         <div class="bg-black text-center h-100 project">
@@ -332,78 +973,33 @@
         <!-- Track Record-->
         <section class="track-record-section fade-in-section bg-black" id="achievements">
             <div class="container px-4 px-lg-5">
-                <h2 class="text-white text-center mb-5">Track Record of Impact</h2>
-                <div class="row gx-4 gx-lg-5">
-                    <div class="col-md-6 mb-4">
-                        <div class="card py-4 h-100">
-                            <div class="card-body text-center">
-                                <i
-                                    class="fas fa-handshake text-primary mb-2"
-                                    style="font-size: 2rem"
-                                ></i>
-                                <h4 class="text-uppercase m-0">96% Client Retention</h4>
-                                <hr class="my-4 mx-auto" />
-                                <div class="small text-black-50">
-                                    Across 20 concurrent client projects representing $80K to $140K
-                                    in annual contracts, achieved through systematic delivery
-                                    excellence and proactive relationship management
-                                </div>
-                            </div>
-                        </div>
+                <span class="tr-eyebrow">Track Record of Impact</span>
+                <div class="tr-grid">
+
+                    <div class="tr-cell">
+                        <div class="tr-metric">96%</div>
+                        <p class="tr-label">Client Retention</p>
+                        <p class="tr-desc">Across 20 concurrent client projects representing $80K to $140K in annual contracts, achieved through systematic delivery excellence and proactive relationship management.</p>
                     </div>
-                    <div class="col-md-6 mb-4">
-                        <div class="card py-4 h-100">
-                            <div class="card-body text-center">
-                                <i
-                                    class="fas fa-chart-line text-primary mb-2"
-                                    style="font-size: 2rem"
-                                ></i>
-                                <h4 class="text-uppercase m-0">91% Revenue Expansion</h4>
-                                <hr class="my-4 mx-auto" />
-                                <div class="small text-black-50">
-                                    Drove revenue growth through proactive client engagement,
-                                    strategic project delivery, and identifying expansion
-                                    opportunities across diverse client portfolios
-                                </div>
-                            </div>
-                        </div>
+
+                    <div class="tr-cell">
+                        <div class="tr-metric">91%</div>
+                        <p class="tr-label">Revenue Expansion</p>
+                        <p class="tr-desc">Drove revenue growth through proactive client engagement, strategic project delivery, and identifying expansion opportunities across diverse client portfolios.</p>
                     </div>
-                </div>
-                <div class="row gx-4 gx-lg-5 mt-2">
-                    <div class="col-md-6 mb-4">
-                        <div class="card py-4 h-100">
-                            <div class="card-body text-center">
-                                <i
-                                    class="fas fa-globe text-primary mb-2"
-                                    style="font-size: 2rem"
-                                ></i>
-                                <h4 class="text-uppercase m-0">50+ People, 4 Continents</h4>
-                                <hr class="my-4 mx-auto" />
-                                <div class="small text-black-50">
-                                    Coordinating cross-functional teams across design, development,
-                                    content, SEO, and paid media for fully remote operations
-                                    spanning multiple time zones
-                                </div>
-                            </div>
-                        </div>
+
+                    <div class="tr-cell">
+                        <div class="tr-metric">50<span class="tr-metric-unit">+</span></div>
+                        <p class="tr-label">People, 4 Continents</p>
+                        <p class="tr-desc">Coordinating cross-functional teams across design, development, content, SEO, and paid media for fully remote operations spanning multiple time zones.</p>
                     </div>
-                    <div class="col-md-6 mb-4">
-                        <div class="card py-4 h-100">
-                            <div class="card-body text-center">
-                                <i
-                                    class="fas fa-rocket text-primary mb-2"
-                                    style="font-size: 2rem"
-                                ></i>
-                                <h4 class="text-uppercase m-0">100% ClickUp Adoption</h4>
-                                <hr class="my-4 mx-auto" />
-                                <div class="small text-black-50">
-                                    Architected workspace infrastructure for 52 users at WISE
-                                    Digital Partners, achieving complete adoption within 60 days
-                                    through training and change management
-                                </div>
-                            </div>
-                        </div>
+
+                    <div class="tr-cell">
+                        <div class="tr-metric">100%</div>
+                        <p class="tr-label">ClickUp Adoption</p>
+                        <p class="tr-desc">Architected workspace infrastructure for 52 users at WISE Digital Partners, achieving complete adoption within 60 days through training and change management.</p>
                     </div>
+
                 </div>
             </div>
         </section>
@@ -414,195 +1010,477 @@
                 <h1 class="text-center mb-5 display-4">Career Journey</h1>
                 <div class="row justify-content-center">
                     <div class="col-lg-10">
-                        <div
-                            style="
-                                position: relative;
-                                padding-left: 2.5rem;
-                                border-left: 3px solid #64a19d;
-                            "
-                        >
+                        <div class="career-timeline">
                             <!-- Entry 1: WISE -->
-                            <div class="mb-5" style="position: relative">
-                                <div
-                                    style="
-                                        position: absolute;
-                                        left: -3.15rem;
-                                        top: 0.5rem;
-                                        width: 1.2rem;
-                                        height: 1.2rem;
-                                        background-color: #64a19d;
-                                        border-radius: 50%;
-                                        border: 3px solid #f8f9fa;
-                                        box-shadow: 0 0 0 2px #64a19d;
-                                    "
-                                ></div>
-                                <div
-                                    class="d-flex flex-wrap align-items-baseline justify-content-between mb-2"
-                                >
-                                    <h4 class="mb-0 text-dark">Head of Project Management</h4>
-                                    <span
-                                        class="badge bg-dark text-white"
-                                        style="font-size: 0.75rem"
-                                        >Feb 2025 to Present</span
-                                    >
+                            <div class="career-entry">
+                                <div class="career-year">2025</div>
+                                <div class="career-body">
+                                    <p class="career-role">Head of Project Management</p>
+                                    <p class="career-company">WISE Digital Partners</p>
+                                    <p class="career-meta">Austin, TX (Remote) · Feb 2025 – Present</p>
+                                    <p class="career-desc">
+                                        Lead delivery operations coordinating 50+ people across 6
+                                        departments and 4 continents. Member of EOS leadership team.
+                                        Architected company-wide ClickUp infrastructure achieving 100%
+                                        adoption in 60 days while managing 20 concurrent client
+                                        projects.
+                                    </p>
                                 </div>
-                                <h6 class="mb-2" style="color: #64a19d; font-weight: 600">
-                                    WISE Digital Partners, Austin, TX (Remote)
-                                </h6>
-                                <p class="mb-0 text-muted">
-                                    Lead delivery operations coordinating 50+ people across 6
-                                    departments and 4 continents. Member of EOS leadership team.
-                                    Architected company-wide ClickUp infrastructure achieving 100%
-                                    adoption in 60 days while managing 20 concurrent client
-                                    projects.
-                                </p>
                             </div>
+                            <hr class="career-rule" />
 
                             <!-- Entry 2: Get Smart Group PM -->
-                            <div class="mb-5" style="position: relative">
-                                <div
-                                    style="
-                                        position: absolute;
-                                        left: -3.15rem;
-                                        top: 0.5rem;
-                                        width: 1.2rem;
-                                        height: 1.2rem;
-                                        background-color: #64a19d;
-                                        border-radius: 50%;
-                                        border: 3px solid #f8f9fa;
-                                        box-shadow: 0 0 0 2px #64a19d;
-                                    "
-                                ></div>
-                                <div
-                                    class="d-flex flex-wrap align-items-baseline justify-content-between mb-2"
-                                >
-                                    <h4 class="mb-0 text-dark">Website Project Manager</h4>
-                                    <span
-                                        class="badge bg-dark text-white"
-                                        style="font-size: 0.75rem"
-                                        >Mar 2022 to Feb 2025</span
-                                    >
+                            <div class="career-entry">
+                                <div class="career-year">2022</div>
+                                <div class="career-body">
+                                    <p class="career-role">Website Project Manager</p>
+                                    <p class="career-company">The Get Smart Group</p>
+                                    <p class="career-meta">Austin, TX (Remote) · Mar 2022 – Feb 2025</p>
+                                    <p class="career-desc">
+                                        Scaled delivery portfolio from 8 to 22 concurrent projects with
+                                        94% client retention. Coordinated international contractor team
+                                        of up to 10 specialists. Improved project profitability
+                                        approximately 23% through systematic process optimization.
+                                    </p>
                                 </div>
-                                <h6 class="mb-2" style="color: #64a19d; font-weight: 600">
-                                    The Get Smart Group, Austin, TX (Remote)
-                                </h6>
-                                <p class="mb-0 text-muted">
-                                    Scaled delivery portfolio from 8 to 22 concurrent projects with
-                                    94% client retention. Coordinated international contractor team
-                                    of up to 10 specialists. Improved project profitability
-                                    approximately 23% through systematic process optimization.
-                                </p>
                             </div>
+                            <hr class="career-rule" />
 
                             <!-- Entry 3: Get Smart Group Lead -->
-                            <div class="mb-5" style="position: relative">
-                                <div
-                                    style="
-                                        position: absolute;
-                                        left: -3.15rem;
-                                        top: 0.5rem;
-                                        width: 1.2rem;
-                                        height: 1.2rem;
-                                        background-color: #64a19d;
-                                        border-radius: 50%;
-                                        border: 3px solid #f8f9fa;
-                                        box-shadow: 0 0 0 2px #64a19d;
-                                    "
-                                ></div>
-                                <div
-                                    class="d-flex flex-wrap align-items-baseline justify-content-between mb-2"
-                                >
-                                    <h4 class="mb-0 text-dark">Web Development Team Lead</h4>
-                                    <span
-                                        class="badge bg-dark text-white"
-                                        style="font-size: 0.75rem"
-                                        >Aug 2020 to Mar 2022</span
-                                    >
+                            <div class="career-entry">
+                                <div class="career-year">2020</div>
+                                <div class="career-body">
+                                    <p class="career-role">Web Development Team Lead</p>
+                                    <p class="career-company">The Get Smart Group</p>
+                                    <p class="career-meta">Austin, TX (Remote) · Aug 2020 – Mar 2022</p>
+                                    <p class="career-desc">
+                                        Led delivery of 30 to 40 websites with 100% completion rate.
+                                        Improved average Lighthouse scores from 40 to 90+ through
+                                        technical optimization. Led global contractor team and
+                                        spearheaded the Airtable to ClickUp migration.
+                                    </p>
                                 </div>
-                                <h6 class="mb-2" style="color: #64a19d; font-weight: 600">
-                                    The Get Smart Group, Austin, TX (Remote)
-                                </h6>
-                                <p class="mb-0 text-muted">
-                                    Led delivery of 30 to 40 websites with 100% completion rate.
-                                    Improved average Lighthouse scores from 40 to 90+ through
-                                    technical optimization. Led global contractor team and
-                                    spearheaded the Airtable to ClickUp migration.
-                                </p>
                             </div>
+                            <hr class="career-rule" />
 
                             <!-- Entry 4: Electrician Metrics -->
-                            <div class="mb-5" style="position: relative">
-                                <div
-                                    style="
-                                        position: absolute;
-                                        left: -3.15rem;
-                                        top: 0.5rem;
-                                        width: 1.2rem;
-                                        height: 1.2rem;
-                                        background-color: #64a19d;
-                                        border-radius: 50%;
-                                        border: 3px solid #f8f9fa;
-                                        box-shadow: 0 0 0 2px #64a19d;
-                                    "
-                                ></div>
-                                <div
-                                    class="d-flex flex-wrap align-items-baseline justify-content-between mb-2"
-                                >
-                                    <h4 class="mb-0 text-dark">Founder & CEO</h4>
-                                    <span
-                                        class="badge bg-dark text-white"
-                                        style="font-size: 0.75rem"
-                                        >Jan 2019 to Aug 2020</span
-                                    >
+                            <div class="career-entry">
+                                <div class="career-year">2019</div>
+                                <div class="career-body">
+                                    <p class="career-role">Founder &amp; CEO</p>
+                                    <p class="career-company">Electrician Metrics</p>
+                                    <p class="career-meta">Chicago, IL · Jan 2019 – Aug 2020</p>
+                                    <p class="career-desc">
+                                        Founded and operated digital marketing business serving
+                                        electrical contractors. Built custom WordPress websites,
+                                        implemented SEO strategies, and managed Google Ads campaigns for
+                                        up to 5 concurrent clients.
+                                    </p>
                                 </div>
-                                <h6 class="mb-2" style="color: #64a19d; font-weight: 600">
-                                    Electrician Metrics, Chicago, IL
-                                </h6>
-                                <p class="mb-0 text-muted">
-                                    Founded and operated digital marketing business serving
-                                    electrical contractors. Built custom WordPress websites,
-                                    implemented SEO strategies, and managed Google Ads campaigns for
-                                    up to 5 concurrent clients.
-                                </p>
                             </div>
+                            <hr class="career-rule" />
 
                             <!-- Entry 5: Foundation -->
-                            <div class="mb-0" style="position: relative">
-                                <div
-                                    style="
-                                        position: absolute;
-                                        left: -3.15rem;
-                                        top: 0.5rem;
-                                        width: 1.2rem;
-                                        height: 1.2rem;
-                                        background-color: #64a19d;
-                                        border-radius: 50%;
-                                        border: 3px solid #f8f9fa;
-                                        box-shadow: 0 0 0 2px #64a19d;
-                                    "
-                                ></div>
-                                <div
-                                    class="d-flex flex-wrap align-items-baseline justify-content-between mb-2"
-                                >
-                                    <h4 class="mb-0 text-dark">Freelance WordPress Developer</h4>
-                                    <span
-                                        class="badge bg-dark text-white"
-                                        style="font-size: 0.75rem"
-                                        >2012 to Present</span
-                                    >
+                            <div class="career-entry">
+                                <div class="career-year">2012</div>
+                                <div class="career-body">
+                                    <p class="career-role">Freelance WordPress Developer</p>
+                                    <p class="career-company">Independent Practice</p>
+                                    <p class="career-meta">2012 – Present</p>
+                                    <p class="career-desc">
+                                        The foundation underneath everything else. 14 years building,
+                                        optimizing, and shipping WordPress sites for clients across
+                                        industries, learning the craft hands-on before scaling into
+                                        delivery leadership.
+                                    </p>
                                 </div>
-                                <h6 class="mb-2" style="color: #64a19d; font-weight: 600">
-                                    14 Years of Independent Practice
-                                </h6>
-                                <p class="mb-0 text-muted">
-                                    The foundation underneath everything else. 14 years building,
-                                    optimizing, and shipping WordPress sites for clients across
-                                    industries, learning the craft hands-on before scaling into
-                                    delivery leadership.
-                                </p>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Case Studies Preview Reel -->
+        <section class="reel-section fade-in-section bg-black" id="case-studies-preview">
+            <div class="container px-4 px-lg-5">
+                <div class="mb-4">
+                    <p class="stat-chip">Case Studies</p>
+                    <h2
+                        class="text-white"
+                        style="
+                            font-family: 'Varela Round', sans-serif;
+                            font-size: clamp(1.6rem, 3vw, 2.2rem);
+                        "
+                    >
+                        Work Worth Reading About
+                    </h2>
+                    <p
+                        class="text-white-50"
+                        style="max-width: 560px; font-size: 1rem; line-height: 1.7"
+                    >
+                        Real outcomes from real engagements — documented in detail.
+                    </p>
+                </div>
+                <div class="cs-carousel-wrapper">
+                    <div class="cs-carousel-track" id="csCarouselTrack">
+                        <!-- Card 1 -->
+                        <div class="cs-carousel-slide">
+                            <a href="case-studies/case-study-template.html" class="cs-reel-card">
+                                <div class="cs-reel-card-img">
+                                    <div
+                                        class="cs-reel-card-bg"
+                                        style="
+                                            background-image: url('https://picsum.photos/seed/clickup/800/500');
+                                        "
+                                    ></div>
+                                    <div class="cs-reel-card-overlay"></div>
+                                </div>
+                                <div class="cs-reel-card-content">
+                                    <span class="cs-type-tag">Operations · Featured</span>
+                                    <h3 class="cs-reel-card-title">
+                                        Enterprise ClickUp Rollout: Unifying 6 Departments in 60
+                                        Days
+                                    </h3>
+                                    <p class="cs-reel-card-blurb">
+                                        How I migrated a 50+ person global agency to a unified
+                                        ClickUp workspace — hitting 100% adoption in two months.
+                                    </p>
+                                    <span class="cs-reel-card-arrow"
+                                        >Read Case Study <i class="fas fa-arrow-right"></i
+                                    ></span>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Card 2 -->
+                        <div class="cs-carousel-slide">
+                            <a href="case-studies.html" class="cs-reel-card">
+                                <div class="cs-reel-card-img">
+                                    <div
+                                        class="cs-reel-card-bg"
+                                        style="
+                                            background-image: url('https://picsum.photos/seed/remote/800/500');
+                                        "
+                                    ></div>
+                                    <div class="cs-reel-card-overlay"></div>
+                                </div>
+                                <div class="cs-reel-card-content">
+                                    <span class="cs-type-tag">Strategy</span>
+                                    <h3 class="cs-reel-card-title">
+                                        Scaling a Remote Team Across Three Time Zones
+                                    </h3>
+                                    <p class="cs-reel-card-blurb">
+                                        Designing async-first workflows that cut meeting overhead by
+                                        40% without losing team cohesion.
+                                    </p>
+                                    <span class="cs-reel-card-arrow"
+                                        >Read Case Study <i class="fas fa-arrow-right"></i
+                                    ></span>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Card 3 -->
+                        <div class="cs-carousel-slide">
+                            <a href="case-studies.html" class="cs-reel-card">
+                                <div class="cs-reel-card-img">
+                                    <div
+                                        class="cs-reel-card-bg"
+                                        style="
+                                            background-image: url('https://picsum.photos/seed/sops/800/500');
+                                        "
+                                    ></div>
+                                    <div class="cs-reel-card-overlay"></div>
+                                </div>
+                                <div class="cs-reel-card-content">
+                                    <span class="cs-type-tag">Process Design</span>
+                                    <h3 class="cs-reel-card-title">
+                                        SOPs That Stick: Building a Knowledge System from Scratch
+                                    </h3>
+                                    <p class="cs-reel-card-blurb">
+                                        Documenting 80+ processes for a growing e-commerce brand and
+                                        cutting onboarding time in half.
+                                    </p>
+                                    <span class="cs-reel-card-arrow"
+                                        >Read Case Study <i class="fas fa-arrow-right"></i
+                                    ></span>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Card 4 -->
+                        <div class="cs-carousel-slide">
+                            <a href="case-studies.html" class="cs-reel-card">
+                                <div class="cs-reel-card-img">
+                                    <div
+                                        class="cs-reel-card-bg"
+                                        style="
+                                            background-image: url('https://picsum.photos/seed/crm/800/500');
+                                        "
+                                    ></div>
+                                    <div class="cs-reel-card-overlay"></div>
+                                </div>
+                                <div class="cs-reel-card-content">
+                                    <span class="cs-type-tag">Technology</span>
+                                    <h3 class="cs-reel-card-title">
+                                        CRM Migration Without the Chaos
+                                    </h3>
+                                    <p class="cs-reel-card-blurb">
+                                        Moving a 10,000-contact database from spreadsheets to
+                                        HubSpot — zero data loss, zero downtime.
+                                    </p>
+                                    <span class="cs-reel-card-arrow"
+                                        >Read Case Study <i class="fas fa-arrow-right"></i
+                                    ></span>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Card 5 -->
+                        <div class="cs-carousel-slide">
+                            <a href="case-studies.html" class="cs-reel-card">
+                                <div class="cs-reel-card-img">
+                                    <div
+                                        class="cs-reel-card-bg"
+                                        style="
+                                            background-image: url('https://picsum.photos/seed/vendor/800/500');
+                                        "
+                                    ></div>
+                                    <div class="cs-reel-card-overlay"></div>
+                                </div>
+                                <div class="cs-reel-card-content">
+                                    <span class="cs-type-tag">Operations</span>
+                                    <h3 class="cs-reel-card-title">
+                                        Vendor Consolidation for a Mid-Market Agency
+                                    </h3>
+                                    <p class="cs-reel-card-blurb">
+                                        Reducing a fragmented 22-tool stack to 9 — saving
+                                        $4,200/month and one FTE of admin overhead.
+                                    </p>
+                                    <span class="cs-reel-card-arrow"
+                                        >Read Case Study <i class="fas fa-arrow-right"></i
+                                    ></span>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Card 6 -->
+                        <div class="cs-carousel-slide">
+                            <a href="case-studies.html" class="cs-reel-card">
+                                <div class="cs-reel-card-img">
+                                    <div
+                                        class="cs-reel-card-bg"
+                                        style="
+                                            background-image: url('https://picsum.photos/seed/leadership/800/500');
+                                        "
+                                    ></div>
+                                    <div class="cs-reel-card-overlay"></div>
+                                </div>
+                                <div class="cs-reel-card-content">
+                                    <span class="cs-type-tag">Leadership</span>
+                                    <h3 class="cs-reel-card-title">
+                                        Building an Operations Function From Zero
+                                    </h3>
+                                    <p class="cs-reel-card-blurb">
+                                        Standing up a full ops department in a Series A startup:
+                                        hiring, tooling, and process in 90 days.
+                                    </p>
+                                    <span class="cs-reel-card-arrow"
+                                        >Read Case Study <i class="fas fa-arrow-right"></i
+                                    ></span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="cs-carousel-nav mt-3">
+                    <button class="cs-carousel-btn" id="csPrev" aria-label="Previous">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="cs-carousel-btn" id="csNext" aria-label="Next">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="mt-4 text-center">
+                    <a
+                        class="btn btn-lg"
+                        href="case-studies.html"
+                        style="
+                            background: #64a19d;
+                            border-color: #64a19d;
+                            color: #050505;
+                            font-weight: 600;
+                        "
+                    >
+                        View All Case Studies <i class="fas fa-arrow-right ms-1"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <script>
+            (function () {
+                var track = document.getElementById('csCarouselTrack');
+                var slides = track.querySelectorAll('.cs-carousel-slide');
+                var total = slides.length;
+                var idx = 0;
+
+                function getVisible() {
+                    if (window.innerWidth < 576) return 1;
+                    if (window.innerWidth < 992) return 2;
+                    return 3;
+                }
+
+                function goTo(i) {
+                    var visible = getVisible();
+                    var maxIdx = total - visible;
+                    // Wrap around
+                    if (i < 0) i = maxIdx;
+                    if (i > maxIdx) i = 0;
+                    idx = i;
+                    var slideWidth = slides[0].offsetWidth;
+                    var gap = 24; // 1.5rem at 16px base
+                    track.scrollTo({ left: idx * (slideWidth + gap), behavior: 'smooth' });
+                }
+
+                document.getElementById('csPrev').addEventListener('click', function () {
+                    goTo(idx - 1);
+                });
+                document.getElementById('csNext').addEventListener('click', function () {
+                    goTo(idx + 1);
+                });
+            })();
+        </script>
+
+        <!-- Insights Preview Reel -->
+        <section class="reel-section fade-in-section bg-light" id="insights-preview">
+            <div class="container px-4 px-lg-5">
+                <div class="mb-4">
+                    <p class="stat-chip stat-chip-teal">Insights</p>
+                    <h2
+                        class="text-dark"
+                        style="
+                            font-family: 'Varela Round', sans-serif;
+                            font-size: clamp(1.6rem, 3vw, 2.2rem);
+                        "
+                    >
+                        Thinking Out Loud
+                    </h2>
+                    <p
+                        class="text-muted"
+                        style="max-width: 560px; font-size: 1rem; line-height: 1.7"
+                    >
+                        Practical writing on operations, project management, and building systems
+                        that actually stick.
+                    </p>
+                </div>
+                <div class="insights-preview-grid">
+                    <!-- A: 2-wide, row 1 — live post -->
+                    <a
+                        href="insights/clickup-hierarchy-explained.html"
+                        class="insight-reel-card irp-a"
+                    >
+                        <div class="insight-reel-img-wrap">
+                            <img
+                                src="assets/img/campaign-creators-gMsnXqILjp4-unsplash.jpg"
+                                alt="ClickUp Hierarchy Explained"
+                            />
+                            <span class="insight-cat-badge">Systems &amp; PM</span>
+                        </div>
+                        <div class="insight-reel-body">
+                            <span class="insight-reel-title"
+                                >ClickUp Hierarchy Explained: Spaces, Folders, Lists, and
+                                Tasks</span
+                            >
+                            <p class="insight-reel-blurb">
+                                Most ClickUp setups fail before the first task is created. Here's
+                                how to build a hierarchy that actually maps to how your team works.
+                            </p>
+                            <div class="insight-reel-meta">Apr 2026 · 7 min read</div>
+                        </div>
+                    </a>
+                    <!-- B: 1-wide, row 1 — placeholder -->
+                    <a href="#" class="insight-reel-card irp-b">
+                        <div class="insight-reel-img-wrap">
+                            <img
+                                src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=800&auto=format&fit=crop"
+                                alt="PM frameworks"
+                            />
+                            <span class="insight-cat-badge">Operations</span>
+                        </div>
+                        <div class="insight-reel-body">
+                            <span class="insight-reel-title"
+                                >The Three Documents Every Project Needs Before It Starts</span
+                            >
+                            <p class="insight-reel-blurb">
+                                Scope doc, RACI, kickoff brief. Not glamorous — but they prevent 80%
+                                of the fires.
+                            </p>
+                            <div class="insight-reel-meta">Coming soon</div>
+                        </div>
+                    </a>
+                    <!-- C: 1-wide, row 2 — placeholder -->
+                    <a href="#" class="insight-reel-card irp-c">
+                        <div class="insight-reel-img-wrap">
+                            <img
+                                src="https://images.unsplash.com/photo-1507925922837-3265279c8e12?q=80&w=800&auto=format&fit=crop"
+                                alt="Team onboarding"
+                            />
+                            <span class="insight-cat-badge">Leadership</span>
+                        </div>
+                        <div class="insight-reel-body">
+                            <span class="insight-reel-title"
+                                >How to Onboard a New Hire Without Losing Two Weeks of Output</span
+                            >
+                            <p class="insight-reel-blurb">
+                                A repeatable onboarding system that gets people productive faster.
+                            </p>
+                            <div class="insight-reel-meta">Coming soon</div>
+                        </div>
+                    </a>
+                    <!-- D: 2-wide, row 2 — placeholder -->
+                    <a href="#" class="insight-reel-card irp-d">
+                        <div class="insight-reel-img-wrap">
+                            <img
+                                src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1200&auto=format&fit=crop"
+                                alt="Systems thinking"
+                            />
+                            <span class="insight-cat-badge">Systems &amp; PM</span>
+                        </div>
+                        <div class="insight-reel-body">
+                            <span class="insight-reel-title"
+                                >Why Your Project Management Tool Is Not Your Problem — Your Process
+                                Is</span
+                            >
+                            <p class="insight-reel-blurb">
+                                Most teams switch tools every 18 months and wonder why nothing
+                                changes. The tool is rarely the bottleneck.
+                            </p>
+                            <div class="insight-reel-meta">Coming soon</div>
+                        </div>
+                    </a>
+                    <!-- E: tall right, spans both rows — placeholder -->
+                    <a href="#" class="insight-reel-card irp-e">
+                        <div class="insight-reel-img-wrap">
+                            <img
+                                src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1200&auto=format&fit=crop"
+                                alt="Strategy"
+                            />
+                            <span class="insight-cat-badge">Strategy</span>
+                        </div>
+                        <div class="insight-reel-body">
+                            <span class="insight-reel-title"
+                                >From Reactive to Intentional: Building an Operations Rhythm That
+                                Actually Works</span
+                            >
+                            <p class="insight-reel-blurb">
+                                Chaos isn't a capacity problem — it's a systems problem. Here's how
+                                to shift from putting out fires to running a predictable,
+                                high-output operation.
+                            </p>
+                            <div class="insight-reel-meta">Coming soon</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="mt-4 text-center">
+                    <a class="btn btn-primary btn-lg" href="insights.html">
+                        Explore All Insights <i class="fas fa-arrow-right ms-1"></i>
+                    </a>
                 </div>
             </div>
         </section>
@@ -643,6 +1521,18 @@
         <script src="js/scripts.js"></script>
         <!-- Fade Animation Script -->
         <script>
+            // Hero entrance: trigger stagger on next frame so CSS transitions fire
+            (function () {
+                const masthead = document.querySelector('.masthead');
+                if (masthead) {
+                    requestAnimationFrame(function () {
+                        requestAnimationFrame(function () {
+                            masthead.classList.add('hero-loaded');
+                        });
+                    });
+                }
+            })();
+
             // Fade-in on scroll
             const faders = document.querySelectorAll('.fade-in-section');
 
@@ -652,10 +1542,12 @@
             };
 
             const appearOnScroll = new IntersectionObserver(function (entries, appearOnScroll) {
-                entries.forEach(entry => {
+                entries.forEach((entry, i) => {
                     if (!entry.isIntersecting) {
                         return;
                     } else {
+                        const delay = entry.target.classList.contains('expertise-row') ? i * 120 : 0;
+                        entry.target.style.transitionDelay = delay + 'ms';
                         entry.target.classList.add('is-visible');
                         appearOnScroll.unobserve(entry.target);
                     }

@@ -3,25 +3,35 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="Case studies by Jonathan Ibrahim — operations architecture, ClickUp systems, web development, and project management work." />
+        <meta
+            name="description"
+            content="Case studies by Jonathan Ibrahim — operations architecture, ClickUp systems, web development, and project management work."
+        />
         <title>Case Studies | Jonathan Ibrahim</title>
         <link
             rel="icon"
             href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23050505%22/><text x=%2250%22 y=%2274%22 text-anchor=%22middle%22 font-size=%2265%22 font-family=%22sans-serif%22 font-weight=%22900%22 fill=%22%2364a19d%22>JI</text></svg>"
         />
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <script
+            src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
+            crossorigin="anonymous"
+        ></script>
         <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900" rel="stylesheet" />
+        <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900"
+            rel="stylesheet"
+        />
         <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/custom.css" rel="stylesheet" />
 
         <style>
             /* ── Page header ── */
             .cs-archive-header {
                 padding: 10rem 0 5rem;
                 background:
-                    linear-gradient(to bottom, rgba(0,0,0,0.78), rgba(0,0,0,0.97)),
+                    linear-gradient(to bottom, rgba(0, 0, 0, 0.78), rgba(0, 0, 0, 0.97)),
                     url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2070&auto=format&fit=crop')
-                    center/cover no-repeat;
+                        center/cover no-repeat;
             }
 
             /* ── Filter pills ── */
@@ -64,17 +74,35 @@
 
             /* Card slot definitions */
             /* Featured: 8 cols × 7 rows */
-            .bento-featured     { grid-column: span 8; grid-row: span 7; }
+            .bento-featured {
+                grid-column: span 8;
+                grid-row: span 7;
+            }
             /* Tall sidebar: 4 cols × 7 rows */
-            .bento-tall         { grid-column: span 4; grid-row: span 7; }
+            .bento-tall {
+                grid-column: span 4;
+                grid-row: span 7;
+            }
             /* Wide: 6 cols × 5 rows */
-            .bento-wide         { grid-column: span 6; grid-row: span 5; }
+            .bento-wide {
+                grid-column: span 6;
+                grid-row: span 5;
+            }
             /* Square: 4 cols × 5 rows */
-            .bento-square       { grid-column: span 4; grid-row: span 5; }
+            .bento-square {
+                grid-column: span 4;
+                grid-row: span 5;
+            }
             /* Medium wide: 8 cols × 5 rows */
-            .bento-wide-lg      { grid-column: span 8; grid-row: span 5; }
+            .bento-wide-lg {
+                grid-column: span 8;
+                grid-row: span 5;
+            }
             /* Small: 3 cols × 4 rows — placeholder cards */
-            .bento-small        { grid-column: span 3; grid-row: span 4; }
+            .bento-small {
+                grid-column: span 3;
+                grid-row: span 4;
+            }
 
             /* On tablet, collapse to simpler grid */
             @media (max-width: 991px) {
@@ -117,12 +145,14 @@
                 justify-content: flex-end;
                 cursor: pointer;
                 text-decoration: none;
-                transition: transform 0.35s ease, box-shadow 0.35s ease;
+                transition:
+                    transform 0.35s ease,
+                    box-shadow 0.35s ease;
                 min-height: 200px;
             }
             .cs-card:hover {
                 transform: translateY(-4px);
-                box-shadow: 0 16px 48px rgba(0,0,0,0.55);
+                box-shadow: 0 16px 48px rgba(0, 0, 0, 0.55);
                 text-decoration: none;
             }
 
@@ -133,7 +163,9 @@
                 background-size: cover;
                 background-position: center;
                 filter: grayscale(80%);
-                transition: filter 0.5s ease, transform 0.5s ease;
+                transition:
+                    filter 0.5s ease,
+                    transform 0.5s ease;
             }
             .cs-card:hover .cs-card-bg {
                 filter: grayscale(40%);
@@ -146,18 +178,18 @@
                 inset: 0;
                 background: linear-gradient(
                     to top,
-                    rgba(0,0,0,0.92) 0%,
-                    rgba(0,0,0,0.55) 50%,
-                    rgba(0,0,0,0.12) 100%
+                    rgba(0, 0, 0, 0.92) 0%,
+                    rgba(0, 0, 0, 0.55) 50%,
+                    rgba(0, 0, 0, 0.12) 100%
                 );
                 transition: background 0.4s ease;
             }
             .cs-card:hover .cs-card-overlay {
                 background: linear-gradient(
                     to top,
-                    rgba(0,0,0,0.96) 0%,
-                    rgba(0,0,0,0.6) 55%,
-                    rgba(0,0,0,0.18) 100%
+                    rgba(0, 0, 0, 0.96) 0%,
+                    rgba(0, 0, 0, 0.6) 55%,
+                    rgba(0, 0, 0, 0.18) 100%
                 );
             }
 
@@ -167,7 +199,9 @@
                 padding: 1.5rem;
                 z-index: 1;
             }
-            .bento-featured .cs-card-content { padding: 2.25rem; }
+            .bento-featured .cs-card-content {
+                padding: 2.25rem;
+            }
 
             /* Type tag */
             .cs-type-tag {
@@ -186,7 +220,7 @@
             /* Filter pill on card (small) */
             .cs-filter-pill {
                 display: inline-block;
-                background: rgba(100,161,157,0.15);
+                background: rgba(100, 161, 157, 0.15);
                 color: #64a19d;
                 padding: 0.15rem 0.6rem;
                 border-radius: 50px;
@@ -203,21 +237,38 @@
                 margin-bottom: 0.4rem;
                 line-height: 1.3;
             }
-            .bento-featured .cs-card-title { font-size: 1.6rem; }
-            .bento-tall     .cs-card-title { font-size: 1.1rem; }
-            .bento-wide     .cs-card-title { font-size: 1.15rem; }
-            .bento-square   .cs-card-title { font-size: 1rem; }
-            .bento-wide-lg  .cs-card-title { font-size: 1.2rem; }
-            .bento-small    .cs-card-title { font-size: 0.9rem; }
+            .bento-featured .cs-card-title {
+                font-size: 1.6rem;
+            }
+            .bento-tall .cs-card-title {
+                font-size: 1.1rem;
+            }
+            .bento-wide .cs-card-title {
+                font-size: 1.15rem;
+            }
+            .bento-square .cs-card-title {
+                font-size: 1rem;
+            }
+            .bento-wide-lg .cs-card-title {
+                font-size: 1.2rem;
+            }
+            .bento-small .cs-card-title {
+                font-size: 0.9rem;
+            }
 
             .cs-card-blurb {
-                color: rgba(255,255,255,0.6);
+                color: rgba(255, 255, 255, 0.6);
                 font-size: 0.85rem;
                 line-height: 1.5;
                 margin-bottom: 0.75rem;
             }
-            .bento-featured .cs-card-blurb { font-size: 0.95rem; max-width: 520px; }
-            .bento-small    .cs-card-blurb { display: none; } /* too small for blurb */
+            .bento-featured .cs-card-blurb {
+                font-size: 0.95rem;
+                max-width: 520px;
+            }
+            .bento-small .cs-card-blurb {
+                display: none;
+            } /* too small for blurb */
 
             /* Arrow on hover */
             .cs-card-arrow {
@@ -230,7 +281,9 @@
                 letter-spacing: 0.08rem;
                 opacity: 0;
                 transform: translateX(-6px);
-                transition: opacity 0.3s ease, transform 0.3s ease;
+                transition:
+                    opacity 0.3s ease,
+                    transform 0.3s ease;
                 font-family: 'Varela Round', sans-serif;
             }
             .cs-card:hover .cs-card-arrow {
@@ -254,7 +307,9 @@
 
             /* Filtered-out state */
             .cs-card-wrap {
-                transition: opacity 0.3s ease, transform 0.3s ease;
+                transition:
+                    opacity 0.3s ease,
+                    transform 0.3s ease;
             }
             .cs-card-wrap.hidden {
                 opacity: 0.15;
@@ -265,7 +320,9 @@
             .fade-in-section {
                 opacity: 0;
                 transform: translateY(20px);
-                transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+                transition:
+                    opacity 0.6s ease-out,
+                    transform 0.6s ease-out;
             }
             .fade-in-section.is-visible {
                 opacity: 1;
@@ -274,25 +331,42 @@
         </style>
     </head>
     <body id="page-top" class="bg-black text-white-50">
-
         <!-- ── Navigation ── -->
         <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
             <div class="container px-4 px-lg-5">
                 <a class="navbar-brand" href="index.html">Create | JonathanIbrahim</a>
-                <button class="navbar-toggler navbar-toggler-right" type="button"
-                    data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
-                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <button
+                    class="navbar-toggler navbar-toggler-right"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarResponsive"
+                    aria-controls="navbarResponsive"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
                     Menu <i class="fas fa-bars"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="index.html#expertise">Expertise</a></li>
-                        <li class="nav-item"><a class="nav-link" href="index.html#achievements">Achievements</a></li>
-                        <li class="nav-item"><a class="nav-link" href="index.html#experience">Experience</a></li>
-                        <li class="nav-item"><a class="nav-link active" href="case-studies.html">Case Studies</a></li>
-                        <li class="nav-item"><a class="nav-link" href="insights.html">Insights</a></li>
-                        <li class="nav-item"><a class="nav-link" href="index.html#connect">Connect</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html#expertise">Expertise</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html#achievements">Achievements</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html#experience">Experience</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="case-studies.html">Case Studies</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="insights.html">Insights</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html#connect">Connect</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -303,11 +377,13 @@
         ══════════════════════════════════════════ -->
         <header class="cs-archive-header text-center fade-in-section">
             <div class="container px-4 px-lg-5">
-                <h1 class="text-white fw-bold mb-3" style="font-size: clamp(2.2rem, 5vw, 3.8rem);">
+                <h1 class="text-white fw-bold mb-3" style="font-size: clamp(2.2rem, 5vw, 3.8rem)">
                     Case Studies
                 </h1>
-                <p class="text-white-50 mx-auto" style="max-width: 560px; font-size: 1.05rem;">
-                    A documented record of real problems, real systems, and measurable outcomes — across operations, ClickUp architecture, web development, and project management.
+                <p class="text-white-50 mx-auto" style="max-width: 560px; font-size: 1.05rem">
+                    A documented record of real problems, real systems, and measurable outcomes —
+                    across operations, ClickUp architecture, web development, and project
+                    management.
                 </p>
             </div>
         </header>
@@ -315,9 +391,8 @@
         <!-- ══════════════════════════════════════════
              FILTER BAR + BENTO GRID
         ══════════════════════════════════════════ -->
-        <section style="padding: 4rem 0 6rem; background: #000;">
+        <section style="padding: 4rem 0 6rem; background: #000">
             <div class="container px-4 px-lg-5">
-
                 <!-- Filter bar -->
                 <div class="filter-bar mb-5 fade-in-section">
                     <button class="filter-btn active" data-filter="all">All Work</button>
@@ -326,16 +401,25 @@
                     <button class="filter-btn" data-filter="web-design">Web Design / UI·UX</button>
                     <button class="filter-btn" data-filter="web-dev">Web Development</button>
                     <button class="filter-btn" data-filter="client-mgmt">Client Management</button>
-                    <button class="filter-btn" data-filter="project-mgmt">Project Management</button>
+                    <button class="filter-btn" data-filter="project-mgmt">
+                        Project Management
+                    </button>
                 </div>
 
                 <!-- Bento grid -->
                 <div class="bento-grid fade-in-section" id="bentoGrid">
-
                     <!-- ══ FEATURED: ClickUp WISE Rollout ══ -->
-                    <div class="bento-featured cs-card-wrap" data-tags="operations,clickup,project-mgmt">
-                        <a href="case-studies/case-study-test.html" class="cs-card h-100">
-                            <div class="cs-card-bg" style="background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070&auto=format&fit=crop');"></div>
+                    <div
+                        class="bento-featured cs-card-wrap"
+                        data-tags="operations,clickup,project-mgmt"
+                    >
+                        <a href="case-studies/case-study-template.html" class="cs-card h-100">
+                            <div
+                                class="cs-card-bg"
+                                style="
+                                    background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070&auto=format&fit=crop');
+                                "
+                            ></div>
                             <div class="cs-card-overlay"></div>
                             <div class="cs-card-content">
                                 <span class="cs-type-tag">Macro · Featured</span>
@@ -344,9 +428,17 @@
                                     <span class="cs-filter-pill">ClickUp</span>
                                     <span class="cs-filter-pill">Project Management</span>
                                 </div>
-                                <h2 class="cs-card-title">Enterprise ClickUp Rollout: Unifying 6 Departments in 60 Days</h2>
-                                <p class="cs-card-blurb">How I migrated a 50+ person global agency from a fractured tech stack into a single, automated source of truth — achieving 100% adoption in 60 days and eliminating $14K in annual SaaS spend.</p>
-                                <span class="cs-card-arrow">Read Case Study <i class="fas fa-arrow-right"></i></span>
+                                <h2 class="cs-card-title">
+                                    Enterprise ClickUp Rollout: Unifying 6 Departments in 60 Days
+                                </h2>
+                                <p class="cs-card-blurb">
+                                    How I migrated a 50+ person global agency from a fractured tech
+                                    stack into a single, automated source of truth — achieving 100%
+                                    adoption in 60 days and eliminating $14K in annual SaaS spend.
+                                </p>
+                                <span class="cs-card-arrow"
+                                    >Read Case Study <i class="fas fa-arrow-right"></i
+                                ></span>
                             </div>
                         </a>
                     </div>
@@ -355,13 +447,29 @@
                     <div class="bento-tall cs-card-wrap" data-tags="operations,project-mgmt">
                         <div class="cs-card cs-card-placeholder h-100">
                             <div class="cs-card-content">
-                                <span class="cs-type-tag" style="border-color: #333; color: #444;">Coming Soon</span>
+                                <span class="cs-type-tag" style="border-color: #333; color: #444"
+                                    >Coming Soon</span
+                                >
                                 <div class="mb-2">
-                                    <span class="cs-filter-pill" style="color:#444; background:rgba(255,255,255,0.03);">Operations</span>
-                                    <span class="cs-filter-pill" style="color:#444; background:rgba(255,255,255,0.03);">Project Management</span>
+                                    <span
+                                        class="cs-filter-pill"
+                                        style="color: #444; background: rgba(255, 255, 255, 0.03)"
+                                        >Operations</span
+                                    >
+                                    <span
+                                        class="cs-filter-pill"
+                                        style="color: #444; background: rgba(255, 255, 255, 0.03)"
+                                        >Project Management</span
+                                    >
                                 </div>
-                                <h3 class="cs-card-title" style="color: #333; font-size: 1rem;">EOS Implementation at Scale</h3>
-                                <p style="color: #2a2a2a; font-size: 0.82rem; line-height: 1.5;">Implementing the Entrepreneurial Operating System across a distributed agency team — from accountability charts to quarterly rocks.</p>
+                                <h3 class="cs-card-title" style="color: #333; font-size: 1rem">
+                                    EOS Implementation at Scale
+                                </h3>
+                                <p style="color: #2a2a2a; font-size: 0.82rem; line-height: 1.5">
+                                    Implementing the Entrepreneurial Operating System across a
+                                    distributed agency team — from accountability charts to
+                                    quarterly rocks.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -370,13 +478,29 @@
                     <div class="bento-wide cs-card-wrap" data-tags="web-dev,web-design">
                         <div class="cs-card cs-card-placeholder h-100">
                             <div class="cs-card-content">
-                                <span class="cs-type-tag" style="border-color: #333; color: #444;">Coming Soon</span>
+                                <span class="cs-type-tag" style="border-color: #333; color: #444"
+                                    >Coming Soon</span
+                                >
                                 <div class="mb-2">
-                                    <span class="cs-filter-pill" style="color:#444; background:rgba(255,255,255,0.03);">Web Development</span>
-                                    <span class="cs-filter-pill" style="color:#444; background:rgba(255,255,255,0.03);">Web Design / UI·UX</span>
+                                    <span
+                                        class="cs-filter-pill"
+                                        style="color: #444; background: rgba(255, 255, 255, 0.03)"
+                                        >Web Development</span
+                                    >
+                                    <span
+                                        class="cs-filter-pill"
+                                        style="color: #444; background: rgba(255, 255, 255, 0.03)"
+                                        >Web Design / UI·UX</span
+                                    >
                                 </div>
-                                <h3 class="cs-card-title" style="color: #333; font-size: 1rem;">Home Services Website Rebuild</h3>
-                                <p style="color: #2a2a2a; font-size: 0.82rem; line-height: 1.5;">Full redesign and WordPress rebuild for a regional home services company — improving Lighthouse scores from 40 to 90+ and driving measurable lead growth.</p>
+                                <h3 class="cs-card-title" style="color: #333; font-size: 1rem">
+                                    Home Services Website Rebuild
+                                </h3>
+                                <p style="color: #2a2a2a; font-size: 0.82rem; line-height: 1.5">
+                                    Full redesign and WordPress rebuild for a regional home services
+                                    company — improving Lighthouse scores from 40 to 90+ and driving
+                                    measurable lead growth.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -385,13 +509,29 @@
                     <div class="bento-wide cs-card-wrap" data-tags="client-mgmt,project-mgmt">
                         <div class="cs-card cs-card-placeholder h-100">
                             <div class="cs-card-content">
-                                <span class="cs-type-tag" style="border-color: #333; color: #444;">Coming Soon</span>
+                                <span class="cs-type-tag" style="border-color: #333; color: #444"
+                                    >Coming Soon</span
+                                >
                                 <div class="mb-2">
-                                    <span class="cs-filter-pill" style="color:#444; background:rgba(255,255,255,0.03);">Client Management</span>
-                                    <span class="cs-filter-pill" style="color:#444; background:rgba(255,255,255,0.03);">Project Management</span>
+                                    <span
+                                        class="cs-filter-pill"
+                                        style="color: #444; background: rgba(255, 255, 255, 0.03)"
+                                        >Client Management</span
+                                    >
+                                    <span
+                                        class="cs-filter-pill"
+                                        style="color: #444; background: rgba(255, 255, 255, 0.03)"
+                                        >Project Management</span
+                                    >
                                 </div>
-                                <h3 class="cs-card-title" style="color: #333; font-size: 1rem;">96% Retention Across 20 Concurrent Clients</h3>
-                                <p style="color: #2a2a2a; font-size: 0.82rem; line-height: 1.5;">How proactive delivery management and structured client communication built a retention rate that speaks for itself across a $140K annual portfolio.</p>
+                                <h3 class="cs-card-title" style="color: #333; font-size: 1rem">
+                                    96% Retention Across 20 Concurrent Clients
+                                </h3>
+                                <p style="color: #2a2a2a; font-size: 0.82rem; line-height: 1.5">
+                                    How proactive delivery management and structured client
+                                    communication built a retention rate that speaks for itself
+                                    across a $140K annual portfolio.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -400,13 +540,29 @@
                     <div class="bento-wide-lg cs-card-wrap" data-tags="clickup,operations">
                         <div class="cs-card cs-card-placeholder h-100">
                             <div class="cs-card-content">
-                                <span class="cs-type-tag" style="border-color: #333; color: #444;">Coming Soon · Micro</span>
+                                <span class="cs-type-tag" style="border-color: #333; color: #444"
+                                    >Coming Soon · Micro</span
+                                >
                                 <div class="mb-2">
-                                    <span class="cs-filter-pill" style="color:#444; background:rgba(255,255,255,0.03);">ClickUp</span>
-                                    <span class="cs-filter-pill" style="color:#444; background:rgba(255,255,255,0.03);">Operations</span>
+                                    <span
+                                        class="cs-filter-pill"
+                                        style="color: #444; background: rgba(255, 255, 255, 0.03)"
+                                        >ClickUp</span
+                                    >
+                                    <span
+                                        class="cs-filter-pill"
+                                        style="color: #444; background: rgba(255, 255, 255, 0.03)"
+                                        >Operations</span
+                                    >
                                 </div>
-                                <h3 class="cs-card-title" style="color: #333; font-size: 1rem;">Custom Field Strategy: Building Data-Consistent Workspaces</h3>
-                                <p style="color: #2a2a2a; font-size: 0.82rem; line-height: 1.5;">A micro deep-dive into how workspace-level custom fields — not list-level — are the difference between dashboards that work and dashboards that lie.</p>
+                                <h3 class="cs-card-title" style="color: #333; font-size: 1rem">
+                                    Custom Field Strategy: Building Data-Consistent Workspaces
+                                </h3>
+                                <p style="color: #2a2a2a; font-size: 0.82rem; line-height: 1.5">
+                                    A micro deep-dive into how workspace-level custom fields — not
+                                    list-level — are the difference between dashboards that work and
+                                    dashboards that lie.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -415,11 +571,19 @@
                     <div class="bento-square cs-card-wrap" data-tags="web-dev">
                         <div class="cs-card cs-card-placeholder h-100">
                             <div class="cs-card-content">
-                                <span class="cs-type-tag" style="border-color: #333; color: #444;">Coming Soon</span>
+                                <span class="cs-type-tag" style="border-color: #333; color: #444"
+                                    >Coming Soon</span
+                                >
                                 <div class="mb-2">
-                                    <span class="cs-filter-pill" style="color:#444; background:rgba(255,255,255,0.03);">Web Development</span>
+                                    <span
+                                        class="cs-filter-pill"
+                                        style="color: #444; background: rgba(255, 255, 255, 0.03)"
+                                        >Web Development</span
+                                    >
                                 </div>
-                                <h3 class="cs-card-title" style="color: #333; font-size: 0.9rem;">WordPress Performance Audit & Rebuild</h3>
+                                <h3 class="cs-card-title" style="color: #333; font-size: 0.9rem">
+                                    WordPress Performance Audit & Rebuild
+                                </h3>
                             </div>
                         </div>
                     </div>
@@ -428,41 +592,86 @@
                     <div class="bento-small cs-card-wrap" data-tags="project-mgmt">
                         <div class="cs-card cs-card-placeholder h-100">
                             <div class="cs-card-content">
-                                <i class="fas fa-plus" style="color: #222; font-size: 1.4rem; margin-bottom: 0.5rem;"></i>
-                                <p style="color: #2a2a2a; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08rem; margin: 0;">Project Management</p>
+                                <i
+                                    class="fas fa-plus"
+                                    style="color: #222; font-size: 1.4rem; margin-bottom: 0.5rem"
+                                ></i>
+                                <p
+                                    style="
+                                        color: #2a2a2a;
+                                        font-size: 0.72rem;
+                                        text-transform: uppercase;
+                                        letter-spacing: 0.08rem;
+                                        margin: 0;
+                                    "
+                                >
+                                    Project Management
+                                </p>
                             </div>
                         </div>
                     </div>
                     <div class="bento-small cs-card-wrap" data-tags="web-design">
                         <div class="cs-card cs-card-placeholder h-100">
                             <div class="cs-card-content">
-                                <i class="fas fa-plus" style="color: #222; font-size: 1.4rem; margin-bottom: 0.5rem;"></i>
-                                <p style="color: #2a2a2a; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08rem; margin: 0;">Web Design / UI·UX</p>
+                                <i
+                                    class="fas fa-plus"
+                                    style="color: #222; font-size: 1.4rem; margin-bottom: 0.5rem"
+                                ></i>
+                                <p
+                                    style="
+                                        color: #2a2a2a;
+                                        font-size: 0.72rem;
+                                        text-transform: uppercase;
+                                        letter-spacing: 0.08rem;
+                                        margin: 0;
+                                    "
+                                >
+                                    Web Design / UI·UX
+                                </p>
                             </div>
                         </div>
                     </div>
                     <div class="bento-small cs-card-wrap" data-tags="client-mgmt">
                         <div class="cs-card cs-card-placeholder h-100">
                             <div class="cs-card-content">
-                                <i class="fas fa-plus" style="color: #222; font-size: 1.4rem; margin-bottom: 0.5rem;"></i>
-                                <p style="color: #2a2a2a; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08rem; margin: 0;">Client Management</p>
+                                <i
+                                    class="fas fa-plus"
+                                    style="color: #222; font-size: 1.4rem; margin-bottom: 0.5rem"
+                                ></i>
+                                <p
+                                    style="
+                                        color: #2a2a2a;
+                                        font-size: 0.72rem;
+                                        text-transform: uppercase;
+                                        letter-spacing: 0.08rem;
+                                        margin: 0;
+                                    "
+                                >
+                                    Client Management
+                                </p>
                             </div>
                         </div>
                     </div>
-
-                </div><!-- /bento-grid -->
-
+                </div>
+                <!-- /bento-grid -->
             </div>
         </section>
 
         <!-- ══════════════════════════════════════════
              CTA FOOTER STRIP
         ══════════════════════════════════════════ -->
-        <section class="fade-in-section" style="background: #0a0a0a; border-top: 1px solid #1a1a1a; padding: 4rem 0;">
+        <section
+            class="fade-in-section"
+            style="background: #0a0a0a; border-top: 1px solid #1a1a1a; padding: 4rem 0"
+        >
             <div class="container px-4 px-lg-5 text-center">
                 <h3 class="text-white mb-3">Want to see work like this applied to your team?</h3>
-                <p class="text-white-50 mb-4" style="max-width: 480px; margin-left: auto; margin-right: auto;">
-                    I'm always interested in conversations about operational challenges, delivery systems, and how to scale without losing quality.
+                <p
+                    class="text-white-50 mb-4"
+                    style="max-width: 480px; margin-left: auto; margin-right: auto"
+                >
+                    I'm always interested in conversations about operational challenges, delivery
+                    systems, and how to scale without losing quality.
                 </p>
                 <a href="mailto:create@jonathanibrahim.com" class="btn btn-primary btn-lg">
                     <i class="fas fa-envelope me-2"></i>Get in Touch
@@ -476,7 +685,9 @@
                 <p class="mb-2">Jonathan Ibrahim, Strategic Operations Leader</p>
                 <p class="mb-0">
                     Austin, Texas &nbsp;|&nbsp; Remote-Friendly &nbsp;|&nbsp;
-                    <a href="mailto:create@jonathanibrahim.com" class="text-white-50">create@jonathanibrahim.com</a>
+                    <a href="mailto:create@jonathanibrahim.com" class="text-white-50"
+                        >create@jonathanibrahim.com</a
+                    >
                 </p>
                 <p class="mt-3 mb-0">Copyright &copy; Jonathan Ibrahim 2026</p>
             </div>
@@ -485,26 +696,37 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
         <script>
-            // ── Navbar scroll shrink ──
+            // ── Navbar reveal + scroll shrink ──
             const mainNav = document.getElementById('mainNav');
+            if (mainNav) mainNav.classList.add('nav-is-visible');
             window.addEventListener('scroll', () => {
                 mainNav.classList.toggle('navbar-shrink', window.scrollY > 50);
             });
 
             // ── Fade-in on scroll ──
             const faders = document.querySelectorAll('.fade-in-section');
-            const observer = new IntersectionObserver((entries, obs) => {
-                entries.forEach(entry => {
-                    if (!entry.isIntersecting) return;
-                    entry.target.classList.add('is-visible');
-                    obs.unobserve(entry.target);
-                });
-            }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
-            faders.forEach(f => observer.observe(f));
+            const observer = new IntersectionObserver(
+                (entries, obs) => {
+                    entries.forEach(entry => {
+                        if (!entry.isIntersecting) return;
+                        entry.target.classList.add('is-visible');
+                        obs.unobserve(entry.target);
+                    });
+                },
+                { threshold: 0.08, rootMargin: '0px 0px -60px 0px' },
+            );
+            faders.forEach(f => {
+                const rect = f.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    f.classList.add('is-visible');
+                } else {
+                    observer.observe(f);
+                }
+            });
 
             // ── Filter logic ──
             const filterBtns = document.querySelectorAll('.filter-btn');
-            const cardWraps  = document.querySelectorAll('.cs-card-wrap');
+            const cardWraps = document.querySelectorAll('.cs-card-wrap');
 
             filterBtns.forEach(btn => {
                 btn.addEventListener('click', () => {

@@ -5,7 +5,7 @@
 - **Direct Output:** Keep explanations extremely brief. Output code directly without apologies, filler language, or conversational fluff.
 - **Copywriting Context:** For generating text, case studies, blog posts, or updating biographical pages, **you must first read `docs/copywriting-guidelines.md`** to adhere to the correct tone, target audience (stealth job search), and biographical facts.
 - **Preserve Structure:** Do not remove existing comments, HTML structure, or utility classes when editing files unless explicitly requested.
-- **Verification:** Always verify changes locally before declaring a task complete.
+- **Verification:** Run a final read of all modified files to check for syntax errors before declaring a task complete.
 
 ## 🏗️ Tech Stack & Constraints
 
@@ -22,7 +22,6 @@
 **Colors:**
 
 - Accent (Teal): `#64a19d` (links, badges, borders, primary highlights)
-- Minor Accent: `#7464a1` (secondary/double button options next to teal)
 - Background Dark: `#050505`, `#0d0d0d`, `#000`
 - Text: `#fff`, `#ddd`, `#aaa`
 - Borders/Dividers: `#1a1a1a`, `#222`, `#333`
@@ -41,10 +40,11 @@
     case-studies.html   Archive — CSS Grid 12-col bento layout + filter pills
     insights.html       Blog archive — magazine layout, sticky category nav, dot-grid
     case-studies/
-      case-study-test.html    Template for individual case study pages
+      case-study-template.html    Template for individual case study pages
     insights/
       post-template.html      Template for individual blog posts
     css/styles.css      Bootstrap 5.2.3 base + global custom styles ONLY
+    css/custom.css      Page-specific or experimental overrides (untracked; do not move rules here unless intentional)
     js/scripts.js       Navbar fade/shrink + ScrollSpy + IntersectionObserver logic
     assets/             Images, headshots, resume PDF, favicon
 
@@ -60,7 +60,7 @@
 
 ### Add a New Case Study
 
-1. Duplicate `case-studies/case-study-test.html` → rename to `case-studies/client-name.html`.
+1. Duplicate `case-studies/case-study-template.html` → rename to `case-studies/client-name.html`.
 2. Update meta tags (`title`, `description`, `og:*`).
 3. Update hero: client name, tagline, stats, background image.
 4. Read `docs/copywriting-guidelines.md`, then author the case study sections.
