@@ -1,69 +1,159 @@
-# [Start Bootstrap - Grayscale](https://startbootstrap.com/theme/grayscale/)
+# jonathanibrahim.com
 
-[Grayscale](https://startbootstrap.com/theme/grayscale/) is a multipurpose, one page HTML theme for [Bootstrap](https://getbootstrap.com/) created by [Start Bootstrap](https://startbootstrap.com/).
+Personal site for Jonathan Ibrahim — Strategic Operations Leader, Head of Project Management, ClickUp architect. Built as a single-page static site, deployed on GitHub Pages.
 
-## Preview
+**Live:** [jonathanibrahim.com](https://jonathanibrahim.com)
 
-[![Grayscale Preview](https://assets.startbootstrap.com/img/screenshots/themes/grayscale.png)](https://startbootstrap.github.io/startbootstrap-grayscale/)
+---
 
-**[View Live Preview](https://startbootstrap.github.io/startbootstrap-grayscale/)**
+## About this site
 
-## Status
+This is a deliberately small site with a deliberate job: present 14 years of operations and delivery work in a form you can read in under two minutes, and give the people who care — clients, collaborators, hiring teams — a fast path to the things that matter (resume, LinkedIn, email).
 
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/StartBootstrap/startbootstrap-grayscale/master/LICENSE)
-[![npm version](https://img.shields.io/npm/v/startbootstrap-grayscale.svg)](https://www.npmjs.com/package/startbootstrap-grayscale)
+It's built as a static, single-page site so it stays fast, cheap to host, and trivial to maintain. The visual language is monochrome with a single teal accent (`#64a19d`) — every image runs through a grayscale filter so the accent is the only color that survives, and attention lands where it's supposed to.
 
-## Download and Installation
+## Tech stack
 
-To begin using this template, choose one of the following options to get started:
+| Layer | Choice |
+|---|---|
+| HTML | [Pug](https://pugjs.org) templates → compiled `index.html` |
+| CSS | [Sass](https://sass-lang.com) (SCSS) + [PostCSS](https://postcss.org) + Autoprefixer |
+| JS | Vanilla ES6, IntersectionObserver, Bootstrap ScrollSpy |
+| Framework | [Bootstrap 5.2.3](https://getbootstrap.com) (only runtime dependency) |
+| Icons | [Font Awesome 6.3](https://fontawesome.com) via CDN |
+| Fonts | Varela Round (display), Nunito (body) via Google Fonts |
+| Dev server | [BrowserSync](https://browsersync.io) with [Chokidar](https://github.com/paulmillr/chokidar) file watching |
+| Task runner | [Concurrently](https://github.com/open-cli-tools/concurrently) |
+| Hosting | GitHub Pages with custom domain via `CNAME` |
 
-- [Download the latest release on Start Bootstrap](https://startbootstrap.com/theme/grayscale/)
-- Install using npm: `npm i startbootstrap-grayscale`
-- Clone the repo: `git clone https://github.com/StartBootstrap/startbootstrap-grayscale.git`
-- [Fork, Clone, or Download on GitHub](https://github.com/StartBootstrap/startbootstrap-grayscale)
+## Project structure
 
-## Usage
+```
+.
+├── index.html                 # Compiled output (committed so GitHub Pages serves it)
+├── css/styles.css             # Compiled Bootstrap + theme (~12k lines, includes Bootstrap)
+├── js/scripts.js              # Compiled JS (nav shrink, scrollspy, mobile collapse)
+├── assets/                    # Headshots, resume PDF, section imagery, favicon
+│
+├── src/                       # Hand-edited sources — edit these, not root files
+│   ├── pug/index.pug          # Page template
+│   ├── scss/                  # Partials: variables, components, sections
+│   │   ├── styles.scss        # Entry point
+│   │   ├── variables/         # _colors.scss, _typography.scss
+│   │   ├── components/        # _navbar.scss, _buttons.scss
+│   │   └── sections/          # _masthead, _about, _projects, _signup, _contact, _footer
+│   ├── js/scripts.js
+│   └── assets/
+│
+├── scripts/                   # Node build & dev-server scripts
+│   ├── build-{pug,scss,scripts,assets}.js
+│   ├── render-*.js            # Incremental rebuilds triggered by the watcher
+│   ├── sb-watch.js            # Chokidar watcher
+│   ├── start.js               # Orchestrates watcher + BrowserSync via concurrently
+│   └── clean.js
+│
+├── package.json
+├── CNAME                      # jonathanibrahim.com
+└── LICENSE                    # MIT (from upstream Start Bootstrap)
+```
 
-### Basic Usage
+## Getting started
 
-After downloading, simply edit the HTML and CSS files included with `dist` directory. These are the only files you need to worry about, you can ignore everything else! To preview the changes you make to the code, you can open the `index.html` file in your web browser.
+Requires Node.js and npm.
 
-### Advanced Usage
+```bash
+git clone https://github.com/<your-user>/website-coming-soon.git
+cd website-coming-soon
+npm install
+npm start
+```
 
-Clone the source files of the theme and navigate into the theme's root directory. Run `npm install` and then run `npm start` which will open up a preview of the template in your default browser, watch for changes to core template files, and live reload the browser when changes are saved. You can view the `package.json` file to see which scripts are included.
+`npm start` runs a full build, boots BrowserSync with live reload, and opens the site in your default browser. Edit anything under `src/`; the watcher recompiles and reloads.
 
-#### npm Scripts
+## NPM scripts
 
-- `npm run build` builds the project - this builds assets, HTML, JS, and CSS into `dist`
-- `npm run build:assets` copies the files in the `src/assets/` directory into `dist`
-- `npm run build:pug` compiles the Pug located in the `src/pug/` directory into `dist`
-- `npm run build:scripts` brings the `src/js/scripts.js` file into `dist`
-- `npm run build:scss` compiles the SCSS files located in the `src/scss/` directory into `dist`
-- `npm run clean` deletes the `dist` directory to prepare for rebuilding the project
-- `npm run start:debug` runs the project in debug mode
-- `npm start` or `npm run start` runs the project, launches a live preview in your default browser, and watches for changes made to files in `src`
+| Script | What it does |
+|---|---|
+| `npm start` | Build everything, then launch BrowserSync with live reload |
+| `npm run start:debug` | Same as `start`, with extra logging |
+| `npm run build` | Clean + build Pug, SCSS, JS, and assets into the root |
+| `npm run build:pug` | Compile `src/pug/index.pug` → `index.html` |
+| `npm run build:scss` | Compile `src/scss/styles.scss` → `css/styles.css` with autoprefixer |
+| `npm run build:scripts` | Copy `src/js/scripts.js` → `js/` |
+| `npm run build:assets` | Copy `src/assets/` → `assets/` |
+| `npm run clean` | Remove generated build artifacts |
 
-You must have npm installed in order to use this build environment.
+## How the build works
 
-## Bugs and Issues
+The repo is its own dist — compiled artifacts (`index.html`, `css/`, `js/`, `assets/`) live at the root because GitHub Pages serves from the repo root. So you write in `src/`, and the build writes over the root files. Don't hand-edit the compiled files; the next rebuild will clobber them.
 
-Have a bug or an issue with this template? [Open a new issue](https://github.com/StartBootstrap/startbootstrap-grayscale/issues) here on GitHub or leave a comment on the [theme overview page at Start Bootstrap](https://startbootstrap.com/theme/grayscale/).
+`scripts/start.js` uses Concurrently to run two things in parallel: the Chokidar watcher in `scripts/sb-watch.js` (which triggers the right `render-*.js` on file change) and BrowserSync (which injects CSS and reloads on JS/HTML changes).
 
-## About
+## Design system
 
-Start Bootstrap is an open source library of free Bootstrap themes and templates. All of the free themes and templates on Start Bootstrap are released under the MIT license, which means you can use them for any purpose, even for commercial projects.
+Pulled from `src/scss/variables/`.
 
-- <https://startbootstrap.com>
-- <https://twitter.com/SBootstrap>
+**Colors**
 
-Start Bootstrap was created by and is maintained by **[David Miller](https://davidmiller.io/)**.
+| Token | Hex | Use |
+|---|---|---|
+| Teal (primary) | `#64a19d` | Accent — links, buttons, icons, timeline border, favicon mark |
+| Black | `#050505` | Body background, hero, darkest sections |
+| Gray 900 | `#212529` | Text on light surfaces, dark panels |
+| Gray 100 | `#f8f9fa` | Light section backgrounds |
+| White | `#ffffff` | Navbar, cards |
 
-- <https://davidmiller.io>
-- <https://twitter.com/davidmillerhere>
-- <https://github.com/davidtmiller>
+One accent, one only. Every image is filtered with `grayscale(100%)` so color never competes with the teal.
 
-Start Bootstrap is based on the [Bootstrap](https://getbootstrap.com/) framework created by [Mark Otto](https://twitter.com/mdo) and [Jacob Thorton](https://twitter.com/fat).
+**Type**
 
-## Copyright and License
+- **Display:** Varela Round — hero H1, section headings (uppercase, wide letter-spacing)
+- **Body:** Nunito (400–900) with a 0.0625em global letter-spacing
+- Font stack falls back to system UI fonts if CDN fails
 
-Copyright 2013-2023 Start Bootstrap LLC. Code released under the [MIT](https://github.com/StartBootstrap/startbootstrap-grayscale/blob/master/LICENSE) license.
+**Motion**
+
+- Navbar fades in on first load, shrinks when the user scrolls past 50px
+- Section content fades up on enter via IntersectionObserver (`0.15` threshold, `-100px` bottom margin)
+- Bootstrap ScrollSpy keeps the active nav link in sync with the scroll position
+
+## What's on the page
+
+Single page, anchor-scrolled:
+
+1. **Masthead** — name, title, and three CTAs (resume PDF, LinkedIn, email)
+2. **About** — positioning statement and current role context
+3. **Core Expertise** — three pillars (Program & Portfolio Management, Digital Operations Architecture, Web Strategy & Delivery)
+4. **Track Record** — four headline metrics in icon cards
+5. **Career Journey** — vertical timeline of roles with dates, companies, and scope
+6. **Connect** — single email CTA
+7. **Footer** — name, location, email, copyright
+
+## SEO and performance
+
+- **Structured data:** JSON-LD `Person` schema with job title, employer, location, education, and certifications
+- **Social cards:** Open Graph (`og:type=profile`) + Twitter `summary_large_image`
+- **Imagery:** Primary headshot ships as WebP; Bootstrap's responsive image classes handle scaling
+- **Favicon:** Inline SVG data URI — a "JI" monogram in teal on near-black. No extra request, looks crisp at any density.
+- **No tracking scripts** and no third-party JS beyond the Font Awesome and Bootstrap CDNs
+
+## Deployment
+
+GitHub Pages, straight from `master`. The `CNAME` file points the site at `jonathanibrahim.com`. Pushing to `master` publishes.
+
+Because the repo root is the deployed site, always run `npm run build` before committing visual changes so the compiled `index.html` / `css/styles.css` / `js/scripts.js` match what's in `src/`.
+
+## Roadmap
+
+- Ongoing: content expansion — case studies and longer-form writing on delivery operations, ClickUp architecture, and remote team systems
+- Eventual: platform migration to Webflow for easier content management, keeping the current monochrome + teal visual language
+
+## Credits
+
+Scaffolding and build pipeline forked from [Start Bootstrap — Grayscale](https://startbootstrap.com/theme/grayscale/) by [David Miller](https://davidmiller.io/), released under MIT. Bootstrap itself is by [Mark Otto](https://twitter.com/mdo) and [Jacob Thornton](https://twitter.com/fat).
+
+All content, copy, site structure, and brand customization © Jonathan Ibrahim.
+
+## License
+
+MIT — see [LICENSE](LICENSE). The MIT grant covers the code scaffolding inherited from Start Bootstrap. Personal content (copy, imagery, resume, headshots) is not licensed for reuse.
