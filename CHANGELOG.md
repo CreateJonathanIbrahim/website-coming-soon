@@ -55,8 +55,35 @@ Commits: `f8ffe0e`, `add7078`
 **Removed**
 - `docs/copywriting-guidelines.md` — superseded by `voice/` files. The voice files are canonical per JonathanOS handoff §2; this resolves DECISION-6 (em-dash conflict) in favor of `voice/constraints.md`
 
-### SETUP-3 — Humanizer skill, pre-bash-guard hook, path-scoped rules (IN PROGRESS)
-- `.claude/skills/caveman/` and `.claude/skills/humanizer/` staged in working tree (untracked); pre-bash-guard hook and `.claude/rules/` directory not yet started
+### SETUP-3 — Humanizer skill, pre-bash-guard hook, path-scoped rules (COMPLETE — 2026-04-26)
+
+**Added**
+- `.claude/skills/caveman/` and `.claude/skills/humanizer/` (migrated from JonathanOS)
+- `.claude/hooks/pre-bash-guard.py` — Python PreToolUse hook that blocks unambiguously destructive shell commands. Tested against 7 cases (rm -rf /, rm -rf ~, git push --force, git push --force-with-lease, git reset --hard, rm -rf node_modules, ls -la); blocks 4 dangerous, allows 3 safe
+- `.claude/settings.json` — wires pre-bash-guard into PreToolUse with matchers `Bash|PowerShell`
+- `.claude/rules/insights-content.md` — path-scoped rule for `insights/**/*.html`. Voice file load order, Insights structural pattern from `voice/format-patterns.md`, hard rules, humanizer requirement
+- `.claude/rules/case-studies-content.md` — path-scoped rule for `case-studies/**/*.html`. Voice + web-design pillar load, employer-framing rules per `docs/website-repo-handoff.md` §5, humanizer requirement
+- `🪝 Hooks and Path-Scoped Rules` section in `CLAUDE.md` documenting the hook, current rules, and the path-scoped rules pattern
+
+**Removed**
+- `.agents/` directory (entire mirror of `.claude/skills/`). Single source of truth at `.claude/skills/` going forward. If a non-Claude-Code runtime ever needs the skills, regenerate the mirror from `.claude/skills/` at that time.
+
+**Changed**
+- `CLAUDE.md` File Map: added `.claude/hooks/`, `.claude/rules/`, `.claude/settings.json`, `.claude/skills/` entries
+- `README.md` Impeccable Agents skill pack section: removed mirror language, points at `.claude/skills/` only
+- `README.md` File Map: replaced `.agents/skills/` and `.claude/skills/` mirror lines with the four `.claude/` entries (skills, hooks, rules, settings)
+
+**Patterns blocked by pre-bash-guard:**
+
+- `rm -rf` targeting root, home directory, wildcards, or single-segment system paths (`/usr`, `/etc`, `/var`, etc.)
+- `git push --force` / `-f` without `--force-with-lease`
+- `git reset --hard` (any args)
+- Windows `format <drive>:`, `del /f /s`, `rd /s /q`
+- `dd` writing to `/dev/sd*`, `/dev/nvme*`, etc.
+- `mkfs.*` filesystem creation
+- `chmod 777` on root or system paths
+
+`rm -rf` of specific repo paths (node_modules, dist, etc.) is not blocked.
 
 ### SETUP-4 — Pre-launch baseline tag (NOT STARTED)
 - Will tag `master` as `pre-launch-2026-04-26` for rollback safety before the dev → master merge

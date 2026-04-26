@@ -72,8 +72,10 @@ Deliberate simplicity. No build pipeline, no bundler, no framework.
     CLAUDE.md              Architectural constraints, design system, SOPs for AI agents
     .impeccable.md         Design brief — users, brand voice, aesthetic direction, principles
     skills-lock.json       Pinned skill versions for the Impeccable Agents pack
-    .agents/skills/        Impeccable Agents skill modules (20+ skills)
-    .claude/skills/        Same skill pack, surfaced for Claude Code
+    .claude/skills/        22 skills (impeccable design pack + caveman + humanizer + seo + seo-audit)
+    .claude/hooks/         PreToolUse hooks (pre-bash-guard.py)
+    .claude/rules/         Path-scoped rules — auto-load when editing matching paths
+    .claude/settings.json  Claude Code settings (hooks, permissions)
     voice/                                       Canonical voice files (constraints, tone-and-style, format-patterns)
     pillars/                                     Six thematic territories + _pillar-map.md
     docs/
@@ -100,7 +102,7 @@ This repository is intentionally optimized for AI coding agents — primarily Cl
 - **[docs/seo-metadata-template.md](docs/seo-metadata-template.md)** — Boilerplate for `<title>`, meta description, OpenGraph, Twitter Card, and JSON-LD tags.
 
 ### Impeccable Agents skill pack
-Skills are mirrored in both [.agents/skills/](.agents/skills/) and [.claude/skills/](.claude/skills/) so multiple agent runtimes can load them. The pack includes:
+Skills live in [.claude/skills/](.claude/skills/) for Claude Code. The pack includes:
 
 | Category       | Skills                                                         |
 | -------------- | -------------------------------------------------------------- |

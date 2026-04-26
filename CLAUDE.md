@@ -61,6 +61,11 @@ This repository is public. GitHub Pages publishes from it. Anything committed he
       design-system.md                          Full design system reference
       seo-metadata-template.md                  SEO/OG/Twitter/JSON-LD boilerplate
       website-repo-handoff.md                   JonathanOS handoff context for this repo
+    .claude/
+      hooks/pre-bash-guard.py                   PreToolUse hook blocking destructive commands
+      rules/                                    Path-scoped rules (auto-load when editing matching paths)
+      settings.json                             Claude Code settings (hooks, permissions)
+      skills/                                   22 skills (impeccable design pack + caveman + humanizer + seo + seo-audit)
 
 ## 📋 Common Tasks (SOPs)
 
@@ -93,6 +98,16 @@ This repository is public. GitHub Pages publishes from it. Anything committed he
 
 - **Behavior (`js/scripts.js`):** Handles navbar fade-in (2s delay or scroll > 50px), navbar shrink (`.navbar-shrink`), Bootstrap ScrollSpy, and auto-closing mobile collapse navs.
 - **SEO Requirements:** Full OpenGraph + Twitter Card tags on all pages. Ensure JSON-LD `Person` schema remains intact on `index.html`.
+
+## 🪝 Hooks and Path-Scoped Rules
+
+- **Hook (`.claude/hooks/pre-bash-guard.py`):** Wired into PreToolUse via `.claude/settings.json` with matchers `Bash|PowerShell`. Blocks unambiguously destructive shell commands: `rm -rf` on root/home/wildcards/system paths, `git push --force` without `--force-with-lease`, `git reset --hard`, Windows `format`/`del /f /s`/`rd /s /q`, `dd`/`mkfs` disk writes, `chmod 777` on system paths. Day-to-day deletions of specific files inside the repo are not blocked. To bypass for an intentional case, run the command in a separate terminal outside Claude Code.
+
+- **Path-scoped rules (`.claude/rules/`):** Each rule file has YAML frontmatter with `paths:` glob patterns. When you are editing files matching a rule's glob, read the rule before making changes. Current rules:
+    - `.claude/rules/insights-content.md` — fires for `insights/**/*.html`. Voice file load order, structural pattern, hard rules, humanizer requirement.
+    - `.claude/rules/case-studies-content.md` — fires for `case-studies/**/*.html`. Voice + web-design pillar load, employer-framing rules, humanizer requirement.
+
+  Add new rule files under `.claude/rules/` as new content surfaces emerge.
 
 ## 📜 Changelog Policy
 
