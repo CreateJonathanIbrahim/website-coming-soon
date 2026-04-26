@@ -28,7 +28,7 @@ Supporting changes:
 Deliberate simplicity. No build pipeline, no bundler, no framework.
 
 - **Frontend:** Vanilla HTML5, CSS3, and JavaScript
-- **Styling:** Bootstrap 5.2.3 (via CDN) + custom CSS
+- **Styling:** Local Bootstrap 5.2.3 (Grayscale-themed) + `css/site.css` (shared site rules) + inline `<style>` per page (page-specific rules)
 - **Typography:** Google Fonts — **Varela Round** (headings/labels), **Nunito** (body)
 - **Icons:** Font Awesome 6.3.0
 - **Hosting:** GitHub Pages (static only)
@@ -62,8 +62,8 @@ Deliberate simplicity. No build pipeline, no bundler, no framework.
 
 ### Styles, scripts, assets
 
-    css/styles.css         Global styles + Bootstrap variable overrides (only)
-    css/custom.css         Page-specific or experimental overrides
+    css/bootstrap.min.css  Local Grayscale-themed Bootstrap 5.2.3 (vendor file, do not edit)
+    css/site.css           Theme :root overrides + shared site rules (animations, post/case-study/section layouts)
     js/scripts.js          Navbar fade/shrink, ScrollSpy, IntersectionObserver fade-ins
     assets/                Headshots, social preview images, resume PDF, favicons
 
@@ -100,6 +100,7 @@ This repository is intentionally optimized for AI coding agents — primarily Cl
 - **[docs/claude-code-architecture-cornerstone.md](docs/claude-code-architecture-cornerstone.md)** — Architecture reference manual (CLAUDE.md design, hooks, rules, skills/agents, layer hierarchy). Load on demand.
 - **[docs/design-system.md](docs/design-system.md)** — Full design system reference.
 - **[docs/seo-metadata-template.md](docs/seo-metadata-template.md)** — Boilerplate for `<title>`, meta description, OpenGraph, Twitter Card, and JSON-LD tags.
+- **[patterns/](patterns/)** — Reusable HTML markup library. Copy a pattern, customize content per page, ship. See [patterns/README.md](patterns/README.md) for the convention.
 
 ### Impeccable Agents skill pack
 Skills live in [.claude/skills/](.claude/skills/) for Claude Code. The pack includes:

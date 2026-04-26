@@ -17,7 +17,7 @@ This repository is public. GitHub Pages publishes from it. Anything committed he
 ## 🏗️ Tech Stack & Constraints
 
 - **Core:** HTML5 + CSS3 + Vanilla JS (no frameworks like React or Vue).
-- **Styling:** Bootstrap 5.2.3 local + custom site styles (split into a vanilla Bootstrap base file and a `site.css` for theme overrides plus shared rules — see WS-1 implementation in CHANGELOG).
+- **Styling:** Local Bootstrap 5.2.3 (Grayscale-themed recompiled build at `css/bootstrap.min.css` — vendor file, do not edit) + `css/site.css` (theme `:root` overrides, shared site rules, animations, layout patterns) + inline `<style>` blocks per page (page-specific rules only).
 - **Typography:** Google Fonts (**Varela Round** for headings/labels, **Nunito** for body).
 - **Icons:** Font Awesome 6.3.0.
 - **Infrastructure:** GitHub Pages deployment (static files only). No bundler, no backend, no environment variables, no database.
@@ -35,8 +35,10 @@ This repository is public. GitHub Pages publishes from it. Anything committed he
 
 **Styling Conventions:**
 
-- **Global CSS:** Base styles and Bootstrap variable overrides (`--bs-*`) live in `css/styles.css`.
-- **Page-Specific CSS:** Must be placed in `<style>` tags inside the specific HTML file's `<head>`. Do not put page-specific rules in the global stylesheet.
+- **CSS architecture (three layers):**
+    1. `css/bootstrap.min.css` — Grayscale-themed Bootstrap 5.2.3 build. Vendor file. Do not edit.
+    2. `css/site.css` — theme `:root` overrides (Grayscale palette + typography), animations (`.fade-in-section`), shared chip/badge utilities, insight post layout, case study layout, homepage section utilities (`.about-section`, `.projects-section`, `.track-record-section`), masthead typography, footer, contact section. **This is the file you edit when changing site-wide styles.**
+    3. Inline `<style>` blocks in each HTML file's `<head>` — page-specific rules only. Do not put shared rules here. When the same rule appears in 2+ inline blocks, migrate it to `css/site.css`.
 - **Typography:** Responsive scale via `clamp(min, preferred-vw, max)` on headings.
 - **Animations:** Smooth CSS transitions on hovers; bounce animation on scroll chevrons; fade-in on scroll via IntersectionObserver (`.fade-in-section` / `.is-visible`).
 
@@ -52,10 +54,13 @@ This repository is public. GitHub Pages publishes from it. Anything committed he
       post-template.html      Template for individual blog posts
     css/styles.css      Bootstrap 5.2.3 base + global custom styles ONLY
     css/custom.css      Page-specific or experimental overrides (untracked; do not move rules here unless intentional)
-    js/scripts.js       Navbar fade/shrink + ScrollSpy + IntersectionObserver logic
-    assets/             Images, headshots, resume PDF, favicon
-    voice/              Canonical voice files — constraints, tone-and-style, format-patterns
-    pillars/            Six thematic territories + _pillar-map.md (load relevant pillar before content production)
+    css/bootstrap.min.css   Grayscale-themed Bootstrap 5.2.3 build (vendor — do not edit)
+    css/site.css            Shared site rules: theme tokens, animations, post/case-study/section layouts
+    js/scripts.js           Navbar fade/shrink + ScrollSpy + IntersectionObserver logic
+    assets/                 Images, headshots, resume PDF, favicon
+    voice/                  Canonical voice files — constraints, tone-and-style, format-patterns
+    pillars/                Six thematic territories + _pillar-map.md (load relevant pillar before content production)
+    patterns/               Reusable HTML markup library (copy + customize per page)
     docs/
       claude-code-architecture-cornerstone.md   Architecture reference (load on demand)
       design-system.md                          Full design system reference
@@ -91,8 +96,22 @@ This repository is public. GitHub Pages publishes from it. Anything committed he
 
 1. Create `page-name.html` at the root directory.
 2. Copy the nav + footer structure from an existing top-level page.
-3. Add a `<link>` to the nav across all existing pages.
-4. Test mobile responsiveness at 375px, 768px, and 1024px.
+3. Link `css/bootstrap.min.css` and `css/site.css` in the `<head>`.
+4. Add a `<link>` to the nav across all existing pages.
+5. Test mobile responsiveness at 375px, 768px, and 1024px.
+
+### Reuse a Pattern from `patterns/`
+
+When dropping a known module (Insights preview grid, stat chip, connect/CTA block) into a new page:
+
+1. Browse `patterns/README.md` to identify the right pattern
+2. Open `patterns/<pattern-name>.html`
+3. Copy the markup block
+4. Paste into your target HTML file
+5. Replace placeholder strings (`<!-- TITLE -->`, `<!-- LINK -->`, etc.) with page-specific content
+6. Verify visual rendering — styling comes from `css/site.css` automatically via shared classes
+
+When you find yourself copy-pasting the same markup to a third page, extract it into `patterns/` first. See `patterns/README.md` for the extraction process.
 
 ## ⚙️ JavaScript & SEO Rules
 

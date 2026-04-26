@@ -6,6 +6,40 @@ All notable changes to this project are documented here. Format follows [Keep a 
 
 > Tracking work on `dev` toward the next deploy to `master`. Versions get cut and dated when work reaches master.
 
+### WS-1 — CSS architecture rebuild (COMPLETE — 2026-04-26)
+
+**End state:** three-layer architecture documented in `CLAUDE.md`:
+
+1. `css/bootstrap.min.css` — Grayscale-themed Bootstrap 5.2.3 build (vendor)
+2. `css/site.css` — theme `:root` overrides + shared site rules
+3. Inline `<style>` blocks — page-specific rules only
+
+**Net change vs pre-WS-1:**
+- 11,416-line `css/styles.css` deleted, replaced with the same content under a clearer name (`css/bootstrap.min.css`) treated as a vendor file
+- 290-line `css/custom.css` deleted; live rules consolidated into `css/site.css`, dead rules (`.signup-section`, residual `.about-section` legacy) removed
+- ~2,270 lines of inline `<style>` across 11 HTML files reduced to ~280 lines (only page-specific rules remain)
+- New file `css/site.css` (~840 lines) holds the consolidated shared layer
+- Per-post insight hero images and per-case-study hero images parameterized via CSS custom properties (`--post-hero-image`, `--cs-hero-image`)
+
+**Phases:**
+- Phase 1 — Audit catalog: [docs/ws-1-css-audit.md](docs/ws-1-css-audit.md)
+- Phase 2 — Build, swap, strip: commit `6d29fc4`
+- Phase 2 hotfix #1 — restored Grayscale-themed Bootstrap build because vanilla Bootstrap's component classes hardcode their colors and `:root` overrides do not propagate: commit `84b316e`
+- Phase 2 hotfix #2 — restored `.masthead h1/h2` typography rules missed in the audit: commit `9448f87`
+- Phase 3 — docs and patterns/ folder (this commit)
+
+**Patterns library introduced:**
+- New `patterns/` folder for reusable HTML markup library (currently empty; populated case-by-case as patterns prove worth extracting)
+- `patterns/README.md` documents the convention (copy markup, swap placeholders per page, styling comes from `css/site.css` automatically)
+- `CLAUDE.md` adds a "Reuse a Pattern from `patterns/`" SOP and File Map entry
+- `README.md` Documentation section references the patterns library
+
+**Audit lessons (worth carrying forward):** the original `styles.css` and `custom.css` were tightly coupled — `styles.css` was a recompiled Grayscale-themed Bootstrap with teal hardcoded into every component class, and `custom.css` had component-level overrides depending on selector cascade against `.masthead`, `.projects-section`, etc. The Phase 1 audit treated the two files as independent layers and missed three classes of error: false-DEAD on live rules (`.about-section`, `.projects-section`, `.project`, `.track-record-section`), assumption that `:root` token overrides would propagate to Bootstrap component classes (they do not — components hardcode their colors), and missed migration of `.masthead h1/h2` typography rules. All three errors caught and fixed before WS-1 closed.
+
+**ClickUp:** WS-1 (`86e132zp6`) marked COMPLETE.
+
+---
+
 ### WS-1 Phase 2 hotfix — restored Grayscale-themed Bootstrap (2026-04-26)
 
 **Issue:** After Phase 2's swap to vanilla minified Bootstrap (195 KB from jsdelivr), the homepage rendered with **blue buttons instead of teal**, visibly broken.
