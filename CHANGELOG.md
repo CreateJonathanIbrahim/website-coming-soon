@@ -85,8 +85,10 @@ Commits: `f8ffe0e`, `add7078`
 
 `rm -rf` of specific repo paths (node_modules, dist, etc.) is not blocked.
 
-### SETUP-4 — Pre-launch baseline tag (NOT STARTED)
-- Will tag `master` as `pre-launch-2026-04-26` for rollback safety before the dev → master merge
+### SETUP-4 — Pre-launch baseline tag (COMPLETE — 2026-04-26)
+
+**Added**
+- Local git tag `pre-launch-2026-04-26` pointing at `master` HEAD (`9d1d84d` — "Update README.md", 2026-04-22). Reserved for one-command rollback if a future launch breaks something on production. Tag is local until pushed via GitHub Desktop.
 
 ### DECISION-1 through DECISION-6 (NOT STARTED)
 - Six pre-launch decisions scoped in ClickUp: CSS strategy, OG image strategy, hero copy, home carousel posture, Insights category redefinition, copywriting/voice reconciliation. Resolutions gate downstream workstreams.
@@ -100,4 +102,4 @@ Commits: `f8ffe0e`, `add7078`
 
 - **CalVer scheme:** `YYYY.MM.DD` matching the date the version was cut
 - **Versions are cut at deploys.** When work reaches `master`, the relevant `[Unreleased]` content gets renamed to `[YYYY.MM.DD]` and a fresh `[Unreleased]` block is started
-- **Pre-launch baseline tag:** `pre-launch-2026-04-26` (will be created in SETUP-4) — reserved for one-command rollback if a launch breaks something on production
+- **Pre-launch baseline tag:** `pre-launch-2026-04-26` — points at `master` HEAD (`9d1d84d`, 2026-04-22). Reserved for one-command rollback if a launch breaks something on production. Created locally on 2026-04-26; push to origin via GitHub Desktop when convenient.
