@@ -38,49 +38,11 @@
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900" rel="stylesheet" />
-        <link href="../css/styles.css" rel="stylesheet" />
-        <link href="../css/custom.css" rel="stylesheet" />
+        <link href="../css/bootstrap.min.css" rel="stylesheet" />
+        <link href="../css/site.css" rel="stylesheet" />
 
         <style>
-            .post-hero {
-                padding: 10rem 0 4rem;
-                background:
-                    linear-gradient(to bottom, rgba(0,0,0,0.72), rgba(0,0,0,0.97)),
-                    url('https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?q=80&w=2070&auto=format&fit=crop')
-                    center/cover no-repeat;
-            }
-            .post-cat-badge { display: inline-block; border: 1px solid #64a19d; color: #64a19d; padding: 0.3rem 0.9rem; border-radius: 50px; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1rem; margin-bottom: 1.25rem; font-family: 'Varela Round', sans-serif; }
-            .post-hero-title { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 800; color: #fff; line-height: 1.25; max-width: 780px; margin-bottom: 1.25rem; }
-            .post-meta-row { font-size: 0.78rem; color: #555; text-transform: uppercase; letter-spacing: 0.08rem; font-family: 'Varela Round', sans-serif; }
-            .post-meta-row span + span::before { content: '·'; margin: 0 0.5rem; }
-            .post-layout { display: grid; grid-template-columns: 1fr 220px; gap: 4rem; align-items: start; }
-            @media (max-width: 991px) { .post-layout { grid-template-columns: 1fr; gap: 2.5rem; } .post-sidebar { display: none; } }
-            .post-body { color: #aaa; font-size: 1.05rem; line-height: 1.88; }
-            .post-body p { margin-bottom: 1.5rem; }
-            .post-body h2 { color: #fff; font-size: 1.45rem; font-weight: 700; margin-top: 3rem; margin-bottom: 1rem; padding-left: 1rem; border-left: 3px solid #64a19d; }
-            .post-body h3 { color: #ddd; font-size: 1.1rem; font-weight: 700; margin-top: 2rem; margin-bottom: 0.75rem; }
-            .post-body ul, .post-body ol { padding-left: 1.5rem; margin-bottom: 1.5rem; }
-            .post-body li { margin-bottom: 0.5rem; }
-            .post-body a { color: #64a19d; text-decoration: underline; }
-            .post-body a:hover { color: #50817e; }
-            .post-body strong { color: #ddd; }
-            .post-body em { color: #888; }
-            .post-body hr { border: none; border-top: 1px solid #1a1a1a; margin: 2.5rem 0; }
-            .post-body blockquote { border-left: 3px solid #64a19d; margin: 2rem 0; padding: 0.5rem 1.5rem; color: #888; font-style: italic; font-size: 1.1rem; }
-            .callout-box { background: rgba(100,161,157,0.08); border: 1px solid rgba(100,161,157,0.25); border-radius: 0.5rem; padding: 1.5rem 1.75rem; margin: 2rem 0; color: #aaa; }
-            .callout-box strong { display: block; color: #64a19d; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12rem; margin-bottom: 0.5rem; font-family: 'Varela Round', sans-serif; }
-            .post-sidebar { position: sticky; top: 100px; }
-            .toc-label { font-family: 'Varela Round', sans-serif; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15rem; color: #444; margin-bottom: 0.75rem; }
-            .toc-list { list-style: none; padding: 0; margin: 0; border-left: 2px solid #1a1a1a; }
-            .toc-list li a { display: block; padding: 0.35rem 0 0.35rem 1rem; font-size: 0.8rem; color: #444; text-decoration: none; transition: color 0.2s, border-color 0.2s; line-height: 1.4; }
-            .toc-list li a:hover { color: #64a19d; }
-            .toc-list li.active a { color: #64a19d; border-left: 2px solid #64a19d; margin-left: -2px; }
-            .post-footer-cta { border-top: 1px solid #1a1a1a; margin-top: 4rem; padding-top: 3rem; }
-            .post-footer-cta .btn { transition: transform 0.2s ease, box-shadow 0.2s ease; }
-            .post-footer-cta .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(100,161,157,0.4); }
-
-            .fade-in-section { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
-            .fade-in-section.is-visible { opacity: 1; transform: translateY(0); }
+            .post-hero { --post-hero-image: url('https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?q=80&w=2070&auto=format&fit=crop'); }
         </style>
     </head>
     <body id="page-top" class="bg-black text-white-50">

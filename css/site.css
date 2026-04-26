@@ -1,0 +1,791 @@
+/* ============================================================
+   Jonathan Ibrahim — Site Custom Styles (Layer 2)
+
+   Loads after css/bootstrap.min.css. Houses:
+   - Theme :root token overrides (Grayscale palette + typography)
+   - Shared site rules used across multiple pages
+
+   Page-specific rules live in inline <style> blocks per page,
+   per the convention in CLAUDE.md.
+
+   Built during WS-1 Phase 2 (2026-04-26) by consolidating
+   duplicated rules from inline <style> blocks across 11 HTML
+   files plus the still-live rules from the legacy custom.css.
+   See docs/ws-1-css-audit.md for the catalog.
+   ============================================================ */
+
+/* === Theme tokens (Grayscale palette + typography) === */
+:root {
+    --bs-blue: #0d6efd;
+    --bs-indigo: #6610f2;
+    --bs-purple: #7464a1;
+    --bs-pink: #d63384;
+    --bs-red: #a16468;
+    --bs-orange: #fd7e14;
+    --bs-yellow: #e4c662;
+    --bs-green: #67c29c;
+    --bs-teal: #64a19d;
+    --bs-cyan: #1cabc4;
+    --bs-black: #000;
+    --bs-white: #fff;
+    --bs-gray: #6c757d;
+    --bs-gray-dark: #343a40;
+    --bs-gray-100: #f8f9fa;
+    --bs-gray-200: #e9ecef;
+    --bs-gray-300: #dee2e6;
+    --bs-gray-400: #ced4da;
+    --bs-gray-500: #adb5bd;
+    --bs-gray-600: #6c757d;
+    --bs-gray-700: #495057;
+    --bs-gray-800: #343a40;
+    --bs-gray-900: #212529;
+    --bs-primary: #64a19d;
+    --bs-secondary: #7464a1;
+    --bs-success: #67c29c;
+    --bs-info: #1cabc4;
+    --bs-warning: #e4c662;
+    --bs-danger: #a16468;
+    --bs-light: #f8f9fa;
+    --bs-dark: #212529;
+    --bs-primary-rgb: 100, 161, 157;
+    --bs-secondary-rgb: 116, 100, 161;
+    --bs-success-rgb: 103, 194, 156;
+    --bs-info-rgb: 28, 171, 196;
+    --bs-warning-rgb: 228, 198, 98;
+    --bs-danger-rgb: 161, 100, 104;
+    --bs-light-rgb: 248, 249, 250;
+    --bs-dark-rgb: 33, 37, 41;
+    --bs-black-rgb: 0, 0, 0;
+    --bs-white-rgb: 255, 255, 255;
+    --bs-body-color-rgb: 33, 37, 41;
+    --bs-body-bg-rgb: 255, 255, 255;
+    --bs-font-sans-serif:
+        system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans',
+        'Liberation Sans', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+    --bs-font-monospace:
+        SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+    --bs-body-font-family:
+        Nunito, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial,
+        sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    --bs-body-font-size: 1rem;
+    --bs-body-font-weight: 400;
+    --bs-body-line-height: 1.5;
+    --bs-body-color: #212529;
+    --bs-body-bg: #fff;
+    --bs-border-width: 1px;
+    --bs-border-style: solid;
+    --bs-border-color: #dee2e6;
+    --bs-border-color-translucent: rgba(0, 0, 0, 0.175);
+    --bs-border-radius: 0.375rem;
+    --bs-border-radius-sm: 0.25rem;
+    --bs-border-radius-lg: 0.5rem;
+    --bs-border-radius-xl: 1rem;
+    --bs-border-radius-2xl: 2rem;
+    --bs-border-radius-pill: 50rem;
+    --bs-link-color: #64a19d;
+    --bs-link-hover-color: #50817e;
+    --bs-code-color: #d63384;
+    --bs-highlight-bg: #faf4e0;
+}
+
+/* === Animations === */
+/* Used sitewide. IntersectionObserver in js/scripts.js adds .is-visible */
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.fade-in-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* === Shared chip / badge === */
+.stat-chip {
+    display: inline-block;
+    background: rgba(100, 161, 157, 0.12);
+    border: 1px solid rgba(100, 161, 157, 0.3);
+    color: #64a19d;
+    font-family: 'Varela Round', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.85rem;
+    border-radius: 2rem;
+    margin: 0.25rem 0.25rem 0.25rem 0;
+}
+
+/* ============================================================
+   Insight post layout
+   Used by all files under insights/ that follow the post template.
+   Per-post hero image is set inline via the --post-hero-image
+   CSS custom property:
+
+       <style>
+           .post-hero { --post-hero-image: url('https://...'); }
+       </style>
+
+   Everything else (gradient, padding, positioning) lives here.
+   ============================================================ */
+
+.post-hero {
+    padding: 10rem 0 4rem;
+    background:
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.97)),
+        var(--post-hero-image, none) center/cover no-repeat;
+}
+.post-cat-badge {
+    display: inline-block;
+    border: 1px solid #64a19d;
+    color: #64a19d;
+    padding: 0.3rem 0.9rem;
+    border-radius: 50px;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    margin-bottom: 1.25rem;
+    font-family: 'Varela Round', sans-serif;
+}
+.post-hero-title {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.25;
+    max-width: 780px;
+    margin-bottom: 1.25rem;
+}
+.post-meta-row {
+    font-size: 0.78rem;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.08rem;
+    font-family: 'Varela Round', sans-serif;
+}
+.post-meta-row span + span::before {
+    content: '·';
+    margin: 0 0.5rem;
+}
+
+/* Article + sidebar layout */
+.post-layout {
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    gap: 4rem;
+    align-items: start;
+}
+@media (max-width: 991px) {
+    .post-layout {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+    .post-sidebar {
+        display: none;
+    }
+}
+
+/* Article body typography */
+.post-body {
+    color: #aaa;
+    font-size: 1.05rem;
+    line-height: 1.88;
+}
+.post-body p {
+    margin-bottom: 1.5rem;
+}
+.post-body h2 {
+    color: #fff;
+    font-size: 1.45rem;
+    font-weight: 700;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    padding-left: 1rem;
+    border-left: 3px solid #64a19d;
+}
+.post-body h3 {
+    color: #ddd;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+}
+.post-body ul,
+.post-body ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+.post-body li {
+    margin-bottom: 0.5rem;
+}
+.post-body a {
+    color: #64a19d;
+    text-decoration: underline;
+}
+.post-body a:hover {
+    color: #50817e;
+}
+.post-body strong {
+    color: #ddd;
+}
+.post-body em {
+    color: #888;
+}
+.post-body hr {
+    border: none;
+    border-top: 1px solid #1a1a1a;
+    margin: 2.5rem 0;
+}
+.post-body blockquote {
+    border-left: 3px solid #64a19d;
+    margin: 2rem 0;
+    padding: 0.5rem 1.5rem;
+    color: #888;
+    font-style: italic;
+    font-size: 1.1rem;
+}
+
+/* Callout box */
+.callout-box {
+    background: rgba(100, 161, 157, 0.08);
+    border: 1px solid rgba(100, 161, 157, 0.25);
+    border-radius: 0.5rem;
+    padding: 1.5rem 1.75rem;
+    margin: 2rem 0;
+    color: #aaa;
+}
+.callout-box strong {
+    display: block;
+    color: #64a19d;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12rem;
+    margin-bottom: 0.5rem;
+    font-family: 'Varela Round', sans-serif;
+}
+
+/* Sticky TOC sidebar */
+.post-sidebar {
+    position: sticky;
+    top: 100px;
+}
+.toc-label {
+    font-family: 'Varela Round', sans-serif;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15rem;
+    color: #444;
+    margin-bottom: 0.75rem;
+}
+.toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-left: 2px solid #1a1a1a;
+}
+.toc-list li a {
+    display: block;
+    padding: 0.35rem 0 0.35rem 1rem;
+    font-size: 0.8rem;
+    color: #444;
+    text-decoration: none;
+    transition: color 0.2s, border-color 0.2s;
+    line-height: 1.4;
+}
+.toc-list li a:hover {
+    color: #64a19d;
+}
+.toc-list li.active a {
+    color: #64a19d;
+    border-left: 2px solid #64a19d;
+    margin-left: -2px;
+}
+
+/* Post footer CTA */
+.post-footer-cta {
+    border-top: 1px solid #1a1a1a;
+    margin-top: 4rem;
+    padding-top: 3rem;
+}
+.post-footer-cta .btn {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.post-footer-cta .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(100, 161, 157, 0.4);
+}
+
+/* ============================================================
+   Case study layout
+   Used by case-studies/case-study-template.html and future
+   case studies. Per-case-study hero image is set inline via
+   --cs-hero-image:
+
+       <style>
+           .cs-hero { --cs-hero-image: url('https://...'); }
+       </style>
+   ============================================================ */
+
+.cs-hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.96)),
+        var(--cs-hero-image, none) center/cover no-repeat;
+    padding-top: 5rem;
+}
+.cs-hero .scroll-chevron {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #64a19d;
+    font-size: 1.5rem;
+    animation: bounce 1.8s ease-in-out infinite;
+}
+@keyframes bounce {
+    0%,
+    100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        transform: translateX(-50%) translateY(10px);
+    }
+}
+
+.meta-badge {
+    border: 1px solid #64a19d;
+    color: #64a19d;
+    padding: 0.35rem 1rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.cs-section-title {
+    font-family: 'Varela Round', sans-serif;
+    color: #64a19d;
+    text-transform: uppercase;
+    letter-spacing: 0.18rem;
+    font-size: 0.8rem;
+    margin-bottom: 0.75rem;
+}
+
+.specs-card {
+    background: #000;
+    border-radius: 0.5rem;
+    padding: 2rem;
+    height: 100%;
+}
+.specs-card .tool-pill {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: #aaa;
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    display: inline-block;
+    margin: 0.2rem 0.2rem 0.2rem 0;
+}
+
+.chaos-diagram {
+    background: #0d0d0d;
+    border: 1px solid #2a2a2a;
+    border-radius: 0.5rem;
+    padding: 2rem;
+}
+.chaos-diagram .tool-box {
+    border: 1px solid #3a3a3a;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    color: #888;
+    display: inline-block;
+    background: #1a1a1a;
+    margin: 0.4rem;
+}
+.chaos-diagram .arrow {
+    color: #444;
+    font-size: 1.1rem;
+    margin: 0 0.3rem;
+}
+.chaos-diagram .pain-point {
+    font-size: 0.72rem;
+    color: #555;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+.video-placeholder {
+    background: #111;
+    aspect-ratio: 16 / 9;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 1px solid #222;
+    position: relative;
+    overflow: hidden;
+}
+.video-placeholder .play-icon {
+    font-size: 4rem;
+    color: #64a19d;
+    opacity: 0.85;
+    transition: opacity 0.3s, transform 0.3s;
+}
+.video-placeholder:hover .play-icon {
+    opacity: 1;
+    transform: scale(1.08);
+}
+.video-placeholder .video-label {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+}
+
+.cs-timeline {
+    border-left: 3px solid #64a19d;
+    padding-left: 2.5rem;
+    position: relative;
+}
+.cs-timeline-entry {
+    position: relative;
+    margin-bottom: 4rem;
+}
+.cs-timeline-entry:last-child {
+    margin-bottom: 0;
+}
+.cs-timeline-dot {
+    position: absolute;
+    left: -3.25rem;
+    top: 0.45rem;
+    width: 1.2rem;
+    height: 1.2rem;
+    background: #64a19d;
+    border-radius: 50%;
+    border: 3px solid #000;
+    box-shadow: 0 0 0 2px #64a19d;
+}
+.cs-phase-number {
+    font-family: 'Varela Round', sans-serif;
+    font-size: 2.5rem;
+    color: #64a19d;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    opacity: 0.7;
+}
+.cs-timeline-img {
+    filter: grayscale(90%);
+    opacity: 0.75;
+    border-radius: 0.4rem;
+    width: 100%;
+    margin-top: 1.25rem;
+    transition: filter 0.4s, opacity 0.4s;
+}
+.cs-timeline-entry:hover .cs-timeline-img {
+    filter: grayscale(60%);
+    opacity: 0.9;
+}
+.cs-timeline-img-caption {
+    font-size: 0.75rem;
+    color: #555;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+.cs-img-wrap {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    background: #eee;
+}
+.cs-img-wrap img {
+    width: 100%;
+    display: block;
+    filter: grayscale(70%);
+    transition: transform 0.5s ease, filter 0.4s;
+}
+.cs-img-wrap:hover img {
+    transform: scale(1.04);
+    filter: grayscale(40%);
+}
+.cs-img-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.88));
+    padding: 2.5rem 1.25rem 1rem;
+    color: #fff;
+    font-size: 0.82rem;
+}
+.cs-img-caption strong {
+    display: block;
+    margin-bottom: 0.15rem;
+    font-size: 0.9rem;
+}
+
+.stat-divider {
+    width: 3rem;
+    height: 3px;
+    background: #64a19d;
+    margin: 0.75rem auto 0.75rem;
+}
+
+.cs-testimonial {
+    border: 1px solid #2a2a2a;
+    border-radius: 0.5rem;
+    padding: 2.5rem;
+    background: #0a0a0a;
+}
+.cs-testimonial blockquote {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    font-style: italic;
+    color: #bbb;
+    margin: 0 0 1.5rem;
+}
+.cs-testimonial .avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #2a2a2a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    color: #64a19d;
+    flex-shrink: 0;
+}
+
+.cs-learned {
+    border-left: 3px solid #64a19d;
+    padding-left: 1.5rem;
+    color: #888;
+    font-style: italic;
+}
+
+/* Bootstrap accordion — dark-theme overrides used on case studies */
+.accordion-button {
+    background-color: #1a1a1a;
+    color: #fff;
+    font-weight: 600;
+}
+.accordion-button:not(.collapsed) {
+    background-color: #2a2a2a;
+    color: #64a19d;
+    box-shadow: none;
+}
+.accordion-button::after {
+    filter: invert(1);
+}
+.accordion-item {
+    background-color: #111;
+    border-color: #2a2a2a;
+}
+.accordion-body {
+    color: #aaa;
+    line-height: 1.75;
+}
+
+/* ============================================================
+   Homepage section utilities
+
+   Container styling for sections on index.html (and .about-section
+   on about.html). Originally lived in the legacy custom.css; kept
+   here so they remain available across pages.
+   ============================================================ */
+
+.about-section {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    background: linear-gradient(
+        to bottom,
+        #000 0%,
+        rgba(0, 0, 0, 0.9) 75%,
+        rgba(0, 0, 0, 0.8) 100%
+    );
+}
+.about-section p {
+    margin-bottom: 5rem;
+}
+
+.projects-section {
+    padding: 10rem 0;
+}
+.projects-section .featured-text {
+    padding: 2rem;
+}
+@media (min-width: 992px) {
+    .projects-section .featured-text {
+        padding: 0 0 0 2rem;
+        border-left: 0.5rem solid #64a19d;
+    }
+}
+.projects-section .project-text {
+    padding: 3rem;
+    font-size: 90%;
+}
+@media (min-width: 992px) {
+    .projects-section .project-text {
+        padding: 5rem;
+    }
+}
+
+.project img {
+    transition: transform 0.5s ease;
+}
+.project:hover img {
+    transform: scale(1.05);
+}
+
+.track-record-section {
+    padding: 10rem 0;
+}
+.track-record-section .card {
+    border: 0;
+    border-bottom: 0.25rem solid #64a19d;
+}
+.track-record-section .card h4,
+.track-record-section .card .h4 {
+    font-size: 0.8rem;
+    font-family: 'Varela Round', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.15rem;
+}
+.track-record-section .card hr {
+    opacity: 1;
+    border-color: #64a19d;
+    border-width: 0.25rem;
+    width: 3rem;
+}
+
+/* === Masthead (homepage hero) === */
+.masthead {
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 35rem;
+    padding: 15rem 0;
+    background:
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%),
+        url('../assets/img/bg-masthead.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+}
+
+/* === Footer === */
+.footer {
+    padding: 5rem 0;
+}
+
+/* === Contact section (homepage Connect block) === */
+.contact-section {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    padding: 10rem 0 4rem 0;
+    overflow: hidden;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    text-align: center;
+    background-color: #000;
+}
+
+/* Background image layer */
+.contact-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 15%;
+    background: url('../assets/img/derek-livingston-P2TIXADqcFU-unsplash.jpg') center bottom / cover
+        no-repeat;
+    filter: grayscale(100%);
+    transform: scale(1.3) translateX(150px);
+    z-index: 0;
+}
+
+/* Dark gradient overlay */
+.contact-section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.3) 0%,
+        rgba(0, 0, 0, 0.8) 60%,
+        #000000 75%
+    );
+    z-index: 1;
+}
+
+/* Content stays above */
+.contact-section > * {
+    position: relative;
+    z-index: 2;
+}
+
+.contact-section .card {
+    border: 0;
+    border-bottom: 0.25rem solid #64a19d;
+}
+.contact-section .card h4,
+.contact-section .card .h4 {
+    font-size: 0.8rem;
+    font-family:
+        'Varela Round',
+        -apple-system,
+        BlinkMacSystemFont,
+        'Segoe UI',
+        Roboto,
+        'Helvetica Neue',
+        Arial,
+        sans-serif,
+        'Apple Color Emoji',
+        'Segoe UI Emoji',
+        'Segoe UI Symbol',
+        'Noto Color Emoji';
+    text-transform: uppercase;
+    letter-spacing: 0.15rem;
+}
+.contact-section .card hr {
+    opacity: 1;
+    border-color: #64a19d;
+    border-width: 0.25rem;
+    width: 3rem;
+}
+.contact-section .social {
+    margin-top: 5rem;
+}
+.contact-section .social a {
+    text-align: center;
+    height: 3rem;
+    width: 3rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 100%;
+    line-height: 3rem;
+    color: rgba(255, 255, 255, 0.3);
+}
+.contact-section .social a:hover {
+    color: rgba(255, 255, 255, 0.5);
+}
+.contact-section .social a:active {
+    color: #fff;
+}
