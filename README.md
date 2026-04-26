@@ -1,6 +1,6 @@
 # Jonathan Ibrahim — Professional Site
 
-Personal website for Jonathan Ibrahim, Strategic Operations Leader and Head of Project Management at WISE Digital Partners.
+Personal website for Jonathan Ibrahim, Strategic Operations Leader with 14 years building delivery infrastructure for growth-stage companies.
 
 **Live at:** [jonathanibrahim.com](https://jonathanibrahim.com)
 **Current branch:** `dev` — staging for the next production deploy.
