@@ -81,3 +81,31 @@ This repository is public. GitHub Pages publishes from it. Anything committed he
 
 - **Behavior (`js/scripts.js`):** Handles navbar fade-in (2s delay or scroll > 50px), navbar shrink (`.navbar-shrink`), Bootstrap ScrollSpy, and auto-closing mobile collapse navs.
 - **SEO Requirements:** Full OpenGraph + Twitter Card tags on all pages. Ensure JSON-LD `Person` schema remains intact on `index.html`.
+
+## 📜 Changelog Policy
+
+The site has an active [`CHANGELOG.md`](CHANGELOG.md) at the repo root. Update it as work progresses — do not let it drift.
+
+**Format:** [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) adapted for [CalVer](https://calver.org/) (`YYYY.MM.DD`). Categories used: Added, Changed, Deprecated, Removed, Fixed, Security.
+
+**What gets logged:**
+
+- Every workstream-level outcome (e.g., "WS-1: CSS architecture rebuild — Bootstrap moved to CDN, site.css consolidated")
+- Every decision resolution (e.g., "DECISION-1 resolved: option B")
+- Every voice rewrite of an Insights post (one entry per post)
+- Every case study published
+- Structural infrastructure changes (gitignore, hook patterns, rule files, build pipeline)
+
+Per-task detail lives in ClickUp task descriptions. Per-file detail lives in commit messages. The changelog is the workstream-level layer between them.
+
+**When versions get cut:**
+
+- Cut a `[YYYY.MM.DD]` version when work reaches `master` (i.e., dev → master merge)
+- Until then, all in-flight work lives under `[Unreleased]`
+- The date IS the version. Add a one-line subtitle for milestones (e.g., `## [2026.06.15] — Initial launch`)
+
+**Workflow:**
+
+1. As you complete a meaningful chunk of work, add an entry to `[Unreleased]` under the appropriate workstream (or category, for cross-cutting work).
+2. When merging to master, rename `[Unreleased]` → `[YYYY.MM.DD]` and start a new empty `[Unreleased]` block.
+3. Prefer separate commits for changelog updates when feasible (e.g., "Changelog: WS-2 linking sweep complete").
