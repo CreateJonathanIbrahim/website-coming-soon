@@ -1,2 +1,10 @@
 node_modules
 .DS_Store
+
+# Private context — never commit
+CLAUDE.local.md
+*.local.md
+.claude/settings.local.json
+.env
+.env.local
+*.log

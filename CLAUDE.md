@@ -1,9 +1,13 @@
 # Project Context — Jonathan Ibrahim Professional Site
 
+## 🔒 Public Repository Boundary
+
+This repository is public. GitHub Pages publishes from it. Anything committed here is world-readable. Before writing or editing any file in this repo, ask: would I be comfortable with this content visible on the open web? If the content is private (income context, job-search status, family details, client names under NDA, ClickUp workspace IDs, internal task notes), it does not belong in a committed file. Route private context to `CLAUDE.local.md` (gitignored) or keep it out of the repo entirely.
+
 ## 🤖 Agent Behavior & Directives
 
 - **Direct Output:** Keep explanations extremely brief. Output code directly without apologies, filler language, or conversational fluff.
-- **Copywriting Context:** For generating text, case studies, blog posts, or updating biographical pages, **you must first read `docs/copywriting-guidelines.md`** to adhere to the correct tone, target audience (stealth job search), and biographical facts.
+- **Copywriting Context:** For generating text, case studies, blog posts, or updating biographical pages, **you must first read `docs/copywriting-guidelines.md`** to adhere to voice and tone constraints. Private operational context (audience framing, current employment, family details) lives in `CLAUDE.local.md`.
 - **Preserve Structure:** Do not remove existing comments, HTML structure, or utility classes when editing files unless explicitly requested.
 - **Verification:** Run a final read of all modified files to check for syntax errors before declaring a task complete.
 
