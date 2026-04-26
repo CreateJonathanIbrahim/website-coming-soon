@@ -17,7 +17,7 @@ This repository is public. GitHub Pages publishes from it. Anything committed he
 ## 🏗️ Tech Stack & Constraints
 
 - **Core:** HTML5 + CSS3 + Vanilla JS (no frameworks like React or Vue).
-- **Styling:** Bootstrap 5.2.3 (via CDN) + Custom CSS.
+- **Styling:** Bootstrap 5.2.3 local + custom site styles (split into a vanilla Bootstrap base file and a `site.css` for theme overrides plus shared rules — see WS-1 implementation in CHANGELOG).
 - **Typography:** Google Fonts (**Varela Round** for headings/labels, **Nunito** for body).
 - **Icons:** Font Awesome 6.3.0.
 - **Infrastructure:** GitHub Pages deployment (static files only). No bundler, no backend, no environment variables, no database.

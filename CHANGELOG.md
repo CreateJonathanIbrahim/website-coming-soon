@@ -90,8 +90,16 @@ Commits: `f8ffe0e`, `add7078`
 **Added**
 - Local git tag `pre-launch-2026-04-26` pointing at `master` HEAD (`9d1d84d` — "Update README.md", 2026-04-22). Reserved for one-command rollback if a future launch breaks something on production. Tag is local until pushed via GitHub Desktop.
 
-### DECISION-1 through DECISION-6 (NOT STARTED)
-- Six pre-launch decisions scoped in ClickUp: CSS strategy, OG image strategy, hero copy, home carousel posture, Insights category redefinition, copywriting/voice reconciliation. Resolutions gate downstream workstreams.
+### DECISION-1 — CSS strategy (RESOLVED — 2026-04-26)
+
+**Resolved:** Keep Bootstrap local. Split `css/styles.css` (currently 269 KB containing Bootstrap + Grayscale theme tokens) into a vanilla `css/bootstrap.min.css` plus a new `css/site.css` that holds the theme `:root` overrides and consolidated shared rules currently duplicated across inline `<style>` blocks. `css/custom.css` gets deleted in WS-1.
+
+**Reasoning:** self-contained repo, no third-party CDN dependency, pinned local Bootstrap is "always there" and inspectable, the split addresses the actual architecture problem (Layer 2 was missing as a file). Repo size cost (~270 KB) is acceptable for a static personal site. CDN test confirmed jsdelivr serves immutable pinned versions — both options would produce identical visual output, so this is a control/architecture preference, not a functional difference.
+
+**Implementation:** WS-1 (CSS architecture rebuild).
+
+### DECISION-2 through DECISION-5 (NOT STARTED)
+- Four pre-launch decisions scoped in ClickUp: OG image strategy, hero copy, home carousel posture (deferred to after WS-7), Insights category redefinition. Resolutions gate downstream workstreams. (DECISION-6 resolved during SETUP-2 by deletion of `docs/copywriting-guidelines.md`.)
 
 ### WS-1 through WS-8 (SCOPED, NOT STARTED)
 - Eight workstreams scoped with checklists in ClickUp: CSS architecture rebuild, linking integrity sweep, imagery/assets, copy/content fixes + first voice audit, Insights archive restructure, Insights voice rewrites (5 posts + 1 planning subtask), 3 case studies, SEO infrastructure + pre-merge verification
