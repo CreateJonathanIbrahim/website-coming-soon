@@ -36,8 +36,24 @@ Commits: `f8ffe0e`, `add7078`
 - 31 tasks created in the `JonathanIbrahim.com` ClickUp list under the JonathanOS space: 5 SETUP parents, 6 DECISION parents, 8 WORKSTREAM parents, 12 subtasks under WS-6 (Insights voice rewrites) and WS-7 (Case studies)
 - All tasks default to `PLANNING` status; statuses follow JonathanOS handoff §6 conventions
 
-### SETUP-2 — Voice / pillars / cornerstone migration (IN PROGRESS)
-- `voice/` (3 files: `constraints.md`, `tone-and-style.md`, `format-patterns.md`), `pillars/` (7 files: `_pillar-map.md` plus 6 pillar themes), and `docs/claude-code-architecture-cornerstone.md` staged in working tree (untracked); commit pending integration with `CLAUDE.md` voice loading rules and the four hard rules from `docs/website-repo-handoff.md` §4
+### SETUP-2 — Voice / pillars / cornerstone migration (COMPLETE — 2026-04-26)
+
+**Added**
+- `voice/` (3 files): `constraints.md` (14 non-negotiables), `tone-and-style.md` (identity, emotional range, anti-references), `format-patterns.md` (site-scoped structural guidance)
+- `pillars/` (7 files): `_pillar-map.md` plus pillar themes for project-management-systems, digital-marketing-operations, claude-code-architecture, web-design, clickup-architecture, personal-systems
+- `docs/claude-code-architecture-cornerstone.md` (1023-line architecture reference, load on demand)
+- `docs/website-repo-handoff.md` (sanitized in SETUP-1; tracked here)
+- `CLAUDE.md` Agent Behavior section: new `Voice (canonical)` directive with load order, `Voice — four non-negotiables` bullet, `Architecture Reference` and `Private Context` bullets
+
+**Changed**
+- `pillars/_pillar-map.md`: removed "Active weighting (temporary, 2026-04)" section that referenced active job search (public-repo boundary violation)
+- `voice/format-patterns.md`: scoped to personal brand site only — removed LinkedIn carousel/post, when-to-choose, resume, cover letter, and outreach email sections (those surfaces are out-of-scope for this repo; their guidance lives in JonathanOS)
+- `CLAUDE.md` File Map: added voice/, pillars/, docs/ entries with one-line descriptions
+- `CLAUDE.md` SOPs (Add a New Blog Post, Add a New Case Study): updated to load voice/ files; added humanizer skill step before publish; numbered to 6 steps each
+- `README.md`: updated File Map and Documentation sections; updated both SOPs to load voice/ files instead of `docs/copywriting-guidelines.md`
+
+**Removed**
+- `docs/copywriting-guidelines.md` — superseded by `voice/` files. The voice files are canonical per JonathanOS handoff §2; this resolves DECISION-6 (em-dash conflict) in favor of `voice/constraints.md`
 
 ### SETUP-3 — Humanizer skill, pre-bash-guard hook, path-scoped rules (IN PROGRESS)
 - `.claude/skills/caveman/` and `.claude/skills/humanizer/` staged in working tree (untracked); pre-bash-guard hook and `.claude/rules/` directory not yet started

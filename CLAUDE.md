@@ -7,7 +7,10 @@ This repository is public. GitHub Pages publishes from it. Anything committed he
 ## 🤖 Agent Behavior & Directives
 
 - **Direct Output:** Keep explanations extremely brief. Output code directly without apologies, filler language, or conversational fluff.
-- **Copywriting Context:** For generating text, case studies, blog posts, or updating biographical pages, **you must first read `docs/copywriting-guidelines.md`** to adhere to voice and tone constraints. Private operational context (audience framing, current employment, family details) lives in `CLAUDE.local.md`.
+- **Voice (canonical):** `voice/` files are canonical for any copy produced under Jonathan's name. Load order before writing or editing copy: `voice/constraints.md` → `voice/tone-and-style.md` → `voice/format-patterns.md` → the relevant pillar from `pillars/` (use `pillars/_pillar-map.md` to identify which pillar applies). Run the `humanizer` skill on drafts before publish.
+- **Voice — four non-negotiables** (canonical source: `voice/constraints.md`): no em dashes as pauses; no hollow openings or closings; active voice with specific subjects and verbs; no corporate abstraction.
+- **Architecture Reference:** `docs/claude-code-architecture-cornerstone.md` is the architectural manual for Claude Code projects (CLAUDE.md design, hooks, rules, skills/agents, layer hierarchy). Load on demand for architecture decisions.
+- **Private Context:** Audience framing, current employment, family details, and in-flight client work live in `CLAUDE.local.md` — never in committed files.
 - **Preserve Structure:** Do not remove existing comments, HTML structure, or utility classes when editing files unless explicitly requested.
 - **Verification:** Run a final read of all modified files to check for syntax errors before declaring a task complete.
 
@@ -51,6 +54,13 @@ This repository is public. GitHub Pages publishes from it. Anything committed he
     css/custom.css      Page-specific or experimental overrides (untracked; do not move rules here unless intentional)
     js/scripts.js       Navbar fade/shrink + ScrollSpy + IntersectionObserver logic
     assets/             Images, headshots, resume PDF, favicon
+    voice/              Canonical voice files — constraints, tone-and-style, format-patterns
+    pillars/            Six thematic territories + _pillar-map.md (load relevant pillar before content production)
+    docs/
+      claude-code-architecture-cornerstone.md   Architecture reference (load on demand)
+      design-system.md                          Full design system reference
+      seo-metadata-template.md                  SEO/OG/Twitter/JSON-LD boilerplate
+      website-repo-handoff.md                   JonathanOS handoff context for this repo
 
 ## 📋 Common Tasks (SOPs)
 
@@ -59,16 +69,18 @@ This repository is public. GitHub Pages publishes from it. Anything committed he
 1. Duplicate `insights/post-template.html` → rename to `insights/post-slug.html`.
 2. Update `<title>`, meta description, `og:title`, `og:description`, and `og:image`.
 3. Update article header: title, date, category badge, read time.
-4. Read `docs/copywriting-guidelines.md`, then author content inside the `<article>` section.
-5. Add the corresponding card to `insights.html` under the correct category section.
+4. Load `voice/` files (constraints → tone-and-style → format-patterns → relevant pillar from `pillars/`), then author content inside the `<article>` section.
+5. Run the `humanizer` skill on the draft before publish.
+6. Add the corresponding card to `insights.html` under the correct category section.
 
 ### Add a New Case Study
 
 1. Duplicate `case-studies/case-study-template.html` → rename to `case-studies/client-name.html`.
 2. Update meta tags (`title`, `description`, `og:*`).
 3. Update hero: client name, tagline, stats, background image.
-4. Read `docs/copywriting-guidelines.md`, then author the case study sections.
-5. Add the corresponding card to `case-studies.html` bento grid (select appropriate slot size).
+4. Load `voice/` files (constraints → tone-and-style → format-patterns → relevant pillar from `pillars/`), then author the case study sections.
+5. Run the `humanizer` skill on the draft before publish.
+6. Add the corresponding card to `case-studies.html` bento grid (select appropriate slot size).
 
 ### Create a Top-Level Page
 

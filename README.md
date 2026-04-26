@@ -74,10 +74,13 @@ Deliberate simplicity. No build pipeline, no bundler, no framework.
     skills-lock.json       Pinned skill versions for the Impeccable Agents pack
     .agents/skills/        Impeccable Agents skill modules (20+ skills)
     .claude/skills/        Same skill pack, surfaced for Claude Code
+    voice/                                       Canonical voice files (constraints, tone-and-style, format-patterns)
+    pillars/                                     Six thematic territories + _pillar-map.md
     docs/
-      copywriting-guidelines.md    Tone, audience, biographical facts — read before writing copy
-      design-system.md             Colors, typography, components, patterns
-      seo-metadata-template.md     Canonical SEO/OG/Twitter/JSON-LD metadata patterns
+      claude-code-architecture-cornerstone.md    Architecture reference (load on demand)
+      design-system.md                           Colors, typography, components, patterns
+      seo-metadata-template.md                   Canonical SEO/OG/Twitter/JSON-LD metadata patterns
+      website-repo-handoff.md                    JonathanOS handoff context for this repo
 
 ---
 
@@ -90,7 +93,9 @@ This repository is intentionally optimized for AI coding agents — primarily Cl
 - **[.impeccable.md](.impeccable.md)** — Design brief: who the site is for, the brand personality, aesthetic direction, and anti-references (no purple `#7464a1`, no glassmorphism, no gradient text, etc.). Read this before making visual changes.
 
 ### Documentation
-- **[docs/copywriting-guidelines.md](docs/copywriting-guidelines.md)** — Required reading before generating or updating any copy (tone, audience, biographical facts).
+- **[voice/](voice/)** — Required reading before generating or updating any copy. Load order: `constraints.md` → `tone-and-style.md` → `format-patterns.md` → relevant pillar from [pillars/](pillars/).
+- **[pillars/](pillars/)** — Six thematic territories. Use `_pillar-map.md` to identify which pillar(s) apply to a given topic.
+- **[docs/claude-code-architecture-cornerstone.md](docs/claude-code-architecture-cornerstone.md)** — Architecture reference manual (CLAUDE.md design, hooks, rules, skills/agents, layer hierarchy). Load on demand.
 - **[docs/design-system.md](docs/design-system.md)** — Full design system reference.
 - **[docs/seo-metadata-template.md](docs/seo-metadata-template.md)** — Boilerplate for `<title>`, meta description, OpenGraph, Twitter Card, and JSON-LD tags.
 
@@ -132,14 +137,14 @@ Full SOPs live in [CLAUDE.md](CLAUDE.md). Quick reference:
 1. Duplicate [insights/post-template.html](insights/post-template.html) → rename to `insights/post-slug.html`.
 2. Update `<title>`, meta description, `og:title`, `og:description`, `og:image`.
 3. Update article header (title, date, category badge, read time).
-4. Read [docs/copywriting-guidelines.md](docs/copywriting-guidelines.md), then author content.
+4. Load [voice/](voice/) files (`constraints.md` → `tone-and-style.md` → `format-patterns.md` → relevant pillar), then author content. Run `humanizer` skill before publish.
 5. Add the corresponding card to [insights.html](insights.html) under the correct category.
 
 ### Add a new case study
 1. Duplicate [case-studies/case-study-template.html](case-studies/case-study-template.html) → rename to `case-studies/client-name.html`.
 2. Update meta tags (`title`, `description`, `og:*`).
 3. Update hero (client, tagline, stats, background image).
-4. Read [docs/copywriting-guidelines.md](docs/copywriting-guidelines.md), then author the case study sections.
+4. Load [voice/](voice/) files (`constraints.md` → `tone-and-style.md` → `format-patterns.md` → relevant pillar), then author the case study sections. Run `humanizer` skill before publish.
 5. Add the card to the [case-studies.html](case-studies.html) bento grid (pick an appropriate slot size).
 
 ### Create a top-level page
