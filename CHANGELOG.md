@@ -6,6 +6,18 @@ All notable changes to this project are documented here. Format follows [Keep a 
 
 > Tracking work on `dev` toward the next deploy to `master`. Versions get cut and dated when work reaches master.
 
+### WS-1 Phase 2 hotfix — restored Grayscale-themed Bootstrap (2026-04-26)
+
+**Issue:** After Phase 2's swap to vanilla minified Bootstrap (195 KB from jsdelivr), the homepage rendered with **blue buttons instead of teal**, visibly broken.
+
+**Root cause:** The original `css/styles.css` was not vanilla Bootstrap with `:root` overrides at the top — it was a fully **recompiled** Start Bootstrap Grayscale v7.0.6 build, where the teal color was baked into every component class (`.btn-primary`, `.bg-primary`, `.text-primary`, etc.) at compile time. Bootstrap's component classes hardcode their colors (e.g., `.btn-primary { --bs-btn-bg: #0d6efd }`), so `:root { --bs-primary: #64a19d }` overrides in `site.css` do not propagate to component classes. The audit caught the `:root` token block but missed that the component classes throughout the file were also recompiled with teal.
+
+**Fix:** Replaced `css/bootstrap.min.css` with the recovered original `styles.css` from git (the Grayscale-themed recompiled build). File grew from 195 KB minified back to 264 KB unminified, but visual parity is restored. `site.css` is unchanged and still hosts the Layer 2 shared rules.
+
+**Naming caveat:** The file is still named `bootstrap.min.css` for now even though it is unminified and is a Grayscale-themed build, not vanilla Bootstrap. Renaming to `bootstrap-grayscale.css` would require updating 11 HTML link tags again — deferred as a polish task. The misnomer is documented here for transparency.
+
+**DECISION-1 framing correction:** "Local Bootstrap" in DECISION-1 now correctly means "the Grayscale-themed recompiled Bootstrap build, treated as a vendor file" — not "vanilla Bootstrap with `:root` overrides." Cleaner architectures (vanilla Bootstrap + comprehensive component overrides in `site.css`) remain available as a future revisit but are not justified by visual or maintenance benefit alone.
+
 ### SETUP-1 — Public-repo boundary (COMPLETE — 2026-04-26)
 
 **Added**
