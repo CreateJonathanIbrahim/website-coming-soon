@@ -17,7 +17,7 @@ This repository is public. GitHub Pages publishes from it. Anything committed he
 ## 🏗️ Tech Stack & Constraints
 
 - **Core:** HTML5 + CSS3 + Vanilla JS (no frameworks like React or Vue).
-- **Styling:** Local Bootstrap 5.2.3 (Grayscale-themed recompiled build at `css/bootstrap.min.css` — vendor file, do not edit) + `css/site.css` (theme `:root` overrides, shared site rules, animations, layout patterns) + inline `<style>` blocks per page (page-specific rules only).
+- **Styling:** Local Bootstrap 5.2.3 (Grayscale-themed recompiled build at `css/bootstrap-grayscale.css` — vendor file, do not edit) + `css/site.css` (theme `:root` overrides, shared site rules, animations, layout patterns) + inline `<style>` blocks per page (page-specific rules only).
 - **Typography:** Google Fonts (**Varela Round** for headings/labels, **Nunito** for body).
 - **Icons:** Font Awesome 6.3.0.
 - **Infrastructure:** GitHub Pages deployment (static files only). No bundler, no backend, no environment variables, no database.
@@ -36,7 +36,7 @@ This repository is public. GitHub Pages publishes from it. Anything committed he
 **Styling Conventions:**
 
 - **CSS architecture (three layers):**
-    1. `css/bootstrap.min.css` — Grayscale-themed Bootstrap 5.2.3 build. Vendor file. Do not edit.
+    1. `css/bootstrap-grayscale.css` — Grayscale-themed Bootstrap 5.2.3 build. Vendor file. Do not edit.
     2. `css/site.css` — theme `:root` overrides (Grayscale palette + typography), animations (`.fade-in-section`), shared chip/badge utilities, insight post layout, case study layout, homepage section utilities (`.about-section`, `.projects-section`, `.track-record-section`), masthead typography, footer, contact section. **This is the file you edit when changing site-wide styles.**
     3. Inline `<style>` blocks in each HTML file's `<head>` — page-specific rules only. Do not put shared rules here. When the same rule appears in 2+ inline blocks, migrate it to `css/site.css`.
 - **Typography:** Responsive scale via `clamp(min, preferred-vw, max)` on headings.
@@ -54,7 +54,7 @@ This repository is public. GitHub Pages publishes from it. Anything committed he
       post-template.html      Template for individual blog posts
     css/styles.css      Bootstrap 5.2.3 base + global custom styles ONLY
     css/custom.css      Page-specific or experimental overrides (untracked; do not move rules here unless intentional)
-    css/bootstrap.min.css   Grayscale-themed Bootstrap 5.2.3 build (vendor — do not edit)
+    css/bootstrap-grayscale.css   Grayscale-themed Bootstrap 5.2.3 build (vendor — do not edit)
     css/site.css            Shared site rules: theme tokens, animations, post/case-study/section layouts
     js/scripts.js           Navbar fade/shrink + ScrollSpy + IntersectionObserver logic
     assets/                 Images, headshots, resume PDF, favicon
@@ -96,7 +96,7 @@ This repository is public. GitHub Pages publishes from it. Anything committed he
 
 1. Create `page-name.html` at the root directory.
 2. Copy the nav + footer structure from an existing top-level page.
-3. Link `css/bootstrap.min.css` and `css/site.css` in the `<head>`.
+3. Link `css/bootstrap-grayscale.css` and `css/site.css` in the `<head>`.
 4. Add a `<link>` to the nav across all existing pages.
 5. Test mobile responsiveness at 375px, 768px, and 1024px.
 

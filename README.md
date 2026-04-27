@@ -62,7 +62,7 @@ Deliberate simplicity. No build pipeline, no bundler, no framework.
 
 ### Styles, scripts, assets
 
-    css/bootstrap.min.css  Local Grayscale-themed Bootstrap 5.2.3 (vendor file, do not edit)
+    css/bootstrap-grayscale.css  Local Grayscale-themed Bootstrap 5.2.3 (vendor file, do not edit)
     css/site.css           Theme :root overrides + shared site rules (animations, post/case-study/section layouts)
     js/scripts.js          Navbar fade/shrink, ScrollSpy, IntersectionObserver fade-ins
     assets/                Headshots, social preview images, resume PDF, favicons

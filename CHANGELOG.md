@@ -6,16 +6,27 @@ All notable changes to this project are documented here. Format follows [Keep a 
 
 > Tracking work on `dev` toward the next deploy to `master`. Versions get cut and dated when work reaches master.
 
+### WS-1 follow-up — renamed `bootstrap.min.css` → `bootstrap-grayscale.css` (2026-04-26)
+
+The misnomer flagged in Phase 2 hotfix #1 (file was neither minified nor vanilla Bootstrap) is resolved.
+
+**Changed:**
+- `css/bootstrap.min.css` → `css/bootstrap-grayscale.css` (via `git mv` to preserve history)
+- All 11 HTML files' `<link>` tags updated
+- `CLAUDE.md` File Map and Tech Stack lines updated
+- `README.md` File Map updated
+- This `CHANGELOG.md` end-state references updated; historical entries for Phase 2 / hotfix #1 / DECISION-1 left as-is to preserve accurate record of what those commits actually said at the time
+
 ### WS-1 — CSS architecture rebuild (COMPLETE — 2026-04-26)
 
 **End state:** three-layer architecture documented in `CLAUDE.md`:
 
-1. `css/bootstrap.min.css` — Grayscale-themed Bootstrap 5.2.3 build (vendor)
+1. `css/bootstrap-grayscale.css` — Grayscale-themed Bootstrap 5.2.3 build (vendor)
 2. `css/site.css` — theme `:root` overrides + shared site rules
 3. Inline `<style>` blocks — page-specific rules only
 
 **Net change vs pre-WS-1:**
-- 11,416-line `css/styles.css` deleted, replaced with the same content under a clearer name (`css/bootstrap.min.css`) treated as a vendor file
+- 11,416-line `css/styles.css` deleted, replaced with the same content under a clearer name (`css/bootstrap-grayscale.css`) treated as a vendor file
 - 290-line `css/custom.css` deleted; live rules consolidated into `css/site.css`, dead rules (`.signup-section`, residual `.about-section` legacy) removed
 - ~2,270 lines of inline `<style>` across 11 HTML files reduced to ~280 lines (only page-specific rules remain)
 - New file `css/site.css` (~840 lines) holds the consolidated shared layer
@@ -48,7 +59,7 @@ All notable changes to this project are documented here. Format follows [Keep a 
 
 **Fix:** Replaced `css/bootstrap.min.css` with the recovered original `styles.css` from git (the Grayscale-themed recompiled build). File grew from 195 KB minified back to 264 KB unminified, but visual parity is restored. `site.css` is unchanged and still hosts the Layer 2 shared rules.
 
-**Naming caveat:** The file is still named `bootstrap.min.css` for now even though it is unminified and is a Grayscale-themed build, not vanilla Bootstrap. Renaming to `bootstrap-grayscale.css` would require updating 11 HTML link tags again — deferred as a polish task. The misnomer is documented here for transparency.
+**Naming caveat (resolved in WS-1 Phase 3 follow-up):** The file was named `bootstrap.min.css` immediately after this hotfix even though it is unminified and is a Grayscale-themed build, not vanilla Bootstrap. Renamed to `css/bootstrap-grayscale.css` in a separate commit; 11 HTML link tags + CLAUDE.md + README.md updated alongside.
 
 **DECISION-1 framing correction:** "Local Bootstrap" in DECISION-1 now correctly means "the Grayscale-themed recompiled Bootstrap build, treated as a vendor file" — not "vanilla Bootstrap with `:root` overrides." Cleaner architectures (vanilla Bootstrap + comprehensive component overrides in `site.css`) remain available as a future revisit but are not justified by visual or maintenance benefit alone.
 
