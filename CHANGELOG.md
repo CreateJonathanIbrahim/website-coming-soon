@@ -6,6 +6,43 @@ All notable changes to this project are documented here. Format follows [Keep a 
 
 > Tracking work on `dev` toward the next deploy to `master`. Versions get cut and dated when work reaches master.
 
+### ClickUp consolidation — superseded duplicate workstreams (2026-04-27)
+
+Two pre-DECISION-7 workstreams in the JonathanIbrahim.com list were superseded by the new WS-4 ("Option D hybrid rebrand") tree to remove duplication:
+
+- **Old WS-4** (`86e132zva` "Copy/content mechanical fixes + first voice audit") → fully absorbed by new WS-4 (`86e136teq`) and its subtasks. DECISION-3 resolution closed the only completable item; remaining items already covered by WS-4.1 / WS-4.2 / WS-4.3.
+- **WS-3** (`86e132zue` "Imagery & assets") → OG image scope completed by DECISION-2 resolution; remaining asset-cleanup checklist items (2026 hero image swap, picsum carousel replacement, 7.7 MB PNG delete, `assets/img/` audit, webp re-export) absorbed into WS-4.1 / WS-4.2 / WS-4.3 descriptions. Marked SUPERSEDED with full breadcrumb comment.
+
+Both old tasks marked COMPLETE-as-superseded. Nothing lost; WS-4 subtask descriptions now hold every checklist item that was distributed across the old tasks.
+
+### DECISION-2 RESOLVED — OG image standardized sitewide (2026-04-27)
+
+Standardized every social-card image reference on the canonical 2026 social preview. Per-post custom OG images deferred to the Insights review stage (only revisited if a specific post needs a bespoke card).
+
+**Changed:**
+- `index.html` — `og:image`, `twitter:image`, JSON-LD Person `image` field
+- `insights/the-discovery-process.html` — `og:image` + `twitter:image`
+- `insights/seo-2026-small-service-businesses.html` — `og:image` + `twitter:image`
+- `insights/onboarding-process-that-doesnt-leak.html` — `og:image` + `twitter:image`
+- `insights/freelancer-to-agency-side.html` — `og:image` + `twitter:image`
+- `insights/clickup-hierarchy-explained.html` — `og:image`, `twitter:image`, JSON-LD Article `image` field
+
+Canonical URL: `https://jonathanibrahim.com/assets/Jonathan_Ibrahim_Social_Media_Preview.jpg`. ClickUp DECISION-2 (`86e132zrj`) marked COMPLETE.
+
+### DECISION-3 RESOLVED — "Full Website Coming Soon" line deleted (2026-04-27)
+
+Removed the placeholder line at `index.html:800`. Hero stack now flows H2 subtitle → CTA buttons directly. Replacement positioning copy will be authored during the homepage rework in WS-4.1 rather than slotted into a layout that's about to change. ClickUp DECISION-3 (`86e132xp4`) marked COMPLETE.
+
+### DECISION-7 RESOLVED — Site posture set to Option D, hybrid (2026-04-26)
+
+Stealth-search constraint dropped (Jonathan laid off from WISE 2026-04). Site posture redefined as personal brand surface primary, soft job-search signal located only in About and Connect. Hire-me CTAs absent from hero, global nav, and top-of-page sections. Resume PDF stays accessible but is not pushed. Site survives the job search ending without a rewrite.
+
+**Cascades:**
+- Unblocks DECISION-2 (OG image strategy), DECISION-3 (hero copy), and WS-4 (homepage rework)
+- New workstream needed: shift homepage from digital-resume layout to personal-site layout, possibly a Deep Dive sub-page under About to absorb resume-heavy detail
+- Private context updated: `CLAUDE.local.md` ("Active Job Search Context" → "Site Posture") and auto-memory `project_site_purpose.md`
+- ClickUp task DECISION-7 (`86e136mbn`) marked COMPLETE
+
 ### WS-1 follow-up — renamed `bootstrap.min.css` → `bootstrap-grayscale.css` (2026-04-26)
 
 The misnomer flagged in Phase 2 hotfix #1 (file was neither minified nor vanilla Bootstrap) is resolved.
