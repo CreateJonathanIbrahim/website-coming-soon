@@ -1,6 +1,6 @@
 # jonathanibrahim.com
 
-Personal site for Jonathan Ibrahim — Strategic Operations Leader, Head of Project Management, ClickUp architect. Built as a single-page static site, deployed on GitHub Pages.
+Personal site for Jonathan Ibrahim — Strategic Operations Leader, Director of Operations, ClickUp architect. Built as a single-page static site, deployed on GitHub Pages.
 
 **Live:** [jonathanibrahim.com](https://jonathanibrahim.com)
 
@@ -8,7 +8,7 @@ Personal site for Jonathan Ibrahim — Strategic Operations Leader, Head of Proj
 
 ## About this site
 
-This is a deliberately small site with a deliberate job: present 14 years of operations and delivery work in a form you can read in under two minutes, and give the people who care — clients, collaborators, hiring teams — a fast path to the things that matter (resume, LinkedIn, email).
+This is a deliberately small site with a deliberate job: present 14 years of operations and delivery work in a form you can read in under two minutes, and give the people who care — clients, collaborators, hiring teams — a fast path to the things that matter (email, LinkedIn).
 
 It's built as a static, single-page site so it stays fast, cheap to host, and trivial to maintain. The visual language is monochrome with a single teal accent (`#64a19d`) — every image runs through a grayscale filter so the accent is the only color that survives, and attention lands where it's supposed to.
 
@@ -33,7 +33,7 @@ It's built as a static, single-page site so it stays fast, cheap to host, and tr
 ├── index.html                 # Compiled output (committed so GitHub Pages serves it)
 ├── css/styles.css             # Compiled Bootstrap + theme (~12k lines, includes Bootstrap)
 ├── js/scripts.js              # Compiled JS (nav shrink, scrollspy, mobile collapse)
-├── assets/                    # Headshots, resume PDF, section imagery, favicon
+├── assets/                    # Headshots, section imagery, favicon
 │
 ├── src/                       # Hand-edited sources — edit these, not root files
 │   ├── pug/index.pug          # Page template
@@ -121,7 +121,7 @@ One accent, one only. Every image is filtered with `grayscale(100%)` so color ne
 
 Single page, anchor-scrolled:
 
-1. **Masthead** — name, title, and three CTAs (resume PDF, LinkedIn, email)
+1. **Masthead** — name, title, and two CTAs (email, LinkedIn)
 2. **About** — positioning statement and current role context
 3. **Core Expertise** — three pillars (Program & Portfolio Management, Digital Operations Architecture, Web Strategy & Delivery)
 4. **Track Record** — four headline metrics in icon cards
